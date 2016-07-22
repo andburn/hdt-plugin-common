@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/andburn/hdt-plugin-common/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/andburn/hdt-plugin-common</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A common library for HDT plugins</description>
+    <copyright>Copyright 2016</copyright>
+  </metadata>
+</package>
