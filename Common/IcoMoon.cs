@@ -12,6 +12,9 @@ namespace HDT.Plugins.Common
 			{"download3", "\ue9c7"},
 			{"upload3", "\ue9c8"},
 			{"cog", "\ue994"},
+			{"info", "\uea0c" },
+			{"notification", "\uea08" },
+			{"cancel-circle", "\uea0d" }
 		};
 
 		public static string Get(string name)

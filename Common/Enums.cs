@@ -44,6 +44,14 @@ namespace HDT.Plugins.Common
 		PREVIOUS_YEAR
 	}
 
+	public enum Position
+	{
+		TOP,
+		BOTTOM,
+		LEFT,
+		RIGHT
+	}
+
 	public class EnumStringConverter : IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

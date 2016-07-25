@@ -35,6 +35,11 @@
     <Reference Include="Hearthstone Deck Tracker">
       <HintPath>..\..\build\Hearthstone Deck Tracker.exe</HintPath>
     </Reference>
+    <Reference Include="MahApps.Metro, Version=1.1.2.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\build\MahApps.Metro.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\Newtonsoft.Json.dll</HintPath>
@@ -44,6 +49,9 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,6 +61,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\MoonTextButton.xaml.cs">
+      <DependentUpon>MoonTextButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NotificationDialog.xaml.cs">
+      <DependentUpon>NotificationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SlidePanels\SlidePanel.cs" />
+    <Compile Include="Controls\SlidePanels\SlidePanelManager.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="IcoMoon.cs" />
     <Compile Include="Models\Card.cs" />
@@ -68,12 +84,27 @@
     <Compile Include="Services\IDataRepository.cs" />
     <Compile Include="Services\ILoggingService.cs" />
     <Compile Include="Services\IUpdateService.cs" />
+    <Compile Include="Util\TaskExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Resource Include="Resources\IcoMoon-Free.ttf" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Page Include="Controls\MoonTextButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NotificationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
