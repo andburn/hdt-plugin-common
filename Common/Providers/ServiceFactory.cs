@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HDT.Plugins.Common.Services;
+﻿using HDT.Plugins.Common.Services;
 
 namespace HDT.Plugins.Common.Providers
 {
@@ -11,15 +6,19 @@ namespace HDT.Plugins.Common.Providers
 	{
 		private static readonly IDataRepository DataRepository;
 		private static readonly ILoggingService LoggingService;
+		private static readonly IUpdateService UpdateService;
 
 		static ServiceFactory()
 		{
 			DataRepository = new TrackerDataRepository();
 			LoggingService = new TrackerLoggingService();
+			UpdateService = new GitHubUpdateService();
 		}
 
 		public static IDataRepository CreateDataRepository() => DataRepository;
 
 		public static ILoggingService CreateLoggingService() => LoggingService;
+
+		public static IUpdateService CreateUpdateService() => UpdateService;
 	}
 }
