@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Common.Tests
 {
 	[TestClass]
-	public class TestGitHubUpdate
+	public class GitHubUpdateTest
 	{
 		private static IUpdateService updater;
 		private static GithubRelease release;

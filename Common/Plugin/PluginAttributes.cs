@@ -67,11 +67,11 @@ namespace HDT.Plugins.Common.Plugin
 	}
 
 	[AttributeUsage(System.AttributeTargets.Class)]
-	public class Version : Attribute
+	public class PluginVersion : Attribute
 	{
 		private string _text;
 
-		public Version(string text)
+		public PluginVersion(string text)
 		{
 			_text = text;
 		}

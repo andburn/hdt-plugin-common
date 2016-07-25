@@ -1,4 +1,5 @@
-﻿using HDT.Plugins.Common.Services;
+﻿using System;
+using HDT.Plugins.Common.Services;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 
 namespace HDT.Plugins.Common.Providers
@@ -12,6 +13,8 @@ namespace HDT.Plugins.Common.Providers
 		public void Error(object obj) => Log.Error(obj.ToString());
 
 		public void Error(string message) => Log.Error(message);
+
+		public void Error(Exception ex) => Log.Error(ex);
 
 		public void Info(object obj) => Log.Info(obj.ToString());
 

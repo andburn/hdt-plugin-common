@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HDT.Plugins.Common.Services
 {
@@ -11,6 +7,8 @@ namespace HDT.Plugins.Common.Services
 		void Error(string message);
 
 		void Error(object obj);
+
+		void Error(Exception ex);
 
 		void Info(string message);
 

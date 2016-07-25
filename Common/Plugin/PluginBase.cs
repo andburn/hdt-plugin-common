@@ -75,8 +75,8 @@ namespace HDT.Plugins.Common.Plugin
 					_description = ((Description)atr).Get();
 				else if (atr is Author)
 					_author = ((Author)atr).Get();
-				else if (atr is Version)
-					_version = new System.Version(((Version)atr).Get());
+				else if (atr is PluginVersion)
+					_version = new System.Version(((PluginVersion)atr).Get());
 				else if (atr is ButtonText)
 					_button = ((ButtonText)atr).Get();
 			}
