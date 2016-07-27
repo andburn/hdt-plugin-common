@@ -2,13 +2,13 @@
 using System.Windows;
 using System.Windows.Controls;
 using HDT.Plugins.Common.Util;
-using MahApps.Metro.Controls;
+using Metro = MahApps.Metro.Controls;
 
 namespace HDT.Plugins.Common.Controls.SlidePanels
 {
 	public class SlidePanel
 	{
-		private Flyout _flyout;
+		private Metro.Flyout _flyout;
 
 		public ContentControl Content
 		{
@@ -71,12 +71,12 @@ namespace HDT.Plugins.Common.Controls.SlidePanels
 		{
 			get
 			{
-				return _flyout.Theme == FlyoutTheme.Accent;
+				return _flyout.Theme == Metro.FlyoutTheme.Accent;
 			}
 			set
 			{
 				if (value)
-					_flyout.Theme = FlyoutTheme.Accent;
+					_flyout.Theme = Metro.FlyoutTheme.Accent;
 				else
 					_flyout.UpdateDefaultStyle();
 			}
@@ -84,7 +84,7 @@ namespace HDT.Plugins.Common.Controls.SlidePanels
 
 		public SlidePanel()
 		{
-			_flyout = new Flyout();
+			_flyout = new Metro.Flyout();
 		}
 
 		public SlidePanel(ContentControl content)
@@ -133,41 +133,41 @@ namespace HDT.Plugins.Common.Controls.SlidePanels
 			Panel.SetZIndex(_flyout, idx);
 		}
 
-		private Position ConvertPosition(MahApps.Metro.Controls.Position position)
+		private Position ConvertPosition(Metro.Position position)
 		{
 			switch (position)
 			{
-				case MahApps.Metro.Controls.Position.Left:
+				case Metro.Position.Left:
 					return Position.LEFT;
 
-				case MahApps.Metro.Controls.Position.Right:
+				case Metro.Position.Right:
 					return Position.RIGHT;
 
-				case MahApps.Metro.Controls.Position.Top:
+				case Metro.Position.Top:
 					return Position.TOP;
 
-				case MahApps.Metro.Controls.Position.Bottom:
+				case Metro.Position.Bottom:
 				default:
 					return Position.BOTTOM;
 			}
 		}
 
-		private MahApps.Metro.Controls.Position ConvertPosition(Position position)
+		private Metro.Position ConvertPosition(Position position)
 		{
 			switch (position)
 			{
 				case Position.TOP:
-					return MahApps.Metro.Controls.Position.Top;
+					return Metro.Position.Top;
 
 				case Position.LEFT:
-					return MahApps.Metro.Controls.Position.Left;
+					return Metro.Position.Left;
 
 				case Position.RIGHT:
-					return MahApps.Metro.Controls.Position.Right;
+					return Metro.Position.Right;
 
 				case Position.BOTTOM:
 				default:
-					return MahApps.Metro.Controls.Position.Bottom;
+					return Metro.Position.Bottom;
 			}
 		}
 	}

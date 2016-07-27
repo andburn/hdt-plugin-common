@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="Hearthstone Deck Tracker">
       <HintPath>..\..\build\Hearthstone Deck Tracker.exe</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.1.2.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -69,8 +70,11 @@
     </Compile>
     <Compile Include="Controls\SlidePanels\SlidePanel.cs" />
     <Compile Include="Controls\SlidePanels\SlidePanelManager.cs" />
-    <Compile Include="Enums.cs" />
-    <Compile Include="IcoMoon.cs" />
+    <Compile Include="Models\ArenaReward.cs" />
+    <Compile Include="Models\DeckStats.cs" />
+    <Compile Include="Models\GameStats.cs" />
+    <Compile Include="Util\Enums.cs" />
+    <Compile Include="Util\IcoMoon.cs" />
     <Compile Include="Models\Card.cs" />
     <Compile Include="Models\Deck.cs" />
     <Compile Include="Plugin\PluginAttributes.cs" />

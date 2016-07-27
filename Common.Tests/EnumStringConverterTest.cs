@@ -1,4 +1,4 @@
-﻿using HDT.Plugins.Common;
+﻿using HDT.Plugins.Common.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Common.Tests

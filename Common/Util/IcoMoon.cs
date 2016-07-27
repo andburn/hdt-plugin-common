@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace HDT.Plugins.Common
+namespace HDT.Plugins.Common.Util
 {
 	public static class IcoMoon
 	{

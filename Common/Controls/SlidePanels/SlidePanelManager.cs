@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using HDT.Plugins.Common.Util;
 
 namespace HDT.Plugins.Common.Controls.SlidePanels
 {

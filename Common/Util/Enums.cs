@@ -4,7 +4,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Data;
 
-namespace HDT.Plugins.Common
+namespace HDT.Plugins.Common.Util
 {
 	public enum GameMode
 	{
@@ -17,6 +17,13 @@ namespace HDT.Plugins.Common
 		PRACTICE,
 		SPECTATOR,
 		NONE
+	}
+
+	public enum GameResult
+	{
+		WIN,
+		LOSS,
+		DRAW
 	}
 
 	public enum Region
