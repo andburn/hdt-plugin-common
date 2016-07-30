@@ -5,20 +5,23 @@ namespace HDT.Plugins.Common.Models
 {
 	public class Deck
 	{
+		public static readonly Deck None = new Deck();
+
+		public Guid Id { get; set; }
 		public bool IsArena { get; set; }
 		public string Name { get; set; }
-		public Guid DeckId { get; set; }
 		public DateTime LastPlayed { get; set; }
 		public List<Card> Cards { get; set; }
 		public string Class { get; set; }
 		public ArenaReward ArenaReward { get; set; }
-		public DeckStats DeckStats { get; set; }
 
 		public Deck()
 		{
+			Id = Guid.NewGuid();
 		}
 
 		public Deck(string name, bool arena)
+			: this()
 		{
 			Name = name;
 			IsArena = arena;

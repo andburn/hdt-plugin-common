@@ -23,9 +23,10 @@ namespace HDT.Plugins.Common.Providers
 				.ToList();
 		}
 
-		public List<Models.DeckStats> GetAllStats()
+		public List<Game> GetAllGames()
 		{
-			return new List<Models.DeckStats>();
+			return new List<Game>();
+			//return new List<Models.DeckStats>();
 			//ReloadDeckStatsList();
 			//ReloadDefaultDeckStats();
 			//var ds = new List<DeckStats>(DeckStatsList.Instance.DeckStats.Values);

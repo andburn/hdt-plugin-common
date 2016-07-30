@@ -7,6 +7,6 @@ namespace HDT.Plugins.Common.Services
 	{
 		List<Deck> GetAllDecks();
 
-		List<DeckStats> GetAllStats();
+		List<Game> GetAllGames();
 	}
 }

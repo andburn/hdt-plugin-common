@@ -6,6 +6,19 @@ using System.Windows.Data;
 
 namespace HDT.Plugins.Common.Util
 {
+	public enum PlayerClass
+	{
+		DRUID,
+		MAGE,
+		HUNTER,
+		WARLOCK,
+		WARRIOR,
+		SHAMAN,
+		PRIEST,
+		PALADIN,
+		ROGUE
+	}
+
 	public enum GameMode
 	{
 		ALL,

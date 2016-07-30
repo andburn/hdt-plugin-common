@@ -71,8 +71,8 @@
     <Compile Include="Controls\SlidePanels\SlidePanel.cs" />
     <Compile Include="Controls\SlidePanels\SlidePanelManager.cs" />
     <Compile Include="Models\ArenaReward.cs" />
-    <Compile Include="Models\DeckStats.cs" />
-    <Compile Include="Models\GameStats.cs" />
+    <Compile Include="Models\Game.cs" />
+    <Compile Include="Models\Note.cs" />
     <Compile Include="Util\Enums.cs" />
     <Compile Include="Util\IcoMoon.cs" />
     <Compile Include="Models\Card.cs" />
