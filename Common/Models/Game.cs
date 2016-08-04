@@ -44,5 +44,10 @@ namespace HDT.Plugins.Common.Models
 
 			return game.Id == Id;
 		}
+
+		public override int GetHashCode()
+		{
+			return Id.GetHashCode();
+		}
 	}
 }

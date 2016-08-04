@@ -8,5 +8,7 @@ namespace HDT.Plugins.Common.Services
 		List<Deck> GetAllDecks();
 
 		List<Game> GetAllGames();
+
+		void AddGames(List<Game> games);
 	}
 }

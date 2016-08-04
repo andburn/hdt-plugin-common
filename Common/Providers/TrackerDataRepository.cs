@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using HDT.Plugins.Common.Models;
 using HDT.Plugins.Common.Services;
+using HDT.Plugins.Common.Util;
 using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Stats;
 
@@ -23,15 +24,22 @@ namespace HDT.Plugins.Common.Providers
 				.ToList();
 		}
 
+		public void AddGames(List<Game> games)
+		{
+		}
+
 		public List<Game> GetAllGames()
 		{
-			return new List<Game>();
-			//return new List<Models.DeckStats>();
-			//ReloadDeckStatsList();
-			//ReloadDefaultDeckStats();
-			//var ds = new List<DeckStats>(DeckStatsList.Instance.DeckStats.Values);
-			//ds.AddRange(DefaultDeckStats.Instance.DeckStats);
-			//return ds;
+			var games = new List<Game>();
+			ReloadDeckStatsList();
+			ReloadDefaultDeckStats();
+			var ds = new List<DeckStats>(DeckStatsList.Instance.DeckStats.Values);
+			ds.AddRange(DefaultDeckStats.Instance.DeckStats);
+			foreach (var deck in ds)
+			{
+				games.AddRange(deck.Games.Select(g => CreateGame(g)));
+			}
+			return games;
 		}
 
 		private void ReloadDeckList()
@@ -53,6 +61,13 @@ namespace HDT.Plugins.Common.Providers
 			Type type = typeof(DeckStatsList);
 			MethodInfo method = type.GetMethod("Reload", bindFlags);
 			method.Invoke(null, new object[] { });
+		}
+
+		private Game CreateGame(GameStats stats)
+		{
+			var game = new Game();
+			game.CopyFrom(stats);
+			return game;
 		}
 	}
 }
