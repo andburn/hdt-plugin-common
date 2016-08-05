@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows.Controls;
 using Hearthstone_Deck_Tracker.Plugins;
 
@@ -14,10 +15,17 @@ namespace HDT.Plugins.Common.Plugin
 		private string _author;
 		private System.Version _version;
 		private string _button;
+		private Assembly _pluginAssembly;
 
 		public PluginBase()
 		{
 			GetAttributes();
+		}
+
+		public PluginBase(Assembly assembly)
+			: this()
+		{
+			_pluginAssembly = assembly;
 		}
 
 		public virtual string Author
@@ -42,7 +50,11 @@ namespace HDT.Plugins.Common.Plugin
 
 		public virtual System.Version Version
 		{
-			get { return _version ?? new System.Version(0, 0, 0); }
+			get
+			{
+				Hearthstone_Deck_Tracker.Utility.Logging.Log.Debug($"Get() = {GetGitSemVer()} {_version} -");
+				return GetGitSemVer() ?? (_version ?? new System.Version(0, 0, 0));
+			}
 		}
 
 		public virtual void OnUpdate()
@@ -80,6 +92,21 @@ namespace HDT.Plugins.Common.Plugin
 				else if (atr is ButtonText)
 					_button = ((ButtonText)atr).Get();
 			}
+		}
+
+		private Version GetGitSemVer()
+		{
+			if (_pluginAssembly == null)
+				return null;
+			Hearthstone_Deck_Tracker.Utility.Logging.Log.Debug($"name: {_pluginAssembly.FullName}");
+			var nspace = GetType().Namespace;
+			Hearthstone_Deck_Tracker.Utility.Logging.Log.Debug($"nspace: {nspace}");
+			var gitInfo = _pluginAssembly.GetType(nspace + ".GitVersionInformation");
+			var semVer = gitInfo.GetField("AssemblySemVer").GetValue(null).ToString();
+			Hearthstone_Deck_Tracker.Utility.Logging.Log.Debug($"semver: {semVer}");
+			Version result = null;
+			Version.TryParse(semVer, out result);
+			return result;
 		}
 	}
 }

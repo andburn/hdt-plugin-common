@@ -17,9 +17,10 @@ namespace HDT.Plugins.Common.Providers
 
 		public List<Deck> GetAllDecks()
 		{
+			Reload<DeckList>();
 			return DeckList.Instance.Decks
 				.Where(d => d.Archived == false)
-				.Select(d => new Deck(d.Name, d.IsArenaDeck))
+				.Select(d => new Deck(d.DeckId, d.Name, d.IsArenaDeck))
 				.OrderBy(d => d.Name)
 				.ToList();
 		}
@@ -31,8 +32,8 @@ namespace HDT.Plugins.Common.Providers
 		public List<Game> GetAllGames()
 		{
 			var games = new List<Game>();
-			ReloadDeckStatsList();
-			ReloadDefaultDeckStats();
+			Reload<DeckStatsList>();
+			Reload<DefaultDeckStats>();
 			var ds = new List<DeckStats>(DeckStatsList.Instance.DeckStats.Values);
 			ds.AddRange(DefaultDeckStats.Instance.DeckStats);
 			foreach (var deck in ds)
@@ -42,23 +43,10 @@ namespace HDT.Plugins.Common.Providers
 			return games;
 		}
 
-		private void ReloadDeckList()
+		// DeckList, DefaultDeckStats, DeckStatsList
+		private void Reload<T>()
 		{
-			Type type = typeof(DeckList);
-			MethodInfo method = type.GetMethod("Reload", bindFlags);
-			method.Invoke(null, new object[] { });
-		}
-
-		private void ReloadDefaultDeckStats()
-		{
-			Type type = typeof(DefaultDeckStats);
-			MethodInfo method = type.GetMethod("Reload", bindFlags);
-			method.Invoke(null, new object[] { });
-		}
-
-		private void ReloadDeckStatsList()
-		{
-			Type type = typeof(DeckStatsList);
+			Type type = typeof(T);
 			MethodInfo method = type.GetMethod("Reload", bindFlags);
 			method.Invoke(null, new object[] { });
 		}

@@ -20,9 +20,9 @@ namespace HDT.Plugins.Common.Models
 			Id = Guid.NewGuid();
 		}
 
-		public Deck(string name, bool arena)
-			: this()
+		public Deck(Guid id, string name, bool arena)
 		{
+			Id = id;
 			Name = name;
 			IsArena = arena;
 		}

@@ -1,5 +1,6 @@
 ﻿using System;
 using HDT.Plugins.Common.Models;
+using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Stats;
 
 namespace HDT.Plugins.Common.Util
@@ -10,8 +11,10 @@ namespace HDT.Plugins.Common.Util
 		{
 			game.Id = stats.GameId;
 			// TODO: add other deck properties
-			game.Deck = new Deck() { Id = stats.DeckId, Name = stats.DeckName };
-			game.DeckVersion = new Version(stats.PlayerDeckVersionString);
+			// FIX: add arena prop from games stats
+			game.Deck = new Deck(stats.DeckId, stats.DeckName, false);
+			var v = stats.PlayerDeckVersion ?? new SerializableVersion();
+			game.DeckVersion = new Version(v.Major, v.Minor, v.Build, v.Revision);
 			game.Region = EnumConverter.Convert(stats.Region);
 			game.Mode = EnumConverter.Convert(stats.GameMode);
 			game.Result = EnumConverter.Convert(stats.Result);
