@@ -75,6 +75,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\Hearthstone Deck Tracker.exe</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -94,6 +95,7 @@
   <ItemGroup>
     <Compile Include="Debugging.cs" />
     <Compile Include="EnumStringConverterTest.cs" />
+    <Compile Include="PluginBaseTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GitHubUpdateTest.cs" />
   </ItemGroup>

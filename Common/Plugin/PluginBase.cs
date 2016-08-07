@@ -52,8 +52,7 @@ namespace HDT.Plugins.Common.Plugin
 		{
 			get
 			{
-				Hearthstone_Deck_Tracker.Utility.Logging.Log.Debug($"Get() = {GetGitSemVer()} {_version} -");
-				return GetGitSemVer() ?? (_version ?? new System.Version(0, 0, 0));
+				return GetGitSemVer() ?? (_version ?? new System.Version(0, 0, 0, 0));
 			}
 		}
 
@@ -98,14 +97,13 @@ namespace HDT.Plugins.Common.Plugin
 		{
 			if (_pluginAssembly == null)
 				return null;
-			Hearthstone_Deck_Tracker.Utility.Logging.Log.Debug($"name: {_pluginAssembly.FullName}");
+
 			var nspace = GetType().Namespace;
-			Hearthstone_Deck_Tracker.Utility.Logging.Log.Debug($"nspace: {nspace}");
 			var gitInfo = _pluginAssembly.GetType(nspace + ".GitVersionInformation");
-			var semVer = gitInfo.GetField("AssemblySemVer").GetValue(null).ToString();
-			Hearthstone_Deck_Tracker.Utility.Logging.Log.Debug($"semver: {semVer}");
+			var semVer = gitInfo?.GetField("AssemblySemVer").GetValue(null).ToString();
 			Version result = null;
 			Version.TryParse(semVer, out result);
+
 			return result;
 		}
 	}
