@@ -72,6 +72,10 @@
       <HintPath>..\..\build\Hearthstone Deck Tracker.exe</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="INIFileParser, Version=2.3.0.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">
+      <HintPath>..\packages\ini-parser.2.3.0\lib\net20\INIFileParser.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=1.1.2.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\build\MahApps.Metro.dll</HintPath>
@@ -109,6 +113,9 @@
     <Compile Include="Models\ArenaReward.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Note.cs" />
+    <Compile Include="Plugin\PluginDirectory.cs" />
+    <Compile Include="Settings\Settings.cs" />
+    <Compile Include="Settings\SettingValue.cs" />
     <Compile Include="Util\EnumConverters.cs" />
     <Compile Include="Util\Enums.cs" />
     <Compile Include="Util\GameExtensions.cs" />
