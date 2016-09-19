@@ -92,5 +92,34 @@ namespace Common.Tests
 			val = new SettingValue("catch22  ");
 			Assert.AreEqual(0.0, val.Double);
 		}
+
+		[TestMethod]
+		public void EmptyConstantIsEqualToItself()
+		{
+			Assert.AreSame(SettingValue.Empty, SettingValue.Empty);
+			Assert.AreEqual(SettingValue.Empty, SettingValue.Empty);
+		}
+
+		[TestMethod]
+		public void EmptyConstantIsEqualToNullValuedObject()
+		{
+			var nullValue = new SettingValue(null);
+			Assert.AreEqual(SettingValue.Empty, nullValue);
+			Assert.AreNotSame(SettingValue.Empty, nullValue);
+		}
+
+		[TestMethod]
+		public void EmptyConstantHasNullValue()
+		{
+			Assert.IsNull(SettingValue.Empty.Value);
+		}
+
+		[TestMethod]
+		public void EmptyConstantHasDefaultPropValues()
+		{
+			Assert.IsFalse(SettingValue.Empty.Bool);
+			Assert.AreEqual(SettingValue.Empty.Int, 0);
+			Assert.AreEqual(SettingValue.Empty.Double, 0.0);
+		}
 	}
 }

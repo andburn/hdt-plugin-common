@@ -1,27 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HDT.Plugins.Common.Plugin;
+using HDT.Plugins.Common.Util;
 using IniParser;
 using IniParser.Model;
 using IniParser.Parser;
 
 namespace HDT.Plugins.Common.Settings
-{	
+{
 	public class Settings
 	{
-		private static readonly string UserFilename = "settings.ini";
+		private static readonly string UserFilename = "Settings.ini";
 		private static readonly IniDataParser StringParser = new IniDataParser();
 		private static readonly FileIniDataParser FileParser = new FileIniDataParser();
 
 		private string _userFile;
-		private IniData _default; // read only, created on construction
-		private IniData _user; // read write, created on set
-		private IniData _merged;
+		private IniData _default; // created on object construction, read only
+		private IniData _user; // created on set, read write
+		private IniData _merged; // default overwritten with user
 
 		public Settings()
 		{
@@ -31,59 +27,146 @@ namespace HDT.Plugins.Common.Settings
 			_merged = new IniData();
 		}
 
-		public Settings(string defaultIni) 
+		public Settings(string ini)
 			: this()
 		{
-			_default = LoadFromString(defaultIni);
-			_merged.Merge(_default);
+			InitializeDefault(ini);
 		}
 
-		public Settings(FileInfo defaultIniFile) 
+		public Settings(FileInfo file)
 			: this()
 		{
-			_default = LoadFromFile(defaultIniFile.FullName);
-			_merged.Merge(_default);
+			string ini = null;
+			try
+			{
+				ini = File.ReadAllText(file.FullName);
+			}
+			catch (Exception e)
+			{
+				// TODO handle no default settings error
+				throw e;
+			}
+			InitializeDefault(ini);
+		}
+
+		public bool DefaultIsEmpty
+		{
+			get { return _default.IsEmpty(); }
+		}
+
+		public bool UserIsEmpty
+		{
+			get { return _user.IsEmpty(); }
+		}
+
+		public SettingValue Get(string section, string key)
+		{
+			// TODO reloading is going to make every Get relatively slow
+			ReloadSettings();
+			return GetSetting(_merged, section, key);
 		}
 
 		public SettingValue Get(string key)
 		{
-			LoadUserSettings();
-			_merged.Merge(_user);
-			return new SettingValue(_merged.Global[key]);
+			return Get(null, key);
 		}
 
-		public string GetDefault(string key)
+		public SettingValue GetDefault(string section, string key)
 		{
-			return _default.Global[key];
+			return GetSetting(_default, section, key);
+		}
+
+		public SettingValue GetDefault(string key)
+		{
+			return GetDefault(null, key);
+		}
+
+		public void Set(string section, string key, string value)
+		{
+			if (string.IsNullOrWhiteSpace(section))
+				_user.Global[key] = value;
+			else if (_user.HasSection(section))
+				_user[section][key] = value;
+			else
+				return;
+
+			FileParser.WriteFile(_userFile, _user);
 		}
 
 		public void Set(string key, string value)
 		{
-			_user.Global[key] = value;
-			FileParser.WriteFile(_userFile, _user);
+			Set(null, key, value);
+		}
+
+		public void Set(string section, string key, object value)
+		{
+			Set(section, key, value.ToString());
+		}
+
+		public void Set(string key, object value)
+		{
+			Set(null, key, value.ToString());
+		}
+
+		public void RestoreDefaults()
+		{
+			_user = new IniData();
+			// TODO possibly backup before delete
+			if (File.Exists(_userFile))
+			{
+				try
+				{
+					File.Delete(_userFile);
+				}
+				catch (Exception)
+				{
+					// TODO log error
+					throw;
+				}
+			}
+		}
+
+		private void InitializeDefault(string ini)
+		{
+			_default = StringParser.Parse(ini);
+			_merged.Merge(_default);
 		}
 
 		private void LoadUserSettings()
-		{			
+		{
 			if (File.Exists(_userFile))
-				_user = FileParser.ReadFile(_userFile);
+			{
+				try
+				{
+					_user = FileParser.ReadFile(_userFile);
+				}
+				catch (Exception)
+				{
+					// TODO log error
+					throw;
+				}
+			}
 		}
 
-		private IniData LoadFromString(string str)
+		private SettingValue GetSetting(IniData data, string section, string key)
 		{
-			return StringParser.Parse(str);
+			if (string.IsNullOrWhiteSpace(key))
+				return SettingValue.Empty;
+
+			if (string.IsNullOrWhiteSpace(section))
+				return new SettingValue(data.Global[key]);
+			else if (data.HasSection(section))
+				return new SettingValue(data[section][key]);
+			else
+				return SettingValue.Empty;
 		}
 
-		private IniData LoadFromFile(string file)
+		// Reset _merged to latest settings from file
+		private void ReloadSettings()
 		{
-			try
-			{
-				return LoadFromString(File.ReadAllText(file));
-			}
-			catch (Exception e)
-			{
-				throw e;
-			}
-		}		
+			_merged.Merge(_default);
+			LoadUserSettings();
+			_merged.Merge(_user);
+		}
 	}
 }

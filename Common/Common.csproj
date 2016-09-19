@@ -68,9 +68,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Hearthstone Deck Tracker">
-      <HintPath>..\..\build\Hearthstone Deck Tracker.exe</HintPath>
-      <Private>True</Private>
+    <Reference Include="HearthstoneDeckTracker">
+      <HintPath>..\..\build\HearthstoneDeckTracker.exe</HintPath>
     </Reference>
     <Reference Include="INIFileParser, Version=2.3.0.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">
       <HintPath>..\packages\ini-parser.2.3.0\lib\net20\INIFileParser.dll</HintPath>
@@ -133,6 +132,7 @@
     <Compile Include="Services\IDataRepository.cs" />
     <Compile Include="Services\ILoggingService.cs" />
     <Compile Include="Services\IUpdateService.cs" />
+    <Compile Include="Util\IniDataExtensions.cs" />
     <Compile Include="Util\TaskExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
