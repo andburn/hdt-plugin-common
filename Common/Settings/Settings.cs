@@ -23,28 +23,23 @@ namespace HDT.Plugins.Common.Settings
 		private IniData _merged; // default overwritten with user
 		private ILoggingService _logger;
 
-		public Settings(string name = null)
+		public Settings()
 		{
-			var fname = DefaultName;
-			if (!string.IsNullOrWhiteSpace(name))
-				fname = name;
-			_userFile = Path.Combine(GetSettingsDir(), fname + ".ini");
-
-			_default = new IniData();
-			_user = new IniData();
-			_merged = new IniData();
-			_logger = ServiceFactory.CreateLoggingService();
+			Initialize();
+			SetUserFile();
 		}
 
 		public Settings(string ini, string name = null)
-			: this(name)
 		{
+			Initialize();
+			SetUserFile(name);
 			InitializeDefault(ini);
 		}
 
 		public Settings(FileInfo file, string name = null)
-			: this(name)
 		{
+			Initialize();
+			SetUserFile(name);
 			string ini = null;
 			try
 			{
@@ -139,6 +134,14 @@ namespace HDT.Plugins.Common.Settings
 			}
 		}
 
+		private void Initialize()
+		{
+			_default = new IniData();
+			_user = new IniData();
+			_merged = new IniData();
+			_logger = ServiceFactory.CreateLoggingService();
+		}
+
 		private void InitializeDefault(string ini)
 		{
 			_default = StringParser.Parse(ini);
@@ -190,6 +193,14 @@ namespace HDT.Plugins.Common.Settings
 		private string GetSettingsDir()
 		{
 			return Hearthstone_Deck_Tracker.Config.Instance.ConfigDir;
+		}
+
+		private void SetUserFile(string name = null)
+		{
+			var fname = DefaultName;
+			if (!string.IsNullOrWhiteSpace(name))
+				fname = name;
+			_userFile = Path.Combine(GetSettingsDir(), fname + ".ini");
 		}
 	}
 }

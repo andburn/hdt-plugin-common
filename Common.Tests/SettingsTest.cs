@@ -1,10 +1,4 @@
-﻿using System;
-using HDT.Plugins.Common.Plugin;
-using HDT.Plugins.Common.Settings;
-using HDT.Plugins.Common.Util;
-using IniParser;
-using IniParser.Model;
-using IniParser.Parser;
+﻿using HDT.Plugins.Common.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Common.Tests
@@ -19,10 +13,10 @@ namespace Common.Tests
 		{
 			var ini = new string[] {
 				"First = 1",
-				"Second = two",
+				"Second=two",
 				"Third = false",
 				"[Section 1]",
-				"First = First Section"
+				"First=First Section"
 			};
 			settings = new Settings(string.Join("\n", ini));
 			settings.RestoreDefaults();
@@ -47,7 +41,7 @@ namespace Common.Tests
 		public void Get_GlobalSetting()
 		{
 			Assert.AreEqual(1, settings.Get("First").Int);
-			Assert.AreEqual("two", settings.Get("Second"));			
+			Assert.AreEqual("two", settings.Get("Second"));
 		}
 
 		[TestMethod]
@@ -78,7 +72,7 @@ namespace Common.Tests
 		public void Get_NullKeyHasNullValue()
 		{
 			Assert.IsNull(settings.Get(null).Value);
-			Assert.IsNull(settings.Get("Section 1", null).Value);			
+			Assert.IsNull(settings.Get("Section 1", null).Value);
 		}
 
 		[TestMethod]
