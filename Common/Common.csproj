@@ -112,7 +112,7 @@
     <Compile Include="Models\ArenaReward.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Note.cs" />
-    <Compile Include="Plugin\PluginDirectory.cs" />
+    <Compile Include="Plugin\PluginAssembly.cs" />
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="Settings\SettingValue.cs" />
     <Compile Include="Util\EnumConverters.cs" />
