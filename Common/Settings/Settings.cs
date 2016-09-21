@@ -36,6 +36,25 @@ namespace HDT.Plugins.Common.Settings
 			InitializeDefault(ini);
 		}
 
+		public Settings(Stream stream, string name = null)
+		{
+			Initialize();
+			SetUserFile(name);
+			string ini = null;
+			try
+			{
+				using (var reader = new StreamReader(stream))
+				{
+					ini = reader.ReadToEnd();
+				}
+			}
+			catch (Exception e)
+			{
+				_logger.Error(e);
+			}
+			InitializeDefault(ini);
+		}
+
 		public Settings(FileInfo file, string name = null)
 		{
 			Initialize();
