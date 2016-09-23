@@ -26,18 +26,26 @@ namespace HDT.Plugins.Common.Plugin
 			Menu.Icon = CreateIcon(icon);
 		}
 
-		public void Append(string header, ICommand command)
+		public PluginMenu(string header, string icon, ICommand command, object param = null)
+			: this(header, icon)
 		{
-			Append(header, null, command);
+			Menu.Command = command;
+			Menu.CommandParameter = param;
 		}
 
-		public void Append(string header, string icon, ICommand command)
+		public void Append(string header, string icon, ICommand command, object param = null)
 		{
 			Menu.Items.Add(new MenuItem() {
 				Header = header,
 				Icon = CreateIcon(icon),
-				Command = command
+				Command = command,
+				CommandParameter = param
 			});
+		}
+
+		public void Append(string header, ICommand command, object param = null)
+		{
+			Append(header, null, command, param);
 		}
 
 		private TextBlock CreateIcon(string name)
