@@ -7,6 +7,7 @@ using HDT.Plugins.Common.Services;
 using HDT.Plugins.Common.Util;
 using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Stats;
+using Hearthstone_Deck_Tracker.Utility;
 
 namespace HDT.Plugins.Common.Providers
 {
@@ -23,11 +24,7 @@ namespace HDT.Plugins.Common.Providers
 				.Select(d => new Deck(d.DeckId, d.Name, d.IsArenaDeck))
 				.OrderBy(d => d.Name)
 				.ToList();
-		}
-
-		public void AddGames(List<Game> games)
-		{
-		}
+		}		
 
 		public List<Game> GetAllGames()
 		{
@@ -43,7 +40,35 @@ namespace HDT.Plugins.Common.Providers
 			return games;
 		}
 
+		public void AddGames(List<Game> games)
+		{
+		}
+
+		public void UpdateGames(List<Game> games)
+		{
+			Reload<DeckStatsList>();
+			Reload<DefaultDeckStats>();
+			var ds = new List<GameStats>(DeckStatsList.Instance.DeckStats.Values.SelectMany(x => x.Games));
+			ds.AddRange(DefaultDeckStats.Instance.DeckStats.SelectMany(x => x.Games));
+			var dd = ds.ToDictionary(x => x.GameId);
+			// make a backup
+			var today = DateTime.Today.ToString("ddMMyyyy");
+			BackupManager.CreateBackup($"Backup_{today}_plugin.zip");
+
+			// TODO some equality so don't overwrite every game
+			foreach (var g in games)
+			{
+				if (dd.ContainsKey(g.Id))
+				{
+					g.CopyTo(dd[g.Id]);
+				}
+			}
+			DeckStatsList.Save();
+			DefaultDeckStats.Save();
+		}
+
 		// DeckList, DefaultDeckStats, DeckStatsList
+		// TODO handle errors
 		private void Reload<T>()
 		{
 			Type type = typeof(T);

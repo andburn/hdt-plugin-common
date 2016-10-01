@@ -32,5 +32,26 @@ namespace HDT.Plugins.Common.Util
 			game.WasConceded = stats.WasConceded;
 			game.Note = new Note(stats.Note);
 		}
+
+		public static void CopyTo(this Game from, GameStats to)
+		{
+			//from.Deck;
+			//from.DeckVersion;
+			to.StartTime = from.StartTime;
+			to.EndTime = from.EndTime;
+			to.GameMode = EnumConverter.Convert(from.Mode);
+			to.Note = from.Note.Text;
+			to.OpponentHero = from.OpponentClass.ToString(); // ??? case matters
+			to.OpponentName = from.OpponentName;
+			to.PlayerHero = from.PlayerClass.ToString(); // ??? case matters
+			to.PlayerName = from.PlayerName;
+			to.Coin = from.PlayerGotCoin; // ??? correct
+			to.Rank = from.Rank;
+			to.Region = EnumConverter.Convert(from.Region);
+			to.Result = EnumConverter.Convert(from.Result);
+			//to.Duration = from.Seconds;
+			to.Turns = from.Turns;
+			to.WasConceded = from.WasConceded;
+		}
 	}
 }

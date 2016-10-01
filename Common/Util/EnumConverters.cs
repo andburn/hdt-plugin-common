@@ -48,6 +48,7 @@ namespace HDT.Plugins.Common.Util
 
 	public static class EnumConverter
 	{
+		// TODO is this used anywhere
 		public static T Convert<T>(string value)
 		{
 			if (typeof(T) == typeof(PlayerClass))
@@ -74,6 +75,29 @@ namespace HDT.Plugins.Common.Util
 				case Hearthstone_Deck_Tracker.Enums.Region.UNKNOWN:
 				default:
 					return Region.UNKNOWN;
+			}
+		}
+
+		public static Hearthstone_Deck_Tracker.Enums.Region Convert(Region region)
+		{
+			switch (region)
+			{
+				case Region.US:
+					return Hearthstone_Deck_Tracker.Enums.Region.US;
+
+				case Region.EU:
+					return Hearthstone_Deck_Tracker.Enums.Region.EU;
+				
+
+				case Region.ASIA:
+					return Hearthstone_Deck_Tracker.Enums.Region.ASIA;
+
+				case Region.CHINA:
+					return Hearthstone_Deck_Tracker.Enums.Region.CHINA;
+
+				case Region.UNKNOWN:
+				default:
+					return Hearthstone_Deck_Tracker.Enums.Region.UNKNOWN;
 			}
 		}
 
@@ -111,6 +135,40 @@ namespace HDT.Plugins.Common.Util
 			}
 		}
 
+		public static Hearthstone_Deck_Tracker.Enums.GameMode Convert(GameMode mode)
+		{
+			switch (mode)
+			{
+				case GameMode.ALL:
+					return Hearthstone_Deck_Tracker.Enums.GameMode.All;
+
+				case GameMode.RANKED:
+					return Hearthstone_Deck_Tracker.Enums.GameMode.Ranked;
+
+				case GameMode.CASUAL:
+					return Hearthstone_Deck_Tracker.Enums.GameMode.Casual;
+
+				case GameMode.ARENA:
+					return Hearthstone_Deck_Tracker.Enums.GameMode.Arena;
+
+				case GameMode.BRAWL:
+					return Hearthstone_Deck_Tracker.Enums.GameMode.Brawl;
+
+				case GameMode.FRIENDLY:
+					return Hearthstone_Deck_Tracker.Enums.GameMode.Friendly;
+
+				case GameMode.PRACTICE:
+					return Hearthstone_Deck_Tracker.Enums.GameMode.Practice;
+
+				case GameMode.SPECTATOR:
+					return Hearthstone_Deck_Tracker.Enums.GameMode.Spectator;
+
+				default:
+				case GameMode.NONE:
+					return Hearthstone_Deck_Tracker.Enums.GameMode.None;
+			}
+		}
+
 		public static GameResult Convert(Hearthstone_Deck_Tracker.Enums.GameResult result)
 		{
 			switch (result)
@@ -125,6 +183,22 @@ namespace HDT.Plugins.Common.Util
 				case Hearthstone_Deck_Tracker.Enums.GameResult.None:
 				default:
 					return GameResult.DRAW;
+			}
+		}
+
+		public static Hearthstone_Deck_Tracker.Enums.GameResult Convert(GameResult result)
+		{
+			switch (result)
+			{
+				case GameResult.WIN:
+					return Hearthstone_Deck_Tracker.Enums.GameResult.Win;
+
+				case GameResult.LOSS:
+					return Hearthstone_Deck_Tracker.Enums.GameResult.Loss;
+
+				case GameResult.DRAW:
+				default:
+					return Hearthstone_Deck_Tracker.Enums.GameResult.Draw;
 			}
 		}
 

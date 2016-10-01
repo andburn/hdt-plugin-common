@@ -10,5 +10,7 @@ namespace HDT.Plugins.Common.Services
 		List<Game> GetAllGames();
 
 		void AddGames(List<Game> games);
+
+		void UpdateGames(List<Game> games);
 	}
 }
