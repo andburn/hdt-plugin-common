@@ -24,7 +24,16 @@ namespace HDT.Plugins.Common.Util
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			return Enum.ToObject(targetType, value);
+			object result = 0;
+			try
+			{
+				result = Enum.Parse(targetType, value.ToString(), true);
+			}
+			catch (Exception)
+			{
+				// TODO log it
+			}
+			return result;
 		}
 
 		public string ToTitleCase(Enum e)
