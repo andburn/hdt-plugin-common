@@ -26,8 +26,7 @@ namespace HDT.Plugins.Common.Util
 			game.OpponentClass = EnumConverter.Convert<PlayerClass>(stats.OpponentHero);
 			game.OpponentName = stats.OpponentName;
 			game.Turns = stats.Turns;
-			game.Seconds = stats.SortableDuration;
-			// QSTN: difference with Coin
+			game.Minutes = stats.SortableDuration;
 			game.PlayerGotCoin = stats.Coin;
 			game.WasConceded = stats.WasConceded;
 			game.Note = new Note(stats.Note);

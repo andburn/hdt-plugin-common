@@ -19,7 +19,7 @@ namespace HDT.Plugins.Common.Models
 		public PlayerClass OpponentClass { get; set; }
 		public string OpponentName { get; set; }
 		public int Turns { get; set; }
-		public int Seconds { get; set; }
+		public int Minutes { get; set; }
 		public bool PlayerGotCoin { get; set; }
 		public bool WasConceded { get; set; }
 		public Note Note { get; set; }
