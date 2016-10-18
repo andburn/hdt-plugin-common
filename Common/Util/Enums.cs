@@ -66,4 +66,11 @@
 		LEFT,
 		RIGHT
 	}
+
+	public enum GameFormat
+	{
+		ANY,
+		WILD,
+		STANDARD
+	}
 }

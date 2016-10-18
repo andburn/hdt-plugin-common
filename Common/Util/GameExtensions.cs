@@ -7,12 +7,10 @@ namespace HDT.Plugins.Common.Util
 {
 	public static class GameExtensions
 	{
-		public static void CopyFrom(this Game game, GameStats stats)
+		public static void CopyFrom(this Game game, GameStats stats, Deck deck)
 		{
-			game.Id = stats.GameId;
-			// TODO: add other deck properties
-			// FIX: add arena prop from games stats
-			game.Deck = new Deck(stats.DeckId, stats.DeckName, false);
+			game.Id = stats.GameId;		
+			game.Deck = deck;
 			var v = stats.PlayerDeckVersion ?? new SerializableVersion();
 			game.DeckVersion = new Version(v.Major, v.Minor, v.Build, v.Revision);
 			game.Region = EnumConverter.Convert(stats.Region);
@@ -32,6 +30,7 @@ namespace HDT.Plugins.Common.Util
 			game.Note = new Note(stats.Note);
 		}
 
+		// TODO check this
 		public static void CopyTo(this Game from, GameStats to)
 		{
 			//from.Deck;

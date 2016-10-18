@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using HDT.Plugins.Common.Util;
 
 namespace HDT.Plugins.Common.Models
 {
@@ -12,7 +13,8 @@ namespace HDT.Plugins.Common.Models
 		public string Name { get; set; }
 		public DateTime LastPlayed { get; set; }
 		public List<Card> Cards { get; set; }
-		public string Class { get; set; }
+		public PlayerClass Class { get; set; }
+		public bool IsStandard { get; set; }
 		public ArenaReward ArenaReward { get; set; }
 
 		public Deck()
@@ -20,11 +22,13 @@ namespace HDT.Plugins.Common.Models
 			Id = Guid.NewGuid();
 		}
 
-		public Deck(Guid id, string name, bool arena)
+		public Deck(Guid id, string name, bool arena, string klass, bool standard)
 		{
 			Id = id;
 			Name = name;
 			IsArena = arena;
+			Class = EnumConverter.ConvertHeroClass(klass);
+			IsStandard = standard;
 		}
 
 		public override string ToString()

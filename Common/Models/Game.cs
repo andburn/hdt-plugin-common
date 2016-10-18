@@ -10,6 +10,7 @@ namespace HDT.Plugins.Common.Models
 		public Version DeckVersion { get; set; }
 		public Region Region { get; set; }
 		public GameMode Mode { get; set; }
+		public GameFormat Format { get; set; }
 		public GameResult Result { get; set; }
 		public DateTime StartTime { get; set; }
 		public DateTime EndTime { get; set; }

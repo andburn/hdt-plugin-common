@@ -211,7 +211,7 @@ namespace HDT.Plugins.Common.Util
 			}
 		}
 
-		private static PlayerClass ConvertHeroClass(string value)
+		public static PlayerClass ConvertHeroClass(string value)
 		{
 			switch (value?.ToLowerInvariant().Trim())
 			{

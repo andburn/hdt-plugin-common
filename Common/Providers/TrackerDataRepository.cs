@@ -16,28 +16,46 @@ namespace HDT.Plugins.Common.Providers
 		private static readonly BindingFlags bindFlags =
 			BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
 
+		private List<Deck> DeckCache = null;
+		private List<Game> GameCache = null;
+
+		// TODO need to have a reload that nulls caches
+
 		public List<Deck> GetAllDecks()
 		{
-			Reload<DeckList>();
-			return DeckList.Instance.Decks
-				.Where(d => d.Archived == false)
-				.Select(d => new Deck(d.DeckId, d.Name, d.IsArenaDeck))
-				.OrderBy(d => d.Name)
-				.ToList();
+			if (DeckCache == null)
+			{
+				Reload<DeckList>();
+				DeckCache = DeckList.Instance.Decks
+					.Where(d => d.Archived == false)
+					.Select(d => new Deck(d.DeckId, d.Name, d.IsArenaDeck, d.Class, d.StandardViable))
+					.OrderBy(d => d.Name)
+					.ToList();
+			}
+			return DeckCache;
 		}		
+
+		public Deck GetDeck(Guid id)
+		{
+			return GetAllDecks().SingleOrDefault(d => d.Id == id);
+		}
 
 		public List<Game> GetAllGames()
 		{
-			var games = new List<Game>();
-			Reload<DeckStatsList>();
-			Reload<DefaultDeckStats>();
-			var ds = new List<DeckStats>(DeckStatsList.Instance.DeckStats.Values);
-			ds.AddRange(DefaultDeckStats.Instance.DeckStats);
-			foreach (var deck in ds)
+			if (GameCache == null)
 			{
-				games.AddRange(deck.Games.Select(g => CreateGame(g)));
+				var games = new List<Game>();
+				Reload<DeckStatsList>();
+				Reload<DefaultDeckStats>();
+				var ds = new List<DeckStats>(DeckStatsList.Instance.DeckStats.Values);
+				ds.AddRange(DefaultDeckStats.Instance.DeckStats);
+				foreach (var deck in ds)
+				{
+					games.AddRange(deck.Games.Select(g => CreateGame(g)));
+				}
+				GameCache = games;
 			}
-			return games;
+			return GameCache;
 		}
 
 		public void AddGames(List<Game> games)
@@ -79,7 +97,8 @@ namespace HDT.Plugins.Common.Providers
 		private Game CreateGame(GameStats stats)
 		{
 			var game = new Game();
-			game.CopyFrom(stats);
+			var deck = GetDeck(stats.DeckId);
+			game.CopyFrom(stats, deck);
 			return game;
 		}
 	}
