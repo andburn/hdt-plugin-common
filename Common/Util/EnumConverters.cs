@@ -96,7 +96,6 @@ namespace HDT.Plugins.Common.Util
 
 				case Region.EU:
 					return Hearthstone_Deck_Tracker.Enums.Region.EU;
-				
 
 				case Region.ASIA:
 					return Hearthstone_Deck_Tracker.Enums.Region.ASIA;
@@ -192,6 +191,36 @@ namespace HDT.Plugins.Common.Util
 				case Hearthstone_Deck_Tracker.Enums.GameResult.None:
 				default:
 					return GameResult.DRAW;
+			}
+		}
+
+		public static Hearthstone_Deck_Tracker.Enums.Format? Convert(GameFormat format)
+		{
+			switch (format)
+			{				
+				case GameFormat.WILD:
+					return Hearthstone_Deck_Tracker.Enums.Format.Wild;
+				case GameFormat.STANDARD:
+					return Hearthstone_Deck_Tracker.Enums.Format.Standard;
+				case GameFormat.ANY:
+				default:
+					return Hearthstone_Deck_Tracker.Enums.Format.All;
+			}
+		}
+
+		public static GameFormat Convert(Hearthstone_Deck_Tracker.Enums.Format? format)
+		{
+			switch (format)
+			{
+				case Hearthstone_Deck_Tracker.Enums.Format.Standard:
+					return GameFormat.STANDARD;
+
+				case Hearthstone_Deck_Tracker.Enums.Format.Wild:
+					return GameFormat.WILD;
+
+				case Hearthstone_Deck_Tracker.Enums.Format.All:
+				default:
+					return GameFormat.ANY;
 			}
 		}
 

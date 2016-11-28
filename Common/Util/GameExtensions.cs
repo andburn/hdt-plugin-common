@@ -15,6 +15,7 @@ namespace HDT.Plugins.Common.Util
 			game.DeckVersion = new Version(v.Major, v.Minor, v.Build, v.Revision);
 			game.Region = EnumConverter.Convert(stats.Region);
 			game.Mode = EnumConverter.Convert(stats.GameMode);
+			game.Format = EnumConverter.Convert(stats.Format);
 			game.Result = EnumConverter.Convert(stats.Result);
 			game.StartTime = stats.StartTime;
 			game.EndTime = stats.EndTime;
@@ -38,6 +39,7 @@ namespace HDT.Plugins.Common.Util
 			to.StartTime = from.StartTime;
 			to.EndTime = from.EndTime;
 			to.GameMode = EnumConverter.Convert(from.Mode);
+			to.Format = EnumConverter.Convert(from.Format);
 			to.Note = from.Note.Text;
 			to.OpponentHero = from.OpponentClass.ToString(); // ??? case matters
 			to.OpponentName = from.OpponentName;
