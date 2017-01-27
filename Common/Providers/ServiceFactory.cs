@@ -7,12 +7,16 @@ namespace HDT.Plugins.Common.Providers
 		private static readonly IDataRepository DataRepository;
 		private static readonly ILoggingService LoggingService;
 		private static readonly IUpdateService UpdateService;
+		private static readonly IEventsService EventService;
+		private static readonly IConfigurationRepository ConfigRepository;
 
 		static ServiceFactory()
 		{
 			DataRepository = new TrackerDataRepository();
 			LoggingService = new TrackerLoggingService();
 			UpdateService = new GitHubUpdateService();
+			EventService = new TrackerEventsService();
+			ConfigRepository = new TrackerConfigRepository();
 		}
 
 		public static IDataRepository CreateDataRepository() => DataRepository;
@@ -20,5 +24,9 @@ namespace HDT.Plugins.Common.Providers
 		public static ILoggingService CreateLoggingService() => LoggingService;
 
 		public static IUpdateService CreateUpdateService() => UpdateService;
+
+		public static IEventsService CreateEventService() => EventService;
+
+		public static IConfigurationRepository CreateConfigRepository() => ConfigRepository;
 	}
 }
