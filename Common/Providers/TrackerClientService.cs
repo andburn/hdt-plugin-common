@@ -8,6 +8,14 @@ namespace HDT.Plugins.Common.Providers
 {
 	public class TrackerClientService : IGameClientService
 	{
+		public string[] CurrentGameInfo()
+		{
+			var stats = Hearthstone_Deck_Tracker.Core.Game?.CurrentGameStats;
+			if (stats != null)
+				return new string[] { stats.PlayerHero, stats.OpponentHero, stats.PlayerName, stats.OpponentName };
+			return new string[0];
+		}
+
 		public Rectangle GameRectangle(bool dpiScale)
 		{
 			return Helper.GetHearthstoneRect(true);
@@ -23,6 +31,11 @@ namespace HDT.Plugins.Common.Providers
 		public bool IsInMenu()
 		{
 			return Core.Game?.IsInMenu ?? false;
+		}
+
+		public System.Windows.Window MainWindow()
+		{
+			return Core.MainWindow;
 		}
 	}
 }

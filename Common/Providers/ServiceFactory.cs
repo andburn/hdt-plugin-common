@@ -8,6 +8,7 @@ namespace HDT.Plugins.Common.Providers
 		private static readonly ILoggingService LoggingService;
 		private static readonly IUpdateService UpdateService;
 		private static readonly IEventsService EventService;
+		private static readonly IGameClientService GameService;
 		private static readonly IConfigurationRepository ConfigRepository;
 
 		static ServiceFactory()
@@ -16,7 +17,8 @@ namespace HDT.Plugins.Common.Providers
 			LoggingService = new TrackerLoggingService();
 			UpdateService = new GitHubUpdateService();
 			EventService = new TrackerEventsService();
-			ConfigRepository = new TrackerConfigRepository();
+			GameService = new TrackerClientService();
+			ConfigRepository = new TrackerConfigRepository();			
 		}
 
 		public static IDataRepository CreateDataRepository() => DataRepository;
@@ -26,6 +28,8 @@ namespace HDT.Plugins.Common.Providers
 		public static IUpdateService CreateUpdateService() => UpdateService;
 
 		public static IEventsService CreateEventService() => EventService;
+
+		public static IGameClientService CreateGameClientService() => GameService;
 
 		public static IConfigurationRepository CreateConfigRepository() => ConfigRepository;
 	}

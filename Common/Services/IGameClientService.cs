@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace HDT.Plugins.Common.Services
 {
@@ -10,5 +11,9 @@ namespace HDT.Plugins.Common.Services
 		Task<Bitmap> GameScreenshot(bool altMethod);
 
 		bool IsInMenu();
+
+		Window MainWindow();
+
+		string[] CurrentGameInfo();
 	}
 }
