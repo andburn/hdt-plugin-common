@@ -105,12 +105,25 @@ namespace HDT.Plugins.Common.Settings
 
 		public void Set(string section, string key, string value)
 		{
-			if (string.IsNullOrWhiteSpace(section))
-				_user.Global[key] = value;
-			else if (_user.HasSection(section))
-				_user[section][key] = value;
-			else
+			if (string.IsNullOrWhiteSpace(key))
+			{
+				_logger.Error("Settings must have non-empty keys");
 				return;
+			}
+
+			if (string.IsNullOrWhiteSpace(section))
+			{
+				_user.Global[key] = value;
+			}
+			else if (_user.HasSection(section))
+			{ 
+				_user[section][key] = value;
+			}
+			else
+			{
+				_user.Sections.AddSection(section);
+				_user[section][key] = value;
+			}
 
 			FileParser.WriteFile(_userFile, _user);
 		}
@@ -220,6 +233,7 @@ namespace HDT.Plugins.Common.Settings
 			if (!string.IsNullOrWhiteSpace(name))
 				fname = name;
 			_userFile = Path.Combine(GetSettingsDir(), fname + ".ini");
+			_logger.Info("User setting file is " + _userFile);
 		}
 	}
 }

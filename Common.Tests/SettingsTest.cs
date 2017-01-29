@@ -91,6 +91,14 @@ namespace Common.Tests
 		}
 
 		[TestMethod]
+		public void Set_WorksCorrectlyUsingSections()
+		{
+			Assert.AreEqual("First Section", settings.Get("Section 1", "First"));
+			settings.Set("Section 1", "First", "Set First");
+			Assert.AreEqual("Set First", settings.Get("Section 1", "First"));
+		}
+
+		[TestMethod]
 		public void DefaultValueIsReturnedIfNotInUser()
 		{
 			settings.Set("Third", "3");
