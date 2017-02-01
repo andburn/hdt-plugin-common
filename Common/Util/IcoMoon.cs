@@ -14,7 +14,8 @@ namespace HDT.Plugins.Common.Util
 			{"cog", "\ue994"},
 			{"info", "\uea0c" },
 			{"notification", "\uea08" },
-			{"cancel-circle", "\uea0d" }
+			{"cancel-circle", "\uea0d" },
+			{ "trophy", "\ue99e" }
 		};
 
 		public static string Get(string name)

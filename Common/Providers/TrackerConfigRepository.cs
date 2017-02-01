@@ -12,17 +12,19 @@ namespace HDT.Plugins.Common.Providers
 	public class TrackerConfigRepository : IConfigurationRepository
 	{
 		private Type _configType;
+		private ILoggingService _logger;
 
 		public TrackerConfigRepository()
 		{
 			_configType = typeof(Config);
+			_logger = ServiceFactory.CreateLoggingService();
 		}
 
 		public object Get(string key)
 		{
 			try
 			{
-				var propInfo = _configType.GetProperty(key);
+				var propInfo = _configType.GetField(key);
 				return propInfo.GetValue(Config.Instance);
 			}
 			catch (NullReferenceException)
@@ -33,7 +35,7 @@ namespace HDT.Plugins.Common.Providers
 
 		public void Set(string key, object value)
 		{
-			var propInfo = _configType.GetProperty(key);
+			var propInfo = _configType.GetField(key);
 			propInfo.SetValue(Config.Instance, value);
 			// allow exceptions to pass up;
 			// ArgumentException, TargetException, 
