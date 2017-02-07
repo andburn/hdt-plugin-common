@@ -3,6 +3,8 @@ using System.Globalization;
 using System.Text;
 using System.Windows;
 using System.Windows.Data;
+using HDT.Plugins.Common.Providers;
+using HDT.Plugins.Common.Services;
 
 namespace HDT.Plugins.Common.Util
 {
@@ -197,11 +199,13 @@ namespace HDT.Plugins.Common.Util
 		public static Hearthstone_Deck_Tracker.Enums.Format? Convert(GameFormat format)
 		{
 			switch (format)
-			{				
+			{
 				case GameFormat.WILD:
 					return Hearthstone_Deck_Tracker.Enums.Format.Wild;
+
 				case GameFormat.STANDARD:
 					return Hearthstone_Deck_Tracker.Enums.Format.Standard;
+
 				case GameFormat.ANY:
 				default:
 					return Hearthstone_Deck_Tracker.Enums.Format.All;
@@ -242,6 +246,7 @@ namespace HDT.Plugins.Common.Util
 
 		public static PlayerClass ConvertHeroClass(string value)
 		{
+			var log = Injector.Instance.Container.GetInstance<ILoggingService>();
 			switch (value?.ToLowerInvariant().Trim())
 			{
 				case "druid":

@@ -21,7 +21,7 @@ namespace HDT.Plugins.Common.Providers
 		private static readonly BindingFlags bindFlags =
 			BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
 
-		private ILoggingService _logger = ServiceFactory.CreateLoggingService();
+		private ILoggingService logger = Injector.Instance.Container.GetInstance<ILoggingService>();
 
 		private List<Deck> DeckCache = null;
 		private List<Game> GameCache = null;
@@ -128,6 +128,7 @@ namespace HDT.Plugins.Common.Providers
 					.ToList();
 				vDecks.Add(vd);
 			}
+
 			return vDecks;
 		}
 
@@ -182,7 +183,7 @@ namespace HDT.Plugins.Common.Providers
 		{
 			if (deck == null)
 			{
-				_logger.Info("Cannot add null deck");
+				logger.Info("Cannot add null deck");
 				return;
 			}
 			HDTDeck d = new HDTDeck();
@@ -237,7 +238,7 @@ namespace HDT.Plugins.Common.Providers
 			if (string.IsNullOrWhiteSpace(tag))
 				return;
 			var decks = DeckList.Instance.Decks.Where(d => d.Tags.Contains(tag)).ToList();
-			_logger.Info($"Deleting {decks.Count} archetype decks");
+			logger.Info($"Deleting {decks.Count} archetype decks");
 			foreach (var d in decks)
 				DeckList.Instance.Decks.Remove(d);
 			if (decks.Any())

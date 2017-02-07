@@ -17,7 +17,7 @@ namespace HDT.Plugins.Common.Plugin
 		public PluginMenu(string header)
 		{
 			Menu = new MenuItem();
-			Menu.Header = header;
+			Menu.Header = header.ToUpper();
 		}
 
 		public PluginMenu(string header, string icon)
@@ -36,7 +36,7 @@ namespace HDT.Plugins.Common.Plugin
 		public void Append(string header, string icon, ICommand command, object param = null)
 		{
 			Menu.Items.Add(new MenuItem() {
-				Header = header,
+				Header = header.ToUpper(),
 				Icon = CreateIcon(icon),
 				Command = command,
 				CommandParameter = param

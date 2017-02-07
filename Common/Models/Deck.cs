@@ -32,6 +32,7 @@ namespace HDT.Plugins.Common.Models
 			Id = deck.Id;
 			IsArena = deck.IsArena;
 			Name = deck.Name;
+			Class = deck.Class;
 			LastPlayed = deck.LastPlayed;
 			Cards = deck.Cards;
 			IsStandard = deck.IsStandard;
