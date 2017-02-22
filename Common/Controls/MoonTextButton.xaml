@@ -14,7 +14,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <ContentPresenter x:Name="Presenter" Content="{TemplateBinding Content}"
-                                      HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                      HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" />
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Foreground" Value="Gray" />
