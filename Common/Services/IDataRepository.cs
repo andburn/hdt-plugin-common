@@ -21,7 +21,7 @@ namespace HDT.Plugins.Common.Services
 
 		void AddDeck(string name, string playerClass, string cards, bool archive, params string[] tags);
 
-		Deck GetOpponentDeck();
+		Deck GetOpponentDeck(bool live);
 
 		string GetGameNote();
 

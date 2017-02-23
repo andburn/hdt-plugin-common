@@ -132,33 +132,50 @@ namespace HDT.Plugins.Common.Providers
 			return vDecks;
 		}
 
-		public Deck GetOpponentDeck()
+		public Deck GetOpponentDeck(bool live)
 		{
-			var deck = new Deck();
+			PlayerClass klass = PlayerClass.ALL;
+			IEnumerable<TrackedCard> cards = new List<TrackedCard>();
+
 			if (Core.Game.IsRunning)
 			{
-				var game = Core.Game.CurrentGameStats;
-				if (game != null && game.CanGetOpponentDeck)
+				if (live)
 				{
-					// hero class
-					deck.Class = EnumConverter.ConvertHeroClass(game.OpponentHero);
-					// add the cards to the deck
-					// create a temp HDT deck too, to check if its standard
-					var hdtDeck = new Hearthstone_Deck_Tracker.Hearthstone.Deck();
-					foreach (var card in game.OpponentCards)
+					klass = EnumConverter.ConvertHeroClass(Core.Game.Player?.Class);
+					cards = Core.Game.Player?.OpponentCardList
+						.Select(x => new TrackedCard(x.Id, x.Count));
+				}
+				else
+				{
+					var game = Core.Game.CurrentGameStats;
+					if (game != null && game.CanGetOpponentDeck)
 					{
-						var c = DB.GetCardFromId(card.Id);
-						c.Count = card.Count;
-						hdtDeck.Cards.Add(c);
-						if (c != null && c != DB.UnknownCard)
-						{
-							deck.Cards.Add(
-								new Card(c.Id, c.LocalizedName, c.Count, c.Background.Clone()));
-						}
+						klass = EnumConverter.ConvertHeroClass(game.OpponentHero);
+						cards = game.OpponentCards;
 					}
-					deck.IsStandard = hdtDeck.StandardViable;
 				}
 			}
+			return CreateDeck(klass, cards);
+		}
+
+		private Deck CreateDeck(PlayerClass klass, IEnumerable<TrackedCard> cards)
+		{
+			var deck = new Deck();
+			// add the cards to the deck
+			// create a temp HDT deck too, to check if its standard
+			var hdtDeck = new Hearthstone_Deck_Tracker.Hearthstone.Deck();
+			foreach (var card in cards)
+			{
+				var c = DB.GetCardFromId(card.Id);
+				c.Count = card.Count;
+				hdtDeck.Cards.Add(c);
+				if (c != null && c != DB.UnknownCard)
+				{
+					deck.Cards.Add(
+						new Card(c.Id, c.LocalizedName, c.Count, c.Background.Clone()));
+				}
+			}
+			deck.IsStandard = hdtDeck.StandardViable;
 			return deck;
 		}
 
