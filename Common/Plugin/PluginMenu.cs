@@ -48,9 +48,9 @@ namespace HDT.Plugins.Common.Plugin
 			Append(header, null, command, param);
 		}
 
-		private TextBlock CreateIcon(string name)
+		private TextBlock CreateIcon(string code)
 		{
-			if (string.IsNullOrWhiteSpace(name))
+			if (string.IsNullOrWhiteSpace(code))
 				return null;
 
 			var block = new TextBlock();
@@ -58,7 +58,7 @@ namespace HDT.Plugins.Common.Plugin
 				new Uri("pack://application:,,,/HDT.Plugins.Common;component/Resources/"), "./#IcoMoon-Free");
 			block.FontSize = 18;
 			block.Margin = new Thickness(5, 0, 0, 0);
-			block.Text = IcoMoon.Get(name);
+			block.Text = code;
 			return block;
 		}
 	}

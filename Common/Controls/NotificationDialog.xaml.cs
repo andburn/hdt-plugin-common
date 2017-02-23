@@ -40,7 +40,7 @@ namespace HDT.Plugins.Common.Controls
 
 		private void SetButton(Button button, Action action, string icon)
 		{
-			button.Content = IcoMoon.Get(icon);
+			button.Content = icon;
 			button.IsEnabled = true;
 			if (action != null)
 				button.Click += (s, e) => { action.Invoke(); };

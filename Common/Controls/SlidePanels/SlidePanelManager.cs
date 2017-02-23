@@ -50,7 +50,7 @@ namespace HDT.Plugins.Common.Controls.SlidePanels
 
 			var content = new NotificationDialog(title, message);
 			content.SetUtilityButton(action, icon);
-			content.SetCloseButton(() => panel.Close(), "cancel-circle");
+			content.SetCloseButton(() => panel.Close(), IcoMoon.CancelCircle);
 
 			panel.Content = content;
 			panel.Attach();

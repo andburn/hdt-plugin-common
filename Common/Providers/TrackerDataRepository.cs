@@ -132,35 +132,28 @@ namespace HDT.Plugins.Common.Providers
 			return vDecks;
 		}
 
-		public Deck GetOpponentDeck(bool live)
+		public Deck GetOpponentDeck()
 		{
 			PlayerClass klass = PlayerClass.ALL;
 			IEnumerable<TrackedCard> cards = new List<TrackedCard>();
 
 			if (Core.Game.IsRunning)
 			{
-				if (live)
-				{
-					klass = EnumConverter.ConvertHeroClass(Core.Game.Player?.Class);
-					cards = Core.Game.Player?.OpponentCardList
-						.Select(x => new TrackedCard(x.Id, x.Count));
-				}
-				else
-				{
-					var game = Core.Game.CurrentGameStats;
-					if (game != null && game.CanGetOpponentDeck)
-					{
-						klass = EnumConverter.ConvertHeroClass(game.OpponentHero);
-						cards = game.OpponentCards;
-					}
+				var game = Core.Game.CurrentGameStats;
+				if (game != null && game.CanGetOpponentDeck)
+				{						
+					klass = EnumConverter.ConvertHeroClass(game.OpponentHero);
+					cards = game.OpponentCards;
 				}
 			}
+
 			return CreateDeck(klass, cards);
 		}
 
 		private Deck CreateDeck(PlayerClass klass, IEnumerable<TrackedCard> cards)
 		{
 			var deck = new Deck();
+			deck.Class = klass;
 			// add the cards to the deck
 			// create a temp HDT deck too, to check if its standard
 			var hdtDeck = new Hearthstone_Deck_Tracker.Hearthstone.Deck();
