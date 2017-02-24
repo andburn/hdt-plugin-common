@@ -26,4 +26,9 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Color x:Key="DarkBackground">#2e3136</Color>
+    <Style x:Key="DarkTextBar" TargetType="{x:Type TextBlock}">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="#2e3136" />
+    </Style>
 </ResourceDictionary>
