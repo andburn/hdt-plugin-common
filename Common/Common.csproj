@@ -155,7 +155,9 @@
     <None Include="packages.config" />
     <Resource Include="Resources\IcoMoon-Free.ttf" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\hdt-banner.png" />
+  </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\MoonTextButton.xaml">
       <SubType>Designer</SubType>
