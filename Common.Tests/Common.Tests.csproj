@@ -99,6 +99,7 @@
   <ItemGroup>
     <Compile Include="EnumStringConverterTest.cs" />
     <Compile Include="GameExtensionTest.cs" />
+    <Compile Include="KlassKonverterTest.cs" />
     <Compile Include="PluginBaseTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GitHubUpdateTest.cs" />

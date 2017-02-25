@@ -36,7 +36,7 @@ namespace HDT.Plugins.Common.Controls.SlidePanels
 		}
 
 		public static SlidePanel Notification(string title, string message,
-			string icon = "notification", Action action = null)
+			string icon = IcoMoon.Notification, Action action = null)
 		{
 			var panel = new SlidePanel();
 
