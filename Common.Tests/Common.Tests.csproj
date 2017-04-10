@@ -71,13 +71,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HearthstoneDeckTracker, Version=1.1.1.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="HearthstoneDeckTracker, Version=1.1.7.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\build\HearthstoneDeckTracker.exe</HintPath>
-    </Reference>
-    <Reference Include="INIFileParser, Version=2.3.0.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">
-      <HintPath>..\packages\ini-parser.2.3.0\lib\net20\INIFileParser.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\dev\HearthstoneDeckTracker.exe</HintPath>
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -99,10 +95,10 @@
   <ItemGroup>
     <Compile Include="EnumStringConverterTest.cs" />
     <Compile Include="GameExtensionTest.cs" />
+    <Compile Include="GitHubUpdateTest.cs" />
     <Compile Include="KlassKonverterTest.cs" />
     <Compile Include="PluginBaseTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GitHubUpdateTest.cs" />
     <Compile Include="SettingsTest.cs" />
     <Compile Include="SettingValueTest.cs" />
   </ItemGroup>
@@ -111,9 +107,6 @@
       <Project>{2ebdf2c6-9c5d-4e95-8bc2-e47bc9aa5811}</Project>
       <Name>Common</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

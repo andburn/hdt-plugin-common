@@ -17,7 +17,7 @@ namespace HDT.Plugins.Common.Providers
 		public TrackerConfigRepository()
 		{
 			_configType = typeof(Config);
-			_logger = ServiceFactory.CreateLoggingService();
+			_logger = Injector.Instance.Container.GetInstance<ILoggingService>();
 		}
 
 		public object Get(string key)

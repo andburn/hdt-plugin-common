@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Reflection;
+using HDT.Plugins.Common.Providers;
+using HDT.Plugins.Common.Services;
 
 namespace HDT.Plugins.Common.Plugin
 {
@@ -23,7 +25,7 @@ namespace HDT.Plugins.Common.Plugin
 				}
 				catch (Exception e)
 				{
-					Providers.ServiceFactory.CreateLoggingService().Error(e);
+					Injector.Instance.Container.GetInstance<ILoggingService>().Error(e);
 				}
 				return path;
 			}

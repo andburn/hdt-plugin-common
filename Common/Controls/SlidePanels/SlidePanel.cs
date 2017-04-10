@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using HDT.Plugins.Common.Util;
@@ -95,12 +96,26 @@ namespace HDT.Plugins.Common.Controls.SlidePanels
 
 		public void Attach()
 		{
-			Hearthstone_Deck_Tracker.API.Core.MainWindow.Flyouts.Items.Add(_flyout);
+			try
+			{
+				Hearthstone_Deck_Tracker.API.Core.MainWindow.Flyouts.Items.Add(_flyout);
+			}
+			catch (Exception e)
+			{
+				Hearthstone_Deck_Tracker.Utility.Logging.Log.Error(e);
+			}
 		}
 
 		public void Detach()
 		{
-			Hearthstone_Deck_Tracker.API.Core.MainWindow.Flyouts.Items.Remove(_flyout);
+			try
+			{
+				Hearthstone_Deck_Tracker.API.Core.MainWindow.Flyouts.Items.Remove(_flyout);
+			}
+			catch (Exception e)
+			{
+				Hearthstone_Deck_Tracker.Utility.Logging.Log.Error(e);
+			}
 		}
 
 		public void Open()

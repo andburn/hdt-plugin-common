@@ -171,7 +171,7 @@ namespace HDT.Plugins.Common.Settings
 			_default = new IniData();
 			_user = new IniData();
 			_merged = new IniData();
-			_logger = ServiceFactory.CreateLoggingService();
+			_logger = Injector.Instance.Container.GetInstance<ILoggingService>();
 		}
 
 		private void InitializeDefault(string ini)
