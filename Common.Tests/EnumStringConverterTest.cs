@@ -1,8 +1,9 @@
 ﻿using System.Globalization;
+using HDT.Plugins.Common.Data;
 using HDT.Plugins.Common.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Common.Tests
+namespace HDT.Plugins.Common.Tests
 {
 	[TestClass]
 	public class EnumStringConverterTest

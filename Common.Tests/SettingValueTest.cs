@@ -1,7 +1,7 @@
 ﻿using HDT.Plugins.Common.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Common.Tests
+namespace HDT.Plugins.Common.Tests
 {
 	[TestClass]
 	public class SettingValueTest

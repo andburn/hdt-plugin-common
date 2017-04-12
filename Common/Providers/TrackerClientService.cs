@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 using System.Threading.Tasks;
-using HDT.Plugins.Common.Services;
+using HDT.Plugins.Common.Data.Services;
 using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Utility;
 

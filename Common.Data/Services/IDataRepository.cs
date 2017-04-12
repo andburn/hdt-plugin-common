@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using HDT.Plugins.Common.Models;
+using HDT.Plugins.Common.Data.Models;
 
-namespace HDT.Plugins.Common.Services
+namespace HDT.Plugins.Common.Data.Services
 {
 	public interface IDataRepository
-	{		
+	{
 		List<Game> GetAllGames();
 
 		void AddGames(List<Game> games);
@@ -27,6 +27,6 @@ namespace HDT.Plugins.Common.Services
 
 		string GetGameMode();
 
-		void UpdateGameNote(string text);		
+		void UpdateGameNote(string text);
 	}
 }

@@ -1,9 +1,9 @@
 ﻿using System;
+using HDT.Plugins.Common.Data.Services;
 using HDT.Plugins.Common.Providers;
-using HDT.Plugins.Common.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Common.Tests
+namespace HDT.Plugins.Common.Tests
 {
 	[TestClass]
 	public class GitHubUpdateTest

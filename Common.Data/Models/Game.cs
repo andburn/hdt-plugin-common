@@ -1,7 +1,6 @@
 ﻿using System;
-using HDT.Plugins.Common.Util;
 
-namespace HDT.Plugins.Common.Models
+namespace HDT.Plugins.Common.Data.Models
 {
 	public class Game
 	{

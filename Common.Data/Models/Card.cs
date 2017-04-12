@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace HDT.Plugins.Common.Models
+namespace HDT.Plugins.Common.Data.Models
 {
 	public class Card
 	{

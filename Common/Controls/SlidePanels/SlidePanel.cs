@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using HDT.Plugins.Common.Data;
 using HDT.Plugins.Common.Util;
 using Metro = MahApps.Metro.Controls;
 

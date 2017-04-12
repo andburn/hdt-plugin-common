@@ -1,8 +1,8 @@
-﻿using HDT.Plugins.Common.Util;
-using static HDT.Plugins.Common.Util.EnumConverter;
+﻿using HDT.Plugins.Common.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static HDT.Plugins.Common.Util.EnumConverter;
 
-namespace HDT.Plugins.EndGame.Tests.Models
+namespace HDT.Plugins.Common.Tests.Models
 {
 	[TestClass]
 	public class KlassKonverterTest

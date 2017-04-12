@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
-using HDT.Plugins.Common.Models;
-using HDT.Plugins.Common.Services;
+using HDT.Plugins.Common.Data;
+using HDT.Plugins.Common.Data.Models;
+using HDT.Plugins.Common.Data.Services;
 using HDT.Plugins.Common.Util;
 using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Importing;
@@ -79,8 +80,7 @@ namespace HDT.Plugins.Common.Providers
 			// make a backup
 			var today = DateTime.Today.ToString("ddMMyyyy");
 			BackupManager.CreateBackup($"Backup_{today}_plugin.zip");
-
-			// TODO some equality so don't overwrite every game
+			// copy all matching games
 			foreach (var g in games)
 			{
 				if (dd.ContainsKey(g.Id))
@@ -141,7 +141,7 @@ namespace HDT.Plugins.Common.Providers
 			{
 				var game = Core.Game.CurrentGameStats;
 				if (game != null && game.CanGetOpponentDeck)
-				{						
+				{
 					klass = EnumConverter.ConvertHeroClass(game.OpponentHero);
 					cards = game.OpponentCards;
 				}

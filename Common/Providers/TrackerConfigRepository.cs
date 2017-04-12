@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using HDT.Plugins.Common.Services;
+using HDT.Plugins.Common.Data.Services;
 using Hearthstone_Deck_Tracker;
 
 namespace HDT.Plugins.Common.Providers
@@ -38,7 +33,7 @@ namespace HDT.Plugins.Common.Providers
 			var propInfo = _configType.GetField(key);
 			propInfo.SetValue(Config.Instance, value);
 			// allow exceptions to pass up;
-			// ArgumentException, TargetException, 
+			// ArgumentException, TargetException,
 			// MethodAccessException, TargetInvocationException
 		}
 	}

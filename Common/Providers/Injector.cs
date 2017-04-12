@@ -1,4 +1,4 @@
-﻿using HDT.Plugins.Common.Services;
+﻿using HDT.Plugins.Common.Data.Services;
 using SimpleInjector;
 
 namespace HDT.Plugins.Common.Providers
@@ -7,7 +7,9 @@ namespace HDT.Plugins.Common.Providers
 	{
 		private static Injector instance;
 
-		private Injector() { }
+		private Injector()
+		{
+		}
 
 		public static Injector Instance
 		{

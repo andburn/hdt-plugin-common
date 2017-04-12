@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace HDT.Plugins.Common.Services
+namespace HDT.Plugins.Common.Data.Services
 {
 	public interface IUpdateService
 	{

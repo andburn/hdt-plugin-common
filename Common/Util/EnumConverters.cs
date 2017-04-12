@@ -3,8 +3,9 @@ using System.Globalization;
 using System.Text;
 using System.Windows;
 using System.Windows.Data;
+using HDT.Plugins.Common.Data;
+using HDT.Plugins.Common.Data.Services;
 using HDT.Plugins.Common.Providers;
-using HDT.Plugins.Common.Services;
 
 namespace HDT.Plugins.Common.Util
 {

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using HDT.Plugins.Common.Util;
 
-namespace HDT.Plugins.Common.Models
+namespace HDT.Plugins.Common.Data.Models
 {
 	public class Deck
 	{
@@ -51,7 +50,7 @@ namespace HDT.Plugins.Common.Models
 			Id = id;
 			Name = name;
 			IsArena = arena;
-			Class = EnumConverter.ConvertHeroClass(klass);
+			Class = Utils.ConvertHeroClass(klass);
 			IsStandard = standard;
 		}
 

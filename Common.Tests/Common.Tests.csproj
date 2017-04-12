@@ -6,7 +6,7 @@
     <ProjectGuid>{D4E12CF6-CCE3-462A-BF1E-71BAE2BC7AD1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Common.Tests</RootNamespace>
+    <RootNamespace>HDT.Plugins.Common.Tests</RootNamespace>
     <AssemblyName>Common.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -71,7 +71,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HearthstoneDeckTracker, Version=1.1.7.0, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="HearthstoneDeckTracker, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\dev\HearthstoneDeckTracker.exe</HintPath>
     </Reference>
@@ -103,6 +103,10 @@
     <Compile Include="SettingValueTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common.Data\Common.Data.csproj">
+      <Project>{728a16fe-ed70-490d-8b66-5421914bd68a}</Project>
+      <Name>Common.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{2ebdf2c6-9c5d-4e95-8bc2-e47bc9aa5811}</Project>
       <Name>Common</Name>

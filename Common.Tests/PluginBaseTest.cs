@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using HDT.Plugins.Common.Plugin;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Common.Tests
+namespace HDT.Plugins.Common.Tests
 {
 	[TestClass]
 	public class PluginBaseTest

@@ -1,5 +1,6 @@
 ﻿using System;
-using HDT.Plugins.Common.Models;
+using HDT.Plugins.Common.Data;
+using HDT.Plugins.Common.Data.Models;
 using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Stats;
 
@@ -9,7 +10,7 @@ namespace HDT.Plugins.Common.Util
 	{
 		public static void CopyFrom(this Game game, GameStats stats, Deck deck)
 		{
-			game.Id = stats.GameId;		
+			game.Id = stats.GameId;
 			game.Deck = deck;
 			var v = stats.PlayerDeckVersion ?? new SerializableVersion();
 			game.DeckVersion = new Version(v.Major, v.Minor, v.Build, v.Revision);

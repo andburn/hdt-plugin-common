@@ -118,25 +118,16 @@
     <Compile Include="Controls\SlidePanels\SlidePanelManager.cs" />
     <Compile Include="Controls\Extensions\WatermarkAdorner.cs" />
     <Compile Include="Controls\Extensions\WatermarkService.cs" />
-    <Compile Include="Models\ArenaReward.cs" />
-    <Compile Include="Models\Game.cs" />
-    <Compile Include="Models\Note.cs" />
     <Compile Include="Plugin\PluginAssembly.cs" />
     <Compile Include="Providers\TrackerClientService.cs" />
     <Compile Include="Providers\TrackerConfigRepository.cs" />
     <Compile Include="Providers\TrackerEventsService.cs" />
     <Compile Include="Providers\Injector.cs" />
-    <Compile Include="Services\IConfigurationRepository.cs" />
-    <Compile Include="Services\IEventsService.cs" />
-    <Compile Include="Services\IGameClientService.cs" />
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="Settings\SettingValue.cs" />
     <Compile Include="Util\EnumConverters.cs" />
-    <Compile Include="Util\Enums.cs" />
     <Compile Include="Util\GameExtensions.cs" />
     <Compile Include="Util\IcoMoon.cs" />
-    <Compile Include="Models\Card.cs" />
-    <Compile Include="Models\Deck.cs" />
     <Compile Include="Plugin\PluginAttributes.cs" />
     <Compile Include="Plugin\PluginBase.cs" />
     <Compile Include="Plugin\PluginMenu.cs" />
@@ -144,9 +135,6 @@
     <Compile Include="Providers\GitHubUpdateService.cs" />
     <Compile Include="Providers\TrackerDataRepository.cs" />
     <Compile Include="Providers\TrackerLoggingService.cs" />
-    <Compile Include="Services\IDataRepository.cs" />
-    <Compile Include="Services\ILoggingService.cs" />
-    <Compile Include="Services\IUpdateService.cs" />
     <Compile Include="Util\IniDataExtensions.cs" />
     <Compile Include="Util\TaskExtensions.cs" />
   </ItemGroup>
@@ -170,6 +158,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Data\Common.Data.csproj">
+      <Project>{728a16fe-ed70-490d-8b66-5421914bd68a}</Project>
+      <Name>Common.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

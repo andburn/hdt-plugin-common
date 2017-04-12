@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Hearthstone_Deck_Tracker.Stats;
-using HDT.Plugins.Common.Models;
+using HDT.Plugins.Common.Data;
+using HDT.Plugins.Common.Data.Models;
 using HDT.Plugins.Common.Util;
+using Hearthstone_Deck_Tracker.Stats;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Common.Tests
+namespace HDT.Plugins.Common.Tests
 {
 	[TestClass]
 	public class GameExtensionTest

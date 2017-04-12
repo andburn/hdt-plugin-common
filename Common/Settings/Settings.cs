@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
+using HDT.Plugins.Common.Data.Services;
 using HDT.Plugins.Common.Providers;
-using HDT.Plugins.Common.Services;
 using HDT.Plugins.Common.Util;
 using IniParser;
 using IniParser.Model;
@@ -116,7 +116,7 @@ namespace HDT.Plugins.Common.Settings
 				_user.Global[key] = value;
 			}
 			else if (_user.HasSection(section))
-			{ 
+			{
 				_user[section][key] = value;
 			}
 			else

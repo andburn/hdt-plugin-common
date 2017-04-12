@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace HDT.Plugins.Common.Services
+namespace HDT.Plugins.Common.Data.Services
 {
 	public interface IGameClientService
 	{

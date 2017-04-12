@@ -1,12 +1,12 @@
-﻿using HDT.Plugins.Common.Settings;
+﻿using PluginSettings = HDT.Plugins.Common.Settings.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Common.Tests
+namespace HDT.Plugins.Common.Tests
 {
 	[TestClass]
 	public class SettingsTest
 	{
-		private static Settings settings;
+		private static PluginSettings settings;
 
 		[TestInitialize]
 		public void Init()
@@ -18,14 +18,14 @@ namespace Common.Tests
 				"[Section 1]",
 				"First=First Section"
 			};
-			settings = new Settings(string.Join("\n", ini));
+			settings = new PluginSettings(string.Join("\n", ini));
 			settings.RestoreDefaults();
 		}
 
 		[TestMethod]
 		public void DefaultCtor_HasEmptySettings()
 		{
-			var s = new Settings();
+			var s = new PluginSettings();
 			Assert.IsTrue(s.DefaultIsEmpty);
 			Assert.IsTrue(s.UserIsEmpty);
 		}
@@ -108,7 +108,7 @@ namespace Common.Tests
 		[TestMethod]
 		public void DecodesUnicodeStrings()
 		{
-			var unicode = new Settings("Name = シオヲ");
+			var unicode = new PluginSettings("Name = シオヲ");
 			Assert.AreEqual("\u30b7\u30AA\u30F2", unicode.Get("Name"));
 		}
 	}

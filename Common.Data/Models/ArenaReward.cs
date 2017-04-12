@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace HDT.Plugins.Common.Models
+namespace HDT.Plugins.Common.Data.Models
 {
 	public class ArenaReward
 	{
