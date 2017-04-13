@@ -1,7 +1,7 @@
 ﻿using System;
-using HDT.Plugins.Common.Data;
+using HDT.Plugins.Common.Data.Enums;
 using HDT.Plugins.Common.Data.Models;
-using HDT.Plugins.Common.Util;
+using HDT.Plugins.Common.Providers.Utils;
 using Hearthstone_Deck_Tracker.Stats;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

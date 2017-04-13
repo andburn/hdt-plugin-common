@@ -2,17 +2,15 @@
 using HDT.Plugins.Common.Data.Services;
 using Hearthstone_Deck_Tracker;
 
-namespace HDT.Plugins.Common.Providers
+namespace HDT.Plugins.Common.Providers.Tracker
 {
 	public class TrackerConfigRepository : IConfigurationRepository
 	{
 		private Type _configType;
-		private ILoggingService _logger;
 
 		public TrackerConfigRepository()
 		{
 			_configType = typeof(Config);
-			_logger = Injector.Instance.Container.GetInstance<ILoggingService>();
 		}
 
 		public object Get(string key)
@@ -32,7 +30,7 @@ namespace HDT.Plugins.Common.Providers
 		{
 			var propInfo = _configType.GetField(key);
 			propInfo.SetValue(Config.Instance, value);
-			// allow exceptions to pass up;
+			// TODO? allow exceptions to pass up;
 			// ArgumentException, TargetException,
 			// MethodAccessException, TargetInvocationException
 		}

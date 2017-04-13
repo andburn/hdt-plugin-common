@@ -2,9 +2,9 @@
 using HDT.Plugins.Common.Data.Services;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 
-namespace HDT.Plugins.Common.Providers
+namespace HDT.Plugins.Common.Providers.Tracker
 {
-	internal class TrackerLoggingService : ILoggingService
+	public class TrackerLoggingService : ILoggingService
 	{
 		public void Debug(object obj) => Log.Debug(obj.ToString());
 

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using HDT.Plugins.Common.Data.Services;
-using HDT.Plugins.Common.Providers;
 
 namespace HDT.Plugins.Common.Plugin
 {
@@ -23,9 +21,9 @@ namespace HDT.Plugins.Common.Plugin
 					var escaped = Uri.UnescapeDataString(uri.Path);
 					path = System.IO.Path.GetDirectoryName(escaped);
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
-					Injector.Instance.Container.GetInstance<ILoggingService>().Error(e);
+					// TODO Log error
 				}
 				return path;
 			}

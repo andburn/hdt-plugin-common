@@ -1,6 +1,6 @@
 ﻿using System;
 using HDT.Plugins.Common.Data.Services;
-using HDT.Plugins.Common.Providers;
+using HDT.Plugins.Common.Providers.Web;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace HDT.Plugins.Common.Tests

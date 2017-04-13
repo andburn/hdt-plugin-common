@@ -71,9 +71,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HearthstoneDeckTracker, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\dev\HearthstoneDeckTracker.exe</HintPath>
+    <Reference Include="Hearthstone Deck Tracker">
+      <HintPath>..\..\build\Hearthstone Deck Tracker.exe</HintPath>
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -93,12 +92,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="EnumStringConverterTest.cs" />
+    <Compile Include="Data\EnumStringConverterTest.cs" />
+    <Compile Include="Data\HeroStringConverterTest.cs" />
     <Compile Include="GameExtensionTest.cs" />
-    <Compile Include="GitHubUpdateTest.cs" />
-    <Compile Include="KlassKonverterTest.cs" />
     <Compile Include="PluginBaseTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\GitHubUpdateTest.cs" />
     <Compile Include="SettingsTest.cs" />
     <Compile Include="SettingValueTest.cs" />
   </ItemGroup>
@@ -107,11 +106,16 @@
       <Project>{728a16fe-ed70-490d-8b66-5421914bd68a}</Project>
       <Name>Common.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Common.Providers\Common.Providers.csproj">
+      <Project>{91a9b287-80e5-427d-a703-f068cf48b45a}</Project>
+      <Name>Common.Providers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{2ebdf2c6-9c5d-4e95-8bc2-e47bc9aa5811}</Project>
       <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

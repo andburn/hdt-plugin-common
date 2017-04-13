@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
-using HDT.Plugins.Common.Data;
+using HDT.Plugins.Common.Data.Enums;
 using HDT.Plugins.Common.Data.Models;
 using HDT.Plugins.Common.Data.Services;
-using HDT.Plugins.Common.Util;
+using HDT.Plugins.Common.Providers.Utils;
 using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Importing;
 using Hearthstone_Deck_Tracker.Stats;
@@ -14,15 +14,17 @@ using Hearthstone_Deck_Tracker.Utility;
 using DB = Hearthstone_Deck_Tracker.Hearthstone.Database;
 using HDTCard = Hearthstone_Deck_Tracker.Hearthstone.Card;
 using HDTDeck = Hearthstone_Deck_Tracker.Hearthstone.Deck;
+using static HDT.Plugins.Common.Data.Enums.Convert;
 
-namespace HDT.Plugins.Common.Providers
+namespace HDT.Plugins.Common.Providers.Tracker
 {
-	internal class TrackerDataRepository : IDataRepository
+	public class TrackerDataRepository : IDataRepository
 	{
 		private static readonly BindingFlags bindFlags =
 			BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
 
-		private ILoggingService logger = Injector.Instance.Container.GetInstance<ILoggingService>();
+		// TODO remove/change this, just use HDT logging call
+		private ILoggingService logger = new TrackerLoggingService();
 
 		private List<Deck> DeckCache = null;
 		private List<Game> GameCache = null;
@@ -142,7 +144,7 @@ namespace HDT.Plugins.Common.Providers
 				var game = Core.Game.CurrentGameStats;
 				if (game != null && game.CanGetOpponentDeck)
 				{
-					klass = EnumConverter.ConvertHeroClass(game.OpponentHero);
+					klass = ToHeroClass(game.OpponentHero);
 					cards = game.OpponentCards;
 				}
 			}

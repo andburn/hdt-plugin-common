@@ -1,10 +1,10 @@
 ﻿using System;
-using HDT.Plugins.Common.Data;
 using HDT.Plugins.Common.Data.Models;
 using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Stats;
+using static HDT.Plugins.Common.Providers.Utils.EnumConverter;
 
-namespace HDT.Plugins.Common.Util
+namespace HDT.Plugins.Common.Providers.Utils
 {
 	public static class GameExtensions
 	{
@@ -14,16 +14,16 @@ namespace HDT.Plugins.Common.Util
 			game.Deck = deck;
 			var v = stats.PlayerDeckVersion ?? new SerializableVersion();
 			game.DeckVersion = new Version(v.Major, v.Minor, v.Build, v.Revision);
-			game.Region = EnumConverter.Convert(stats.Region);
-			game.Mode = EnumConverter.Convert(stats.GameMode);
-			game.Format = EnumConverter.Convert(stats.Format);
-			game.Result = EnumConverter.Convert(stats.Result);
+			game.Region = Convert(stats.Region);
+			game.Mode = Convert(stats.GameMode);
+			game.Format = Convert(stats.Format);
+			game.Result = Convert(stats.Result);
 			game.StartTime = stats.StartTime;
 			game.EndTime = stats.EndTime;
 			game.Rank = stats.Rank;
-			game.PlayerClass = EnumConverter.Convert<PlayerClass>(stats.PlayerHero);
+			game.PlayerClass = Data.Enums.Convert.ToHeroClass(stats.PlayerHero);
 			game.PlayerName = stats.PlayerName;
-			game.OpponentClass = EnumConverter.Convert<PlayerClass>(stats.OpponentHero);
+			game.OpponentClass = Data.Enums.Convert.ToHeroClass(stats.OpponentHero);
 			game.OpponentName = stats.OpponentName;
 			game.Turns = stats.Turns;
 			game.Minutes = stats.SortableDuration;
@@ -39,8 +39,8 @@ namespace HDT.Plugins.Common.Util
 			//from.DeckVersion;
 			to.StartTime = from.StartTime;
 			to.EndTime = from.EndTime;
-			to.GameMode = EnumConverter.Convert(from.Mode);
-			to.Format = EnumConverter.Convert(from.Format);
+			to.GameMode = Convert(from.Mode);
+			to.Format = Convert(from.Format);
 			to.Note = from.Note.Text;
 			to.OpponentHero = from.OpponentClass.ToString(); // ??? case matters
 			to.OpponentName = from.OpponentName;
@@ -48,8 +48,8 @@ namespace HDT.Plugins.Common.Util
 			to.PlayerName = from.PlayerName;
 			to.Coin = from.PlayerGotCoin; // ??? correct
 			to.Rank = from.Rank;
-			to.Region = EnumConverter.Convert(from.Region);
-			to.Result = EnumConverter.Convert(from.Result);
+			to.Region = Convert(from.Region);
+			to.Result = Convert(from.Result);
 			//to.Duration = from.Seconds;
 			to.Turns = from.Turns;
 			to.WasConceded = from.WasConceded;

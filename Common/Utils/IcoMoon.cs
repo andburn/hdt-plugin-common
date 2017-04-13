@@ -1,4 +1,4 @@
-﻿namespace HDT.Plugins.Common.Util
+﻿namespace HDT.Plugins.Common.Utils
 {
 	public static class IcoMoon
 	{

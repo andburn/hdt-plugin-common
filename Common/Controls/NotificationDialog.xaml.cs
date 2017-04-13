@@ -4,7 +4,6 @@ using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Navigation;
-using HDT.Plugins.Common.Util;
 
 namespace HDT.Plugins.Common.Controls
 {

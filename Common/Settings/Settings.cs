@@ -1,9 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
+using HDT.Plugins.Common.Utils;
 using HDT.Plugins.Common.Data.Services;
-using HDT.Plugins.Common.Providers;
-using HDT.Plugins.Common.Util;
 using IniParser;
 using IniParser.Model;
 using IniParser.Parser;
@@ -171,7 +170,9 @@ namespace HDT.Plugins.Common.Settings
 			_default = new IniData();
 			_user = new IniData();
 			_merged = new IniData();
-			_logger = Injector.Instance.Container.GetInstance<ILoggingService>();
+			// TODO need to fix logging here
+			_logger = null;
+			//_logger = Injector.Instance.Container.GetInstance<ILoggingService>();
 		}
 
 		private void InitializeDefault(string ini)

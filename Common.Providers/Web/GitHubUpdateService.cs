@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using HDT.Plugins.Common.Data.Services;
 using Newtonsoft.Json;
 
-namespace HDT.Plugins.Common.Providers
+namespace HDT.Plugins.Common.Providers.Web
 {
 	public class GitHubUpdateService : IUpdateService
 	{

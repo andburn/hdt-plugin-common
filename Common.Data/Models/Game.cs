@@ -1,4 +1,5 @@
 ﻿using System;
+using HDT.Plugins.Common.Data.Enums;
 
 namespace HDT.Plugins.Common.Data.Models
 {

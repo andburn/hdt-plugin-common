@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using HDT.Plugins.Common.Data;
-using HDT.Plugins.Common.Util;
+using HDT.Plugins.Common.Utils;
+using HDT.Plugins.Common.Data.Enums;
 using Metro = MahApps.Metro.Controls;
 
 namespace HDT.Plugins.Common.Controls.SlidePanels

@@ -2,7 +2,7 @@
 using HDT.Plugins.Common.Data.Services;
 using Hearthstone_Deck_Tracker.API;
 
-namespace HDT.Plugins.Common.Providers
+namespace HDT.Plugins.Common.Providers.Tracker
 {
 	public class TrackerEventsService : IEventsService
 	{

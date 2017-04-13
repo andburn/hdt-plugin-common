@@ -4,7 +4,7 @@ using HDT.Plugins.Common.Data.Services;
 using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Utility;
 
-namespace HDT.Plugins.Common.Providers
+namespace HDT.Plugins.Common.Providers.Tracker
 {
 	public class TrackerClientService : IGameClientService
 	{

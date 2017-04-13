@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-namespace HDT.Plugins.Common.Util
+namespace HDT.Plugins.Common.Utils
 {
 	// Suppressing "warning CS4014"
 	// http://stackoverflow.com/a/22630057

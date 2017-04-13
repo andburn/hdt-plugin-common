@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{728A16FE-ED70-490D-8B66-5421914BD68A}</ProjectGuid>
+    <ProjectGuid>{91A9B287-80E5-427D-A703-F068CF48B45A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HDT.Plugins.Common.Data</RootNamespace>
-    <AssemblyName>Common.Data</AssemblyName>
+    <RootNamespace>HDT.Plugins.Common.Providers</RootNamespace>
+    <AssemblyName>Common.Providers</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,12 +30,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Hearthstone Deck Tracker">
+      <HintPath>..\..\build\Hearthstone Deck Tracker.exe</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.1.2.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\MahApps.Metro.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,26 +59,24 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\Convert.cs" />
-    <Compile Include="Enums\GameFormat.cs" />
-    <Compile Include="Enums\GameMode.cs" />
-    <Compile Include="Enums\GameResult.cs" />
-    <Compile Include="Enums\PlayerClass.cs" />
-    <Compile Include="Enums\Position.cs" />
-    <Compile Include="Enums\Region.cs" />
-    <Compile Include="Enums\TimeFrame.cs" />
-    <Compile Include="Models\ArenaReward.cs" />
-    <Compile Include="Models\Card.cs" />
-    <Compile Include="Models\Deck.cs" />
-    <Compile Include="Models\Game.cs" />
-    <Compile Include="Models\Note.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\IConfigurationRepository.cs" />
-    <Compile Include="Services\IDataRepository.cs" />
-    <Compile Include="Services\IEventsService.cs" />
-    <Compile Include="Services\IGameClientService.cs" />
-    <Compile Include="Services\ILoggingService.cs" />
-    <Compile Include="Services\IUpdateService.cs" />
+    <Compile Include="Tracker\TrackerClientService.cs" />
+    <Compile Include="Tracker\TrackerConfigRepository.cs" />
+    <Compile Include="Tracker\TrackerDataRepository.cs" />
+    <Compile Include="Tracker\TrackerEventsService.cs" />
+    <Compile Include="Tracker\TrackerLoggingService.cs" />
+    <Compile Include="Utils\EnumConverters.cs" />
+    <Compile Include="Utils\GameExtensions.cs" />
+    <Compile Include="Web\GitHubUpdateService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Data\Common.Data.csproj">
+      <Project>{728a16fe-ed70-490d-8b66-5421914bd68a}</Project>
+      <Name>Common.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

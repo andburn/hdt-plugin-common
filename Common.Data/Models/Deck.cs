@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using HDT.Plugins.Common.Data.Enums;
 
 namespace HDT.Plugins.Common.Data.Models
 {
@@ -50,7 +51,7 @@ namespace HDT.Plugins.Common.Data.Models
 			Id = id;
 			Name = name;
 			IsArena = arena;
-			Class = Utils.ConvertHeroClass(klass);
+			Class = Enums.Convert.ToHeroClass(klass);
 			IsStandard = standard;
 		}
 
