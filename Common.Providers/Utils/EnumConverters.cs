@@ -187,6 +187,44 @@ namespace HDT.Plugins.Common.Providers.Utils
 				default:
 					return Hearthstone_Deck_Tracker.Enums.GameResult.Draw;
 			}
-		}		
+		}
+
+		public static Position Convert(MahApps.Metro.Controls.Position position)
+		{
+			switch (position)
+			{
+				case MahApps.Metro.Controls.Position.Left:
+					return Position.LEFT;
+
+				case MahApps.Metro.Controls.Position.Right:
+					return Position.RIGHT;
+
+				case MahApps.Metro.Controls.Position.Top:
+					return Position.TOP;
+
+				case MahApps.Metro.Controls.Position.Bottom:
+				default:
+					return Position.BOTTOM;
+			}
+		}
+
+		public static MahApps.Metro.Controls.Position Convert(Position position)
+		{
+			switch (position)
+			{
+				case Position.TOP:
+					return MahApps.Metro.Controls.Position.Top;
+
+				case Position.LEFT:
+					return MahApps.Metro.Controls.Position.Left;
+
+				case Position.RIGHT:
+					return MahApps.Metro.Controls.Position.Right;
+
+				case Position.BOTTOM:
+				default:
+					return MahApps.Metro.Controls.Position.Bottom;
+			}
+		}
 	}
 }

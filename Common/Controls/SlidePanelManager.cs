@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using System.Windows;
 using HDT.Plugins.Common.Data.Enums;
+using HDT.Plugins.Common.Data.Services;
 using HDT.Plugins.Common.Utils;
 
-namespace HDT.Plugins.Common.Controls.SlidePanels
+namespace HDT.Plugins.Common.Controls
 {
 	public class SlidePanelManager
 	{
-		private static List<SlidePanel> _panels;
+		private static List<ISlidePanel> _panels;
 
 		static SlidePanelManager()
 		{
-			_panels = new List<SlidePanel>();
+			_panels = new List<ISlidePanel>();
 		}
 
-		public static SlidePanel Add()
+		public static ISlidePanel Add()
 		{
 			return null;
 		}
@@ -36,11 +37,10 @@ namespace HDT.Plugins.Common.Controls.SlidePanels
 			}
 		}
 
-		public static SlidePanel Notification(string title, string message,
+		// TODO passing the panel in seems a bit weird, look at ninject solutions
+		public static ISlidePanel Notification(ISlidePanel panel, string title, string message,
 			string icon = IcoMoon.Notification, Action action = null)
 		{
-			var panel = new SlidePanel();
-
 			panel.Position = Position.BOTTOM;
 			panel.TitleVisibility = Visibility.Collapsed;
 			panel.CloseButtonVisibility = Visibility.Collapsed;

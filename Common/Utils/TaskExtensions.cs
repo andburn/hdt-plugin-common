@@ -3,10 +3,9 @@ using System.Threading.Tasks;
 
 namespace HDT.Plugins.Common.Utils
 {
-	// Suppressing "warning CS4014"
 	// http://stackoverflow.com/a/22630057
-
-	internal static class TaskExtensions
+	// Suppressing "warning CS4014"
+	public static class TaskExtensions
 	{
 		[MethodImpl(Met‌​hodImplOptions.AggressiveInlining)]
 		public static void Forget(this Task task)

@@ -2,18 +2,24 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using HDT.Plugins.Common.Data.Services;
 using HDT.Plugins.Common.Utils;
-using HDT.Plugins.Common.Data.Enums;
-using Metro = MahApps.Metro.Controls;
+using MahApps.Metro.Controls;
+using static HDT.Plugins.Common.Providers.Utils.EnumConverter;
+using Position = HDT.Plugins.Common.Data.Enums.Position;
 
-namespace HDT.Plugins.Common.Controls.SlidePanels
+namespace HDT.Plugins.Common.Providers.Metro.SlidePanels
 {
-	public class SlidePanel
+	public class MetroSlidePanel : ISlidePanel
 	{
-		private Metro.Flyout _flyout;
+		private Flyout _flyout;
 
 		public ContentControl Content
 		{
+			get
+			{
+				return _flyout.Content as ContentControl;
+			}
 			set
 			{
 				_flyout.Content = value;
@@ -65,31 +71,31 @@ namespace HDT.Plugins.Common.Controls.SlidePanels
 
 		public Position Position
 		{
-			get { return ConvertPosition(_flyout.Position); }
-			set { _flyout.Position = ConvertPosition(value); }
+			get { return Convert(_flyout.Position); }
+			set { _flyout.Position = Convert(value); }
 		}
 
 		public bool UseAltTheme
 		{
 			get
 			{
-				return _flyout.Theme == Metro.FlyoutTheme.Accent;
+				return _flyout.Theme == FlyoutTheme.Accent;
 			}
 			set
 			{
 				if (value)
-					_flyout.Theme = Metro.FlyoutTheme.Accent;
+					_flyout.Theme = FlyoutTheme.Accent;
 				else
 					_flyout.UpdateDefaultStyle();
 			}
 		}
 
-		public SlidePanel()
+		public MetroSlidePanel()
 		{
-			_flyout = new Metro.Flyout();
+			_flyout = new Flyout();
 		}
 
-		public SlidePanel(ContentControl content)
+		public MetroSlidePanel(ContentControl content)
 			: base()
 		{
 			Content = content;
@@ -147,44 +153,6 @@ namespace HDT.Plugins.Common.Controls.SlidePanels
 		public void SetZIndex(int idx)
 		{
 			Panel.SetZIndex(_flyout, idx);
-		}
-
-		private Position ConvertPosition(Metro.Position position)
-		{
-			switch (position)
-			{
-				case Metro.Position.Left:
-					return Position.LEFT;
-
-				case Metro.Position.Right:
-					return Position.RIGHT;
-
-				case Metro.Position.Top:
-					return Position.TOP;
-
-				case Metro.Position.Bottom:
-				default:
-					return Position.BOTTOM;
-			}
-		}
-
-		private Metro.Position ConvertPosition(Position position)
-		{
-			switch (position)
-			{
-				case Position.TOP:
-					return Metro.Position.Top;
-
-				case Position.LEFT:
-					return Metro.Position.Left;
-
-				case Position.RIGHT:
-					return Metro.Position.Right;
-
-				case Position.BOTTOM:
-				default:
-					return Metro.Position.Bottom;
-			}
 		}
 	}
 }
