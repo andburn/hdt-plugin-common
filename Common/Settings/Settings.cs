@@ -2,7 +2,6 @@
 using System.IO;
 using System.Threading;
 using HDT.Plugins.Common.Utils;
-using HDT.Plugins.Common.Data.Services;
 using IniParser;
 using IniParser.Model;
 using IniParser.Parser;
@@ -12,15 +11,15 @@ namespace HDT.Plugins.Common.Settings
 	public class Settings
 	{
 		private static readonly string DefaultName = "Settings";
+		private static readonly string DefaultDir = "HDT.Plugins.Common";
 		private static readonly IniDataParser StringParser = new IniDataParser();
 		private static readonly FileIniDataParser FileParser = new FileIniDataParser();
-		private static readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
+		private static readonly ReaderWriterLockSlim Lock = new ReaderWriterLockSlim();
 
 		private string _userFile;
 		private IniData _default; // created on object construction, read only
 		private IniData _user; // created on set, read write
 		private IniData _merged; // default overwritten with user
-		private ILoggingService _logger;
 
 		public Settings()
 		{
@@ -28,17 +27,17 @@ namespace HDT.Plugins.Common.Settings
 			SetUserFile();
 		}
 
-		public Settings(string ini, string name = null)
+		public Settings(string ini, string name = null, string dir = null)
 		{
 			Initialize();
-			SetUserFile(name);
+			SetUserFile(name, dir);
 			InitializeDefault(ini);
 		}
 
-		public Settings(Stream stream, string name = null)
+		public Settings(Stream stream, string name = null, string dir = null)
 		{
 			Initialize();
-			SetUserFile(name);
+			SetUserFile(name, dir);
 			string ini = null;
 			try
 			{
@@ -49,15 +48,15 @@ namespace HDT.Plugins.Common.Settings
 			}
 			catch (Exception e)
 			{
-				_logger.Error(e);
+				Logger.Instance.Log(e.Message);
 			}
 			InitializeDefault(ini);
 		}
 
-		public Settings(FileInfo file, string name = null)
+		public Settings(FileInfo file, string name = null, string dir = null)
 		{
 			Initialize();
-			SetUserFile(name);
+			SetUserFile(name, dir);
 			string ini = null;
 			try
 			{
@@ -65,7 +64,7 @@ namespace HDT.Plugins.Common.Settings
 			}
 			catch (Exception e)
 			{
-				_logger.Error(e);
+				Logger.Instance.Log(e.Message);
 			}
 			InitializeDefault(ini);
 		}
@@ -106,7 +105,7 @@ namespace HDT.Plugins.Common.Settings
 		{
 			if (string.IsNullOrWhiteSpace(key))
 			{
-				_logger.Error("Settings must have non-empty keys");
+				Logger.Instance.Log("Settings must have non-empty keys");
 				return;
 			}
 
@@ -144,23 +143,23 @@ namespace HDT.Plugins.Common.Settings
 
 		public void RestoreDefaults()
 		{
-			_logger.Info("Restoring default settings.");
+			Logger.Instance.Log("Restoring default settings.");
 			_user = new IniData();
 			// TODO possibly backup before delete
 			if (File.Exists(_userFile))
 			{
 				try
 				{
-					_lock.EnterWriteLock();
+					Lock.EnterWriteLock();
 					File.Delete(_userFile);
 				}
 				catch (Exception e)
 				{
-					_logger.Error(e);
+					Logger.Instance.Log(e.Message);
 				}
 				finally
 				{
-					_lock.ExitWriteLock();
+					Lock.ExitWriteLock();
 				}
 			}
 		}
@@ -170,9 +169,6 @@ namespace HDT.Plugins.Common.Settings
 			_default = new IniData();
 			_user = new IniData();
 			_merged = new IniData();
-			// TODO need to fix logging here
-			_logger = null;
-			//_logger = Injector.Instance.Container.GetInstance<ILoggingService>();
 		}
 
 		private void InitializeDefault(string ini)
@@ -185,19 +181,19 @@ namespace HDT.Plugins.Common.Settings
 		{
 			if (File.Exists(_userFile))
 			{
-				_logger.Debug($"Loading user settings from {_userFile}");
+				Logger.Instance.Log($"Loading user settings from {_userFile}");
 				try
 				{
-					_lock.EnterWriteLock();
+					Lock.EnterWriteLock();
 					_user = FileParser.ReadFile(_userFile);
 				}
 				catch (Exception e)
 				{
-					_logger.Error(e);
+					Logger.Instance.Log(e.Message);
 				}
 				finally
 				{
-					_lock.ExitWriteLock();
+					Lock.ExitWriteLock();
 				}
 			}
 		}
@@ -223,18 +219,27 @@ namespace HDT.Plugins.Common.Settings
 			_merged.Merge(_user);
 		}
 
-		private string GetSettingsDir()
+		private string GetDefaultDir()
 		{
-			return Hearthstone_Deck_Tracker.Config.Instance.ConfigDir;
+			var appData = Environment.GetFolderPath(
+					Environment.SpecialFolder.ApplicationData);
+			var dir = Path.Combine(appData, DefaultDir);
+			if (Directory.Exists(dir))
+				return dir;
+			else
+				return appData;
 		}
 
-		private void SetUserFile(string name = null)
+		private void SetUserFile(string name = null, string dir = null)
 		{
-			var fname = DefaultName;
-			if (!string.IsNullOrWhiteSpace(name))
-				fname = name;
-			_userFile = Path.Combine(GetSettingsDir(), fname + ".ini");
-			_logger.Info("User setting file is " + _userFile);
+			var fname = name;
+			var fdir = dir;
+			if (string.IsNullOrWhiteSpace(dir))
+				fdir = GetDefaultDir();
+			if (string.IsNullOrWhiteSpace(name))
+				fname = DefaultName;
+			_userFile = Path.Combine(fdir, fname + ".ini");
+			Logger.Instance.Log("User setting file is " + _userFile);
 		}
 	}
 }

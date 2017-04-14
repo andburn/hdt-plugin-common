@@ -96,7 +96,6 @@
     <Compile Include="Data\EnumStringConverterTest.cs" />
     <Compile Include="Data\HeroStringConverterTest.cs" />
     <Compile Include="GameExtensionTest.cs" />
-    <Compile Include="PluginBaseTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\GitHubUpdateTest.cs" />
     <Compile Include="SettingsTest.cs" />
