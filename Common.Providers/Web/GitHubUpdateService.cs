@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using HDT.Plugins.Common.Data.Services;
+using HDT.Plugins.Common.Services;
 using Newtonsoft.Json;
 
 namespace HDT.Plugins.Common.Providers.Web

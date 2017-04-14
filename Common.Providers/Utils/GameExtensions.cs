@@ -1,5 +1,5 @@
 ﻿using System;
-using HDT.Plugins.Common.Data.Models;
+using HDT.Plugins.Common.Models;
 using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Stats;
 using static HDT.Plugins.Common.Providers.Utils.EnumConverter;
@@ -21,9 +21,9 @@ namespace HDT.Plugins.Common.Providers.Utils
 			game.StartTime = stats.StartTime;
 			game.EndTime = stats.EndTime;
 			game.Rank = stats.Rank;
-			game.PlayerClass = Data.Enums.Convert.ToHeroClass(stats.PlayerHero);
+			game.PlayerClass = Enums.Convert.ToHeroClass(stats.PlayerHero);
 			game.PlayerName = stats.PlayerName;
-			game.OpponentClass = Data.Enums.Convert.ToHeroClass(stats.OpponentHero);
+			game.OpponentClass = Enums.Convert.ToHeroClass(stats.OpponentHero);
 			game.OpponentName = stats.OpponentName;
 			game.Turns = stats.Turns;
 			game.Minutes = stats.SortableDuration;

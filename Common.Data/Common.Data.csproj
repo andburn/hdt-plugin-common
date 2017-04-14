@@ -45,19 +45,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\Convert.cs" />
-    <Compile Include="Enums\GameFormat.cs" />
-    <Compile Include="Enums\GameMode.cs" />
-    <Compile Include="Enums\GameResult.cs" />
-    <Compile Include="Enums\PlayerClass.cs" />
-    <Compile Include="Enums\Position.cs" />
-    <Compile Include="Enums\Region.cs" />
-    <Compile Include="Enums\TimeFrame.cs" />
-    <Compile Include="Models\ArenaReward.cs" />
-    <Compile Include="Models\Card.cs" />
-    <Compile Include="Models\Deck.cs" />
-    <Compile Include="Models\Game.cs" />
-    <Compile Include="Models\Note.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IConfigurationRepository.cs" />
     <Compile Include="Services\IDataRepository.cs" />

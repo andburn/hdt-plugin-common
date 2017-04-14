@@ -1,4 +1,4 @@
-﻿namespace HDT.Plugins.Common.Data.Enums
+﻿namespace HDT.Plugins.Common.Enums
 {
 	public enum PlayerClass
 	{

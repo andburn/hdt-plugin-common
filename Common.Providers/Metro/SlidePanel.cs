@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using HDT.Plugins.Common.Data.Services;
+using HDT.Plugins.Common.Services;
 using HDT.Plugins.Common.Utils;
 using MahApps.Metro.Controls;
 using static HDT.Plugins.Common.Providers.Utils.EnumConverter;
-using Position = HDT.Plugins.Common.Data.Enums.Position;
+using Position = HDT.Plugins.Common.Enums.Position;
 
 namespace HDT.Plugins.Common.Providers.Metro.SlidePanels
 {

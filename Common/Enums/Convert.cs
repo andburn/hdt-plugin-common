@@ -4,7 +4,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Data;
 
-namespace HDT.Plugins.Common.Data.Enums
+namespace HDT.Plugins.Common.Enums
 {
 	public static class Convert
 	{

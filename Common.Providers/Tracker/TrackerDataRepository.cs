@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
-using HDT.Plugins.Common.Data.Enums;
-using HDT.Plugins.Common.Data.Models;
-using HDT.Plugins.Common.Data.Services;
+using HDT.Plugins.Common.Enums;
+using HDT.Plugins.Common.Models;
+using HDT.Plugins.Common.Services;
 using HDT.Plugins.Common.Providers.Utils;
 using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Importing;
@@ -14,7 +14,7 @@ using Hearthstone_Deck_Tracker.Utility;
 using DB = Hearthstone_Deck_Tracker.Hearthstone.Database;
 using HDTCard = Hearthstone_Deck_Tracker.Hearthstone.Card;
 using HDTDeck = Hearthstone_Deck_Tracker.Hearthstone.Deck;
-using static HDT.Plugins.Common.Data.Enums.Convert;
+using static HDT.Plugins.Common.Enums.Convert;
 
 namespace HDT.Plugins.Common.Providers.Tracker
 {

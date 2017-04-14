@@ -1,5 +1,5 @@
-﻿using HDT.Plugins.Common.Data.Enums;
-using static HDT.Plugins.Common.Data.Enums.Convert;
+﻿using HDT.Plugins.Common.Enums;
+using static HDT.Plugins.Common.Enums.Convert;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace HDT.Plugins.Common.Tests.Data

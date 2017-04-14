@@ -1,5 +1,5 @@
 ﻿using System.Globalization;
-using HDT.Plugins.Common.Data.Enums;
+using HDT.Plugins.Common.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace HDT.Plugins.Common.Tests.Data

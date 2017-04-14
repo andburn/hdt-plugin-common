@@ -1,12 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Text;
-using System.Windows;
-using System.Windows.Data;
-using HDT.Plugins.Common.Data;
-using HDT.Plugins.Common.Data.Enums;
-using HDT.Plugins.Common.Data.Services;
-using HDT.Plugins.Common.Providers;
+﻿using HDT.Plugins.Common.Enums;
 
 namespace HDT.Plugins.Common.Providers.Utils
 {

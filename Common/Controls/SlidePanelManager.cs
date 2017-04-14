@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using HDT.Plugins.Common.Data.Enums;
-using HDT.Plugins.Common.Data.Services;
+using HDT.Plugins.Common.Enums;
+using HDT.Plugins.Common.Services;
 using HDT.Plugins.Common.Utils;
 
 namespace HDT.Plugins.Common.Controls

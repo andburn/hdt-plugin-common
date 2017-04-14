@@ -1,7 +1,7 @@
 ﻿using System;
-using HDT.Plugins.Common.Data.Enums;
+using HDT.Plugins.Common.Enums;
 
-namespace HDT.Plugins.Common.Data.Models
+namespace HDT.Plugins.Common.Models
 {
 	public class Game
 	{

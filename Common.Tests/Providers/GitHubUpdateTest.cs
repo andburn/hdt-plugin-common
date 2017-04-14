@@ -1,5 +1,5 @@
 ﻿using System;
-using HDT.Plugins.Common.Data.Services;
+using HDT.Plugins.Common.Services;
 using HDT.Plugins.Common.Providers.Web;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

@@ -1,4 +1,4 @@
-﻿namespace HDT.Plugins.Common.Data.Models
+﻿namespace HDT.Plugins.Common.Models
 {
 	public class Note
 	{
