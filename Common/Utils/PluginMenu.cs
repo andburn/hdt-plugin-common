@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace HDT.Plugins.Common.Plugin
+namespace HDT.Plugins.Common.Utils
 {
 	/// <summary>
 	/// Helper class to create a MenuItem one level deep
