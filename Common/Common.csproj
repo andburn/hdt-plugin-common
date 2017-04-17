@@ -115,6 +115,7 @@
     <Compile Include="Services\IDataRepository.cs" />
     <Compile Include="Services\IEventsService.cs" />
     <Compile Include="Services\IGameClientService.cs" />
+    <Compile Include="Utils\IPluggable.cs" />
     <Compile Include="Services\ILoggingService.cs" />
     <Compile Include="Services\ISlidePanel.cs" />
     <Compile Include="Services\IUpdateService.cs" />

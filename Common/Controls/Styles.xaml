@@ -7,7 +7,7 @@
     <Style x:Key="MoonButton" TargetType="{x:Type Button}">
         <Setter Property="Foreground" Value="White" />
         <Setter Property="FontSize" Value="20" />
-        <Setter Property="FontFamily" Value="pack://application:,,,/HDT.Plugins.Common;component/Resources/#Icomoon-Free" />
+        <Setter Property="FontFamily" Value="pack://application:,,,/Common;component/Resources/#Icomoon-Free" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">

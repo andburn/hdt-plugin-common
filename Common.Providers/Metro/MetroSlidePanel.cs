@@ -8,7 +8,7 @@ using MahApps.Metro.Controls;
 using static HDT.Plugins.Common.Providers.Utils.EnumConverter;
 using Position = HDT.Plugins.Common.Enums.Position;
 
-namespace HDT.Plugins.Common.Providers.Metro.SlidePanels
+namespace HDT.Plugins.Common.Providers.Metro
 {
 	public class MetroSlidePanel : ISlidePanel
 	{

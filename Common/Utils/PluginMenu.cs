@@ -54,7 +54,7 @@ namespace HDT.Plugins.Common.Utils
 
 			var block = new TextBlock();
 			block.FontFamily = new FontFamily(
-				new Uri("pack://application:,,,/HDT.Plugins.Common;component/Resources/"), "./#IcoMoon-Free");
+				new Uri("pack://application:,,,/Common;component/Resources/"), "./#IcoMoon-Free");
 			block.FontSize = 18;
 			block.Margin = new Thickness(5, 0, 0, 0);
 			block.Text = code;

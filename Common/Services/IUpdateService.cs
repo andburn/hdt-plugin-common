@@ -5,7 +5,7 @@ namespace HDT.Plugins.Common.Services
 {
 	public interface IUpdateService
 	{
-		Task<IUpdateResult> CheckForUpdate(Uri source, Version version);
+		Task<IUpdateResult> CheckForUpdate(string name, string location, Version version);
 	}
 
 	public interface IUpdateResult

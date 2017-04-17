@@ -34,7 +34,7 @@
             CommandParameter="{Binding Param}">
         <DockPanel HorizontalAlignment="Center">
             <TextBlock DockPanel.Dock="Bottom" FontSize="10" Text="{Binding Text}" TextAlignment="Center" Margin="0,3,0,2"/>
-            <TextBlock FontFamily="pack://application:,,,/HDT.Plugins.Common;component/Resources/#IcoMoon-Free" FontSize="26" Text="{Binding Icon}" TextAlignment="Center" />
+            <TextBlock FontFamily="pack://application:,,,/Common;component/Resources/#IcoMoon-Free" FontSize="26" Text="{Binding Icon}" TextAlignment="Center" />
         </DockPanel>
     </Button>
 </UserControl>

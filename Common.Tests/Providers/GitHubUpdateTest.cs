@@ -29,14 +29,14 @@ namespace HDT.Plugins.Common.Tests
 		}
 
 		// check a live repo (TODO better to stub this)
-		[TestMethod]
-		public void LiveRequest()
-		{
-			var result = updater.CheckForUpdate(
-				new Uri("https://api.github.com/repos/andburn/hdt-plugin-endgame/releases"),
-				new Version(0, 1, 0)).Result;
-			Assert.IsTrue(result.HasUpdate);
-		}
+		//[TestMethod]
+		//public void LiveRequest()
+		//{
+		//	var result = updater.CheckForUpdate(
+		//		new Uri("https://api.github.com/repos/andburn/hdt-plugin-endgame/releases"),
+		//		new Version(0, 1, 0)).Result;
+		//	Assert.IsTrue(result.HasUpdate);
+		//}
 
 		[TestMethod]
 		public void RecognizeVersionFromTag_WithPrefix()

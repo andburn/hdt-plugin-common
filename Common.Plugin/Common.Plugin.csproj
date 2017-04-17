@@ -7,7 +7,7 @@
     <ProjectGuid>{23EB2E0F-5CA1-4948-BB1D-0A2BB6972605}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Common.Plugin</RootNamespace>
+    <RootNamespace>HDT.Plugins.Common.Plugin</RootNamespace>
     <AssemblyName>Common.Plugin</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
