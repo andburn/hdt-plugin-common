@@ -39,7 +39,7 @@ namespace HDT.Plugins.Common.Controls
 
 		// TODO passing the panel in seems a bit weird, look at ninject solutions
 		public static ISlidePanel Notification(ISlidePanel panel, string title, string message,
-			string icon = IcoMoon.Notification, Action action = null)
+			string icon = null, Action action = null)
 		{
 			panel.Position = Position.BOTTOM;
 			panel.TitleVisibility = Visibility.Collapsed;
@@ -50,7 +50,7 @@ namespace HDT.Plugins.Common.Controls
 			panel.UseAltTheme = true;
 
 			var content = new NotificationDialog(title, message);
-			content.SetUtilityButton(action, icon);
+			content.SetUtilityButton(action, icon ?? IcoMoon.Notification);
 			content.SetCloseButton(() => panel.Close(), IcoMoon.CancelCircle);
 
 			panel.Content = content;
