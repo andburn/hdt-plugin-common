@@ -1,9 +1,36 @@
-﻿namespace HDT.Plugins.Common.Models
+﻿using System.Text.RegularExpressions;
+
+namespace HDT.Plugins.Common.Models
 {
 	public class Note
 	{
-		public string Text { get; set; }
+		private static readonly Regex _noteRegex =
+			new Regex(@"^\s*\[(?<tag>([A-Za-z0-9\s_\-',]+))\]\s*(?<note>(.*))$",
+				RegexOptions.Compiled);
+
+		private string _text;
+
+		public string Text
+		{
+			get
+			{
+				return _text;
+			}
+			set
+			{
+				SetText(value);
+			}
+		}
+
 		public string Archetype { get; set; }
+
+		public bool HasArchetype
+		{
+			get
+			{
+				return !string.IsNullOrWhiteSpace(Archetype);
+			}
+		}
 
 		public Note()
 		{
@@ -12,8 +39,24 @@
 		public Note(string text)
 			: this()
 		{
-			Text = text;
-			// TODO parse out archetype if any...optional param...
+			SetText(text);
+		}
+
+		private void SetText(string text)
+		{
+			if (!string.IsNullOrWhiteSpace(text))
+			{
+				var match = _noteRegex.Match(text);
+				if (match.Success)
+				{
+					Archetype = match.Groups["tag"].Value;
+					Text = match.Groups["note"].Value;
+				}
+				else
+				{
+					Text = text;
+				}
+			}
 		}
 	}
 }

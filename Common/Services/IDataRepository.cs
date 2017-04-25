@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using HDT.Plugins.Common.Models;
 
 namespace HDT.Plugins.Common.Services
@@ -6,6 +7,8 @@ namespace HDT.Plugins.Common.Services
 	public interface IDataRepository
 	{
 		List<Game> GetAllGames();
+
+		List<Game> GetAllGamesWithDeck(Guid id);
 
 		void AddGames(List<Game> games);
 

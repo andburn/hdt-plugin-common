@@ -5,16 +5,16 @@ using System.Linq;
 using System.Reflection;
 using HDT.Plugins.Common.Enums;
 using HDT.Plugins.Common.Models;
-using HDT.Plugins.Common.Services;
 using HDT.Plugins.Common.Providers.Utils;
+using HDT.Plugins.Common.Services;
 using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Importing;
 using Hearthstone_Deck_Tracker.Stats;
 using Hearthstone_Deck_Tracker.Utility;
+using static HDT.Plugins.Common.Enums.Convert;
 using DB = Hearthstone_Deck_Tracker.Hearthstone.Database;
 using HDTCard = Hearthstone_Deck_Tracker.Hearthstone.Card;
 using HDTDeck = Hearthstone_Deck_Tracker.Hearthstone.Deck;
-using static HDT.Plugins.Common.Enums.Convert;
 
 namespace HDT.Plugins.Common.Providers.Tracker
 {
@@ -66,6 +66,12 @@ namespace HDT.Plugins.Common.Providers.Tracker
 				GameCache = games;
 			}
 			return GameCache;
+		}
+
+		public List<Game> GetAllGamesWithDeck(Guid id)
+		{
+			var games = GetAllGames();
+			return games.Where(g => g.Deck.Id == id).ToList();
 		}
 
 		public void AddGames(List<Game> games)

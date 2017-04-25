@@ -49,7 +49,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HearthstoneDeckTracker">
-      <HintPath>..\..\build\HearthstoneDeckTracker.exe</HintPath>
+      <HintPath>..\..\build\Hearthstone Deck Tracker\HearthstoneDeckTracker.exe</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationFramework" />
