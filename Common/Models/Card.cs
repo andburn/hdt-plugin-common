@@ -42,5 +42,10 @@ namespace HDT.Plugins.Common.Models
 		{
 			return Id.GetHashCode();
 		}
+
+		public override string ToString()
+		{
+			return $"{Name} x{Count}";
+		}
 	}
 }

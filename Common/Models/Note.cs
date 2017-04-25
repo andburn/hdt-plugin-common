@@ -34,6 +34,8 @@ namespace HDT.Plugins.Common.Models
 
 		public Note()
 		{
+			_text = string.Empty;
+			Archetype = string.Empty;
 		}
 
 		public Note(string text)
@@ -50,11 +52,11 @@ namespace HDT.Plugins.Common.Models
 				if (match.Success)
 				{
 					Archetype = match.Groups["tag"].Value;
-					Text = match.Groups["note"].Value;
+					_text = match.Groups["note"].Value;
 				}
 				else
 				{
-					Text = text;
+					_text = text;
 				}
 			}
 		}
