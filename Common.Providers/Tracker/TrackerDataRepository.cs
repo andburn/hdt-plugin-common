@@ -70,8 +70,13 @@ namespace HDT.Plugins.Common.Providers.Tracker
 
 		public List<Game> GetAllGamesWithDeck(Guid id)
 		{
-			var games = GetAllGames();
-			return games.Where(g => g.Deck.Id == id).ToList();
+			var games = new List<Game>();
+			if (id == null)
+				return games;
+			games = GetAllGames()
+				.Where(g => g.Deck != null && g.Deck.Id == id)
+				.ToList();
+			return games;
 		}
 
 		public void AddGames(List<Game> games)
