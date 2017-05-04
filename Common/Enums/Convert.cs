@@ -75,7 +75,7 @@ namespace HDT.Plugins.Common.Enums
 			return result;
 		}
 
-		public string ToTitleCase(Enum e)
+		public static string ToTitleCase(Enum e)
 		{
 			var str = new StringBuilder();
 			var words = e.ToString().ToLower().Split('_');
