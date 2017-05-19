@@ -68,9 +68,21 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HearthstoneDeckTracker">
+      <HintPath>..\..\build\Hearthstone Deck Tracker\HearthstoneDeckTracker.exe</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="INIFileParser, Version=2.4.0.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">
       <HintPath>..\packages\ini-parser.2.4.0\lib\net20\INIFileParser.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.1.2.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\MahApps.Metro.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -78,6 +90,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -111,6 +126,16 @@
     <Compile Include="Models\Deck.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Note.cs" />
+    <Compile Include="Providers\Metro\MetroSlidePanel.cs" />
+    <Compile Include="Providers\Tracker\TrackerClientService.cs" />
+    <Compile Include="Providers\Tracker\TrackerConfigRepository.cs" />
+    <Compile Include="Providers\Tracker\TrackerDataRepository.cs" />
+    <Compile Include="Providers\Tracker\TrackerEventsService.cs" />
+    <Compile Include="Providers\Tracker\TrackerLoggingService.cs" />
+    <Compile Include="Providers\Utils\EnumConverters.cs" />
+    <Compile Include="Providers\Utils\GameExtensions.cs" />
+    <Compile Include="Providers\Web\GitHubUpdateService.cs" />
+    <Compile Include="Providers\Web\HttpClient.cs" />
     <Compile Include="Services\IConfigurationRepository.cs" />
     <Compile Include="Services\IDataRepository.cs" />
     <Compile Include="Services\IEventsService.cs" />

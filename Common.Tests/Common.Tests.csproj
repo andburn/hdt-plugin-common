@@ -102,10 +102,6 @@
     <Compile Include="SettingValueTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.Providers\Common.Providers.csproj">
-      <Project>{91a9b287-80e5-427d-a703-f068cf48b45a}</Project>
-      <Name>Common.Providers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{2ebdf2c6-9c5d-4e95-8bc2-e47bc9aa5811}</Project>
       <Name>Common</Name>
