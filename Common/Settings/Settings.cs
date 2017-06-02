@@ -11,7 +11,7 @@ namespace HDT.Plugins.Common.Settings
 	public class Settings
 	{
 		private static readonly string DefaultName = "Settings";
-		private static readonly string DefaultDir = "HDT.Plugins.Common";
+		private static readonly string DefaultDir = "HearthstoneDeckTracker";
 		private static readonly IniDataParser StringParser = new IniDataParser();
 		private static readonly FileIniDataParser FileParser = new FileIniDataParser();
 		private static readonly ReaderWriterLockSlim Lock = new ReaderWriterLockSlim();
