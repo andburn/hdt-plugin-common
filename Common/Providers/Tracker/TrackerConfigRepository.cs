@@ -30,7 +30,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 		{
 			var propInfo = _configType.GetField(key);
 			propInfo.SetValue(Config.Instance, value);
-			// TODO? allow exceptions to pass up;
+			// allow exceptions to pass up:
 			// ArgumentException, TargetException,
 			// MethodAccessException, TargetInvocationException
 		}

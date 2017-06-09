@@ -53,9 +53,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HearthstoneDeckTracker, Version=1.2.2.2997, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="HearthstoneDeckTracker, Version=1.2.3.3010, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\build\HearthstoneDeckTracker.exe</HintPath>
+      <HintPath>..\..\build\Hearthstone Deck Tracker\HearthstoneDeckTracker.exe</HintPath>
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />

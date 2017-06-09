@@ -32,7 +32,6 @@ namespace HDT.Plugins.Common.Providers.Utils
 			game.Note = new Note(stats.Note);
 		}
 
-		// TODO check this
 		public static void CopyTo(this Game from, GameStats to)
 		{
 			//from.Deck;

@@ -81,7 +81,6 @@ namespace HDT.Plugins.Common.Settings
 
 		public SettingValue Get(string section, string key)
 		{
-			// TODO reloading is going to make every Get relatively slow
 			ReloadSettings();
 			return GetSetting(_merged, section, key);
 		}
@@ -145,7 +144,6 @@ namespace HDT.Plugins.Common.Settings
 		{
 			Logger.Instance.Log("Restoring default settings.");
 			_user = new IniData();
-			// TODO possibly backup before delete
 			if (File.Exists(_userFile))
 			{
 				try

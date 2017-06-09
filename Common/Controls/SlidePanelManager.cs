@@ -21,7 +21,6 @@ namespace HDT.Plugins.Common.Controls
 			return null;
 		}
 
-		// TODO any use for this
 		public static void CloseAll()
 		{
 			foreach (var item in _panels)
@@ -37,7 +36,6 @@ namespace HDT.Plugins.Common.Controls
 			}
 		}
 
-		// TODO passing the panel in seems a bit weird, look at ninject solutions
 		public static ISlidePanel Notification(ISlidePanel panel, string title, string message,
 			string icon = null, Action action = null)
 		{

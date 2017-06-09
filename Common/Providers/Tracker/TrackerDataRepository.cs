@@ -11,6 +11,7 @@ using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Importing;
 using Hearthstone_Deck_Tracker.Stats;
 using Hearthstone_Deck_Tracker.Utility;
+using Hearthstone_Deck_Tracker.Utility.Logging;
 using static HDT.Plugins.Common.Enums.Convert;
 using DB = Hearthstone_Deck_Tracker.Hearthstone.Database;
 using HDTCard = Hearthstone_Deck_Tracker.Hearthstone.Card;
@@ -23,13 +24,8 @@ namespace HDT.Plugins.Common.Providers.Tracker
 		private static readonly BindingFlags bindFlags =
 			BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
 
-		// TODO remove/change this, just use HDT logging call
-		private ILoggingService logger = new TrackerLoggingService();
-
 		private List<Deck> DeckCache = null;
 		private List<Game> GameCache = null;
-
-		// TODO need to have a reload that nulls caches
 
 		public List<Deck> GetAllDecks()
 		{
@@ -106,12 +102,18 @@ namespace HDT.Plugins.Common.Providers.Tracker
 		}
 
 		// DeckList, DefaultDeckStats, DeckStatsList
-		// TODO handle errors
 		private void Reload<T>()
 		{
-			Type type = typeof(T);
-			MethodInfo method = type.GetMethod("Reload", bindFlags);
-			method.Invoke(null, new object[] { });
+			try
+			{
+				Type type = typeof(T);
+				MethodInfo method = type.GetMethod("Reload", bindFlags);
+				method.Invoke(null, new object[] { });
+			}
+			catch (Exception e)
+			{
+				Log.Error(e);
+			}
 		}
 
 		private Game CreateGame(GameStats stats)
@@ -206,7 +208,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 		{
 			if (deck == null)
 			{
-				logger.Info("Cannot add null deck");
+				Log.Info("Cannot add null deck");
 				return;
 			}
 			HDTDeck d = new HDTDeck();
@@ -214,7 +216,6 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			d.Class = deck.Class.ToString();
 			d.Cards = new ObservableCollection<HDTCard>(deck.Cards.Select(c => DB.GetCardFromId(c.Id)));
 			DeckList.Instance.Decks.Add(d);
-			// TODO doesn't refresh the deck picker view
 		}
 
 		public void AddDeck(string name, string playerClass, string cards, bool archive, params string[] tags)
@@ -243,7 +244,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 						Core.MainWindow.ReloadTags();
 					}
 				}
-				// NOTE hack time!
+				// hacky way to update ui:
 				// use MainWindow.ArchiveDeck to update
 				// set deck archive to opposite of desired
 				deck.Archived = !archive;
@@ -261,7 +262,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			if (string.IsNullOrWhiteSpace(tag))
 				return;
 			var decks = DeckList.Instance.Decks.Where(d => d.Tags.Contains(tag)).ToList();
-			logger.Info($"Deleting {decks.Count} archetype decks");
+			Log.Info($"Deleting {decks.Count} tagged with '{tag}'");
 			foreach (var d in decks)
 				DeckList.Instance.Decks.Remove(d);
 			if (decks.Any())

@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Text;
 using System.Windows;
 using System.Windows.Data;
+using HDT.Plugins.Common.Utils;
 
 namespace HDT.Plugins.Common.Enums
 {
@@ -68,9 +69,9 @@ namespace HDT.Plugins.Common.Enums
 			{
 				result = Enum.Parse(targetType, value.ToString(), true);
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-				// TODO log it
+				Logger.Instance.Log($"Enum Converison failed ({e.Message})");
 			}
 			return result;
 		}
