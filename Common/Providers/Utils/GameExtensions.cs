@@ -34,24 +34,47 @@ namespace HDT.Plugins.Common.Providers.Utils
 
 		public static void CopyTo(this Game from, GameStats to)
 		{
-			//from.Deck;
-			//from.DeckVersion;
+			to.GameId = from.Id;
+			to.DeckName = from.Deck.Name;
+			to.DeckId = from.Deck.Id;
 			to.StartTime = from.StartTime;
 			to.EndTime = from.EndTime;
 			to.GameMode = Convert(from.Mode);
 			to.Format = Convert(from.Format);
 			to.Note = from.Note.Text;
-			to.OpponentHero = from.OpponentClass.ToString(); // ??? case matters
+			to.OpponentHero = from.OpponentClass.ToString();
 			to.OpponentName = from.OpponentName;
-			to.PlayerHero = from.PlayerClass.ToString(); // ??? case matters
+			to.PlayerHero = from.PlayerClass.ToString();
 			to.PlayerName = from.PlayerName;
-			to.Coin = from.PlayerGotCoin; // ??? correct
+			to.Coin = from.PlayerGotCoin;
 			to.Rank = from.Rank;
 			to.Region = Convert(from.Region);
 			to.Result = Convert(from.Result);
-			//to.Duration = from.Seconds;
 			to.Turns = from.Turns;
 			to.WasConceded = from.WasConceded;
+		}
+
+		public static bool EqualTo(this Game game, GameStats stats)
+		{
+			return game.Id == stats.GameId &&
+			game.Deck.Name == stats.DeckName &&
+			game.Deck.Id == stats.DeckId &&
+			game.Region == Convert(stats.Region) &&
+			game.Mode == Convert(stats.GameMode) &&
+			game.Format == Convert(stats.Format) &&
+			game.Result == Convert(stats.Result) &&
+			game.StartTime == stats.StartTime &&
+			game.EndTime == stats.EndTime &&
+			game.Rank == stats.Rank &&
+			game.PlayerClass == Enums.Convert.ToHeroClass(stats.PlayerHero) &&
+			game.PlayerName == stats.PlayerName &&
+			game.OpponentClass == Enums.Convert.ToHeroClass(stats.OpponentHero) &&
+			game.OpponentName == stats.OpponentName &&
+			game.Turns == stats.Turns &&
+			game.Minutes == stats.SortableDuration &&
+			game.PlayerGotCoin == stats.Coin &&
+			game.WasConceded == stats.WasConceded &&
+			game.Note.Text == stats.Note;
 		}
 	}
 }

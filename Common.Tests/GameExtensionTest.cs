@@ -12,54 +12,73 @@ namespace HDT.Plugins.Common.Tests
 	{
 		private GameStats HDTGame;
 		private Game PluginGame;
+		private Deck Deck;
 
 		[TestInitialize()]
 		public void Initialize()
 		{
+			Deck = new Deck(new Guid(), "A Deck", false, "Mage", true);
 			HDTGame = new GameStats() {
-				StartTime = new DateTime(2016, 1, 1, 12, 0, 0),
-				EndTime = new DateTime(2016, 1, 1, 12, 0, 0),
+				GameId = new Guid("2dcabbf1-b4b2-4083-9ade-3b2c722fe269"),
+				DeckName = Deck.Name,
+				DeckId = Deck.Id,
+				StartTime = new DateTime(2016, 2, 10, 22, 0, 0),
+				EndTime = new DateTime(2016, 2, 10, 22, 10, 0),
 				GameMode = Hearthstone_Deck_Tracker.Enums.GameMode.Brawl,
-				Note = null,
+				Note = "eSports",
 				OpponentHero = "Druid",
 				OpponentName = "Innkeeper",
 				PlayerHero = "Mage",
 				PlayerName = "Brode",
 				Coin = false,
 				Rank = 20,
-				Region = Hearthstone_Deck_Tracker.Enums.Region.US,
-				Result = Hearthstone_Deck_Tracker.Enums.GameResult.Loss,
-				Turns = 10,
+				Region = Hearthstone_Deck_Tracker.Enums.Region.EU,
+				Result = Hearthstone_Deck_Tracker.Enums.GameResult.Win,
+				Turns = 15,
 				WasConceded = false
 			};
 			PluginGame = new Game() {
 				StartTime = new DateTime(2016, 2, 10, 22, 0, 0),
 				EndTime = new DateTime(2016, 2, 10, 22, 10, 0),
-				Id = new Guid(),
-				Deck = new Deck(),
-				DeckVersion = new Version(),
+				Id = new Guid("2dcabbf1-b4b2-4083-9ade-3b2c722fe269"),
+				Deck = Deck,
+				DeckVersion = new Version(1, 1, 0),
 				Region = Region.EU,
 				Mode = GameMode.BRAWL,
 				Result = GameResult.WIN,
 				Rank = 20,
-				PlayerClass = PlayerClass.DRUID,
-				PlayerName = "Innkeeper",
-				OpponentClass = PlayerClass.MAGE,
-				OpponentName = "Brode",
-				Turns = 10,
-				Minutes = 0,
+				PlayerClass = PlayerClass.MAGE,
+				PlayerName = "Brode",
+				OpponentClass = PlayerClass.DRUID,
+				OpponentName = "Innkeeper",
+				Turns = 15,
+				Minutes = 10,
 				PlayerGotCoin = false,
 				WasConceded = false,
-				Note = new Note(),
+				Note = new Note("eSports")
 			};
 		}
 
 		[TestMethod]
-		public void CopyTest()
+		public void EqualToTest()
 		{
-			Assert.AreEqual(0, HDTGame.SortableDuration);
-			PluginGame.CopyTo(HDTGame);
-			Assert.AreEqual(10, HDTGame.SortableDuration);
+			Assert.IsTrue(PluginGame.EqualTo(HDTGame));
+		}
+
+		[TestMethod]
+		public void CopyToTest()
+		{
+			var stats = new GameStats();
+			PluginGame.CopyTo(stats);
+			Assert.IsTrue(PluginGame.EqualTo(stats));
+		}
+
+		[TestMethod]
+		public void CopyFromTest()
+		{
+			var game = new Game();
+			game.CopyFrom(HDTGame, Deck);
+			Assert.IsTrue(game.EqualTo(HDTGame));
 		}
 	}
 }
