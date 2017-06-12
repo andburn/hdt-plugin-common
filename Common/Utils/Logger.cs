@@ -24,38 +24,40 @@ namespace HDT.Plugins.Common.Utils
 			}
 		}
 
-		private bool _isEnabled;
-
-		public bool IsEnabled
-		{
-			get { return _isEnabled; }
-			set { _isEnabled = value; }
-		}
+		public bool IsEnabled { get; set; } = true;
+		public bool UseTrackerLogging { get; set; } = true;
 
 		private Logger()
 		{
-			try
-			{
-				_filePath = Path.Combine(
-					Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-					_defaultDirName,
-					_defaultFileName);
-				IsEnabled = File.Exists(_filePath);
-			}
-			catch (Exception)
-			{
-				IsEnabled = false;
-			}
+			_filePath = Path.Combine(
+				Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+				_defaultDirName,
+				_defaultFileName);
 		}
 
 		public void Log(string message)
 		{
 			if (IsEnabled)
 			{
-				using (var stream = new StreamWriter(_filePath))
+				if (UseTrackerLogging)
 				{
-					stream.WriteLine(string.Format("[%s] %s",
-						DateTime.Now.ToString("yyyyMMdd HH:mm:ss"), message));
+					Hearthstone_Deck_Tracker.Utility.Logging.Log.Info(message);
+				}
+				else
+				{
+					try
+					{
+						using (var stream = new StreamWriter(_filePath))
+						{
+							stream.WriteLine(string.Format("[%s] %s",
+								DateTime.Now.ToString("yyyyMMdd HH:mm:ss"), message));
+						}
+					}
+					catch (Exception e)
+					{
+						UseTrackerLogging = true;
+						Hearthstone_Deck_Tracker.Utility.Logging.Log.Error(e);
+					}
 				}
 			}
 		}
