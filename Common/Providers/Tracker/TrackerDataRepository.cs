@@ -24,20 +24,15 @@ namespace HDT.Plugins.Common.Providers.Tracker
 		private static readonly BindingFlags bindFlags =
 			BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
 
+		private const int CacheRefreshLimit = 120; // seconds before cache needs to be refreshed
+		private DateTime CacheCreatedAt;
 		private List<Deck> DeckCache = null;
 		private List<Game> GameCache = null;
 
 		public List<Deck> GetAllDecks()
 		{
-			if (DeckCache == null)
-			{
-				Reload<DeckList>();
-				DeckCache = DeckList.Instance.Decks
-					.Where(d => d.Archived == false)
-					.Select(d => new Deck(d.DeckId, d.Name, d.IsArenaDeck, d.Class, d.StandardViable))
-					.OrderBy(d => d.Name)
-					.ToList();
-			}
+			if (DeckCache == null || CacheNeedsRefresh())
+				RefreshCache();
 			return DeckCache;
 		}
 
@@ -48,19 +43,8 @@ namespace HDT.Plugins.Common.Providers.Tracker
 
 		public List<Game> GetAllGames()
 		{
-			if (GameCache == null)
-			{
-				var games = new List<Game>();
-				Reload<DeckStatsList>();
-				Reload<DefaultDeckStats>();
-				var ds = new List<DeckStats>(DeckStatsList.Instance.DeckStats.Values);
-				ds.AddRange(DefaultDeckStats.Instance.DeckStats);
-				foreach (var deck in ds)
-				{
-					games.AddRange(deck.Games.Select(g => CreateGame(g)));
-				}
-				GameCache = games;
-			}
+			if (GameCache == null || CacheNeedsRefresh())
+				RefreshCache();
 			return GameCache;
 		}
 
@@ -99,29 +83,6 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			}
 			DeckStatsList.Save();
 			DefaultDeckStats.Save();
-		}
-
-		// DeckList, DefaultDeckStats, DeckStatsList
-		private void Reload<T>()
-		{
-			try
-			{
-				Type type = typeof(T);
-				MethodInfo method = type.GetMethod("Reload", bindFlags);
-				method.Invoke(null, new object[] { });
-			}
-			catch (Exception e)
-			{
-				Log.Error(e);
-			}
-		}
-
-		private Game CreateGame(GameStats stats)
-		{
-			var game = new Game();
-			var deck = GetDeck(stats.DeckId);
-			game.CopyFrom(stats, deck);
-			return game;
 		}
 
 		public List<Deck> GetAllDecksWithTag(string tag)
@@ -163,28 +124,6 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			}
 
 			return CreateDeck(klass, cards);
-		}
-
-		private Deck CreateDeck(PlayerClass klass, IEnumerable<TrackedCard> cards)
-		{
-			var deck = new Deck();
-			deck.Class = klass;
-			// add the cards to the deck
-			// create a temp HDT deck too, to check if its standard
-			var hdtDeck = new Hearthstone_Deck_Tracker.Hearthstone.Deck();
-			foreach (var card in cards)
-			{
-				var c = DB.GetCardFromId(card.Id);
-				c.Count = card.Count;
-				hdtDeck.Cards.Add(c);
-				if (c != null && c != DB.UnknownCard)
-				{
-					deck.Cards.Add(
-						new Card(c.Id, c.LocalizedName, c.Count, c.Background.Clone()));
-				}
-			}
-			deck.IsStandard = hdtDeck.StandardViable;
-			return deck;
 		}
 
 		public string GetGameNote()
@@ -276,6 +215,82 @@ namespace HDT.Plugins.Common.Providers.Tracker
 				return Core.Game.CurrentGameStats.GameMode.ToString().ToLowerInvariant();
 			}
 			return string.Empty;
+		}
+
+		private Game CreateGame(GameStats stats)
+		{
+			var game = new Game();
+			var deck = GetDeck(stats.DeckId);
+			game.CopyFrom(stats, deck);
+			return game;
+		}
+
+		private Deck CreateDeck(PlayerClass klass, IEnumerable<TrackedCard> cards)
+		{
+			var deck = new Deck();
+			deck.Class = klass;
+			// add the cards to the deck
+			// create a temp HDT deck too, to check if its standard
+			var hdtDeck = new Hearthstone_Deck_Tracker.Hearthstone.Deck();
+			foreach (var card in cards)
+			{
+				var c = DB.GetCardFromId(card.Id);
+				c.Count = card.Count;
+				hdtDeck.Cards.Add(c);
+				if (c != null && c != DB.UnknownCard)
+				{
+					deck.Cards.Add(
+						new Card(c.Id, c.LocalizedName, c.Count, c.Background.Clone()));
+				}
+			}
+			deck.IsStandard = hdtDeck.StandardViable;
+			return deck;
+		}
+
+		// DeckList, DefaultDeckStats, DeckStatsList
+		private void Reload<T>()
+		{
+			try
+			{
+				Type type = typeof(T);
+				MethodInfo method = type.GetMethod("Reload", bindFlags);
+				method.Invoke(null, new object[] { });
+			}
+			catch (Exception e)
+			{
+				Log.Error(e);
+			}
+		}
+
+		private void RefreshCache()
+		{
+			// Decks
+			Reload<DeckList>();
+			DeckCache = DeckList.Instance.Decks
+				.Where(d => d.Archived == false)
+				.Select(d => new Deck(d.DeckId, d.Name, d.IsArenaDeck, d.Class, d.StandardViable))
+				.OrderBy(d => d.Name)
+				.ToList();
+			// Games
+			var games = new List<Game>();
+			Reload<DeckStatsList>();
+			Reload<DefaultDeckStats>();
+			var ds = new List<DeckStats>(DeckStatsList.Instance.DeckStats.Values);
+			ds.AddRange(DefaultDeckStats.Instance.DeckStats);
+			foreach (var deck in ds)
+			{
+				games.AddRange(deck.Games.Select(g => CreateGame(g)));
+			}
+			GameCache = games;
+			// reset the timestamp
+			CacheCreatedAt = DateTime.Now;
+		}
+
+		private bool CacheNeedsRefresh()
+		{
+			if (CacheCreatedAt == null)
+				return false;
+			return DateTime.Now > CacheCreatedAt.AddSeconds(CacheRefreshLimit);
 		}
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using HDT.Plugins.Common.Services;
 using Hearthstone_Deck_Tracker;
+using Hearthstone_Deck_Tracker.Utility.Logging;
 
 namespace HDT.Plugins.Common.Providers.Tracker
 {
@@ -28,11 +29,15 @@ namespace HDT.Plugins.Common.Providers.Tracker
 
 		public void Set(string key, object value)
 		{
-			var propInfo = _configType.GetField(key);
-			propInfo.SetValue(Config.Instance, value);
-			// allow exceptions to pass up:
-			// ArgumentException, TargetException,
-			// MethodAccessException, TargetInvocationException
+			try
+			{
+				var propInfo = _configType.GetField(key);
+				propInfo.SetValue(Config.Instance, value);
+			}
+			catch (Exception e)
+			{
+				Log.Error(e);
+			}
 		}
 	}
 }
