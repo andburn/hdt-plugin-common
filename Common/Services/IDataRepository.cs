@@ -12,8 +12,6 @@ namespace HDT.Plugins.Common.Services
 
 		void AddGames(List<Game> games);
 
-		void UpdateGames(List<Game> games);
-
 		List<Deck> GetAllDecks();
 
 		List<Deck> GetAllDecksWithTag(string tag);
