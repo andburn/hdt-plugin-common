@@ -2,7 +2,7 @@
 using HDT.Plugins.Common.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace HDT.Plugins.Common.Tests.Data
+namespace HDT.Plugins.Common.Tests
 {
 	[TestClass]
 	public class EnumStringConverterTest

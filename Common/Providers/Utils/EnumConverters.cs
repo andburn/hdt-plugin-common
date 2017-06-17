@@ -127,9 +127,10 @@ namespace HDT.Plugins.Common.Providers.Utils
 					return GameResult.LOSS;
 
 				case Hearthstone_Deck_Tracker.Enums.GameResult.Draw:
-				case Hearthstone_Deck_Tracker.Enums.GameResult.None:
-				default:
 					return GameResult.DRAW;
+				
+				default:
+					return GameResult.NONE;
 			}
 		}
 
@@ -176,8 +177,10 @@ namespace HDT.Plugins.Common.Providers.Utils
 					return Hearthstone_Deck_Tracker.Enums.GameResult.Loss;
 
 				case GameResult.DRAW:
-				default:
 					return Hearthstone_Deck_Tracker.Enums.GameResult.Draw;
+
+				default:
+					return Hearthstone_Deck_Tracker.Enums.GameResult.None;
 			}
 		}
 

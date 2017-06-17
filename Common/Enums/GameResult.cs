@@ -2,6 +2,7 @@
 {
 	public enum GameResult
 	{
+		NONE,
 		WIN,
 		LOSS,
 		DRAW

@@ -8,6 +8,7 @@ namespace HDT.Plugins.Common.Models
 	public class Deck
 	{
 		public static readonly Deck None = new Deck() { Name = "No Deck" };
+		public static readonly Deck Empty = new Deck() { Name = "none", Id = Guid.Empty };
 
 		public Guid Id { get; set; }
 		public bool IsArena { get; set; }

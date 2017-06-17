@@ -2,7 +2,7 @@
 using static HDT.Plugins.Common.Enums.Convert;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace HDT.Plugins.Common.Tests.Data
+namespace HDT.Plugins.Common.Tests
 {
 	[TestClass]
 	public class HeroStringConverterTest

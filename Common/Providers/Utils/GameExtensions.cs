@@ -11,7 +11,14 @@ namespace HDT.Plugins.Common.Providers.Utils
 		public static void CopyFrom(this Game game, GameStats stats, Deck deck)
 		{
 			game.Id = stats.GameId;
-			game.Deck = deck;
+			if (deck == null)
+			{
+				game.Deck = new Deck(Deck.Empty);
+			}
+			else
+			{
+				game.Deck = deck;
+			}			
 			var v = stats.PlayerDeckVersion ?? new SerializableVersion();
 			game.DeckVersion = new Version(v.Major, v.Minor, v.Build, v.Revision);
 			game.Region = Convert(stats.Region);
@@ -35,13 +42,21 @@ namespace HDT.Plugins.Common.Providers.Utils
 		public static void CopyTo(this Game from, GameStats to)
 		{
 			to.GameId = from.Id;
-			to.DeckName = from.Deck.Name;
-			to.DeckId = from.Deck.Id;
+			if (from.Deck == null || from.Deck.Name == null)
+			{
+				to.DeckName = Deck.Empty.Name;
+				to.DeckId = Deck.Empty.Id;
+			}
+			else
+			{
+				to.DeckName = from.Deck.Name;
+				to.DeckId = from.Deck.Id;
+			}			
 			to.StartTime = from.StartTime;
 			to.EndTime = from.EndTime;
 			to.GameMode = Convert(from.Mode);
 			to.Format = Convert(from.Format);
-			to.Note = from.Note.Text;
+			to.Note = from.Note?.Text;
 			to.OpponentHero = from.OpponentClass.ToString();
 			to.OpponentName = from.OpponentName;
 			to.PlayerHero = from.PlayerClass.ToString();
@@ -57,24 +72,24 @@ namespace HDT.Plugins.Common.Providers.Utils
 		public static bool EqualTo(this Game game, GameStats stats)
 		{
 			return game.Id == stats.GameId &&
-			game.Deck.Name == stats.DeckName &&
-			game.Deck.Id == stats.DeckId &&
-			game.Region == Convert(stats.Region) &&
-			game.Mode == Convert(stats.GameMode) &&
-			game.Format == Convert(stats.Format) &&
-			game.Result == Convert(stats.Result) &&
-			game.StartTime == stats.StartTime &&
-			game.EndTime == stats.EndTime &&
-			game.Rank == stats.Rank &&
-			game.PlayerClass == Enums.Convert.ToHeroClass(stats.PlayerHero) &&
-			game.PlayerName == stats.PlayerName &&
-			game.OpponentClass == Enums.Convert.ToHeroClass(stats.OpponentHero) &&
-			game.OpponentName == stats.OpponentName &&
-			game.Turns == stats.Turns &&
-			game.Minutes == stats.SortableDuration &&
-			game.PlayerGotCoin == stats.Coin &&
-			game.WasConceded == stats.WasConceded &&
-			game.Note.Text == stats.Note;
+				game.Deck?.Name == stats.DeckName &&
+				game.Deck?.Id == stats.DeckId &&
+				game.Region == Convert(stats.Region) &&
+				game.Mode == Convert(stats.GameMode) &&
+				game.Format == Convert(stats.Format) &&
+				game.Result == Convert(stats.Result) &&
+				game.StartTime == stats.StartTime &&
+				game.EndTime == stats.EndTime &&
+				game.Rank == stats.Rank &&
+				game.PlayerClass == Enums.Convert.ToHeroClass(stats.PlayerHero) &&
+				game.PlayerName == stats.PlayerName &&
+				game.OpponentClass == Enums.Convert.ToHeroClass(stats.OpponentHero) &&
+				game.OpponentName == stats.OpponentName &&
+				game.Turns == stats.Turns &&
+				game.Minutes == stats.SortableDuration &&
+				game.PlayerGotCoin == stats.Coin &&
+				game.WasConceded == stats.WasConceded &&
+				game.Note?.Text == stats.Note;
 		}
 	}
 }

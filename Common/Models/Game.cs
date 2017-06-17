@@ -5,8 +5,8 @@ namespace HDT.Plugins.Common.Models
 {
 	public class Game
 	{
-		public Guid Id { get; set; }
-		public Deck Deck { get; set; }
+		public Guid Id { get; set; } = Guid.Empty;
+		public Deck Deck { get; set; } = Deck.Empty;
 		public Version DeckVersion { get; set; }
 		public Region Region { get; set; }
 		public GameMode Mode { get; set; }

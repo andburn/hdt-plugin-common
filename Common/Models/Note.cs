@@ -34,8 +34,6 @@ namespace HDT.Plugins.Common.Models
 
 		public Note()
 		{
-			_text = string.Empty;
-			Archetype = string.Empty;
 		}
 
 		public Note(string text)

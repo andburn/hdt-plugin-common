@@ -66,6 +66,12 @@ namespace HDT.Plugins.Common.Tests
 		}
 
 		[TestMethod]
+		public void EqualTo_DefaultCtors()
+		{
+			Assert.IsTrue((new Game()).EqualTo(new GameStats()));
+		}
+
+		[TestMethod]
 		public void CopyToTest()
 		{
 			var stats = new GameStats();
@@ -79,6 +85,24 @@ namespace HDT.Plugins.Common.Tests
 			var game = new Game();
 			game.CopyFrom(HDTGame, Deck);
 			Assert.IsTrue(game.EqualTo(HDTGame));
+		}
+
+		[TestMethod]
+		public void CopyTo_GameDefaultCtor()
+		{
+			var stats = new GameStats();
+			var game = new Game();
+			game.CopyTo(stats);
+			Assert.IsTrue(game.EqualTo(stats));
+		}
+
+		[TestMethod]
+		public void CopyFrom_GameStatsDefaultCtor()
+		{
+			var stats = new GameStats();
+			var game = new Game();
+			game.CopyFrom(stats, null);
+			Assert.IsTrue(game.EqualTo(stats));
 		}
 	}
 }
