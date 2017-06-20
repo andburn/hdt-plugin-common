@@ -10,7 +10,7 @@ namespace HDT.Plugins.Common.Services
 
 		List<Game> GetAllGamesWithDeck(Guid id);
 
-		void AddGames(List<Game> games);
+		int AddGames(List<Game> games);
 
 		List<Deck> GetAllDecks();
 

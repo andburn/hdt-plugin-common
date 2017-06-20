@@ -58,8 +58,9 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			return games;
 		}
 
-		public void AddGames(List<Game> games)
+		public int AddGames(List<Game> games)
 		{
+			var count = 0;
 			var newGames = new List<Game>();
 			// load games from tracker
 			Reload<DeckStatsList>();
@@ -97,6 +98,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 						Id = stats.DeckId
 					};
 					game.CopyTo(stats);
+					count++;
 				}
 				else
 				{
@@ -106,10 +108,13 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			DeckStatsList.Save();
 			DefaultDeckStats.Save();
 
+			var newGamesAdded = 0;
 			if (newGames.Count > 0)
 			{
-				AddNewGames(newGames);
+				newGamesAdded = AddNewGames(newGames);
 			}
+
+			return count + newGamesAdded;
 		}
 
 		private int AddNewGames(List<Game> games)

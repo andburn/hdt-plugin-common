@@ -128,16 +128,18 @@ namespace HDT.Plugins.Common.Tests
 		public void Add_NewGame_ByDeckName()
 		{
 			var deck = data.GetAllDecks().Single(d => d.Name == "Beasts");
-			data.AddGames(new List<Game>() { newGameNamedDeck });
+			var count = data.AddGames(new List<Game>() { newGameNamedDeck });
+			Assert.AreEqual(1, count);
 			data.InvalidateCache();
 			Assert.AreEqual(8, data.GetAllGames().Count);
-			Assert.AreEqual(3, data.GetAllGamesWithDeck(deck.Id).Count);
+			Assert.AreEqual(3, data.GetAllGamesWithDeck(deck.Id).Count);			
 		}
 
 		[TestMethod]
 		public void Add_NewGame_AsDefaultDeck()
 		{
-			data.AddGames(new List<Game>() { newGameClassOnly });
+			var count = data.AddGames(new List<Game>() { newGameClassOnly });
+			Assert.AreEqual(1, count);
 			data.InvalidateCache();
 			Assert.AreEqual(8, data.GetAllGames().Count);
 			Assert.AreEqual(1,
@@ -154,7 +156,8 @@ namespace HDT.Plugins.Common.Tests
 			Assert.AreEqual(PlayerClass.DRUID, game.OpponentClass);
 			Assert.AreEqual("Secrets", game.Deck.Name);
 
-			data.AddGames(new List<Game>() { existingGameHasGameId });
+			var count = data.AddGames(new List<Game>() { existingGameHasGameId });
+			Assert.AreEqual(1, count);
 			data.InvalidateCache();
 
 			game = data.GetAllGames().Single(g => g.Id == existingGameHasGameId.Id);
@@ -173,7 +176,8 @@ namespace HDT.Plugins.Common.Tests
 			Assert.AreEqual(20, game.Rank);
 			Assert.AreEqual("Beasts", game.Deck.Name);
 
-			data.AddGames(new List<Game>() { existingGameFuzzy });
+			var count = data.AddGames(new List<Game>() { existingGameFuzzy });
+			Assert.AreEqual(1, count);
 			data.InvalidateCache();
 
 			game = data.GetAllGames().Single(g => g.Id == gameId);
