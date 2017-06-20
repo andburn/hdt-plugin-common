@@ -77,6 +77,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="EnumStringConverterTest.cs" />
+    <Compile Include="GameFilterTest.cs" />
     <Compile Include="HeroStringConverterTest.cs" />
     <Compile Include="GameExtensionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
