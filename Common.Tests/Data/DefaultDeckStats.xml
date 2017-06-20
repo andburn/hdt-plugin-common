@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DefaultDeckStats xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DeckStats>
+    <DeckStats>
+      <DeckId>00000000-0000-0000-0000-000000000000</DeckId>
+      <Games>
+        <Game>
+          <GameId>fced527d-3b31-4f1e-bd9b-0fd7308da8a0</GameId>
+          <PlayerHero>Shaman</PlayerHero>
+          <OpponentHero>Hunter</OpponentHero>
+          <Coin>true</Coin>
+          <GameMode>Ranked</GameMode>
+          <Result>Loss</Result>
+          <Turns>9</Turns>
+          <StartTime>2017-02-07T21:58:58.6951838+00:00</StartTime>
+          <EndTime>2017-02-07T22:04:47.6101431+00:00</EndTime>
+          <Note></Note>
+          <PlayerName>TestRunner</PlayerName>
+          <OpponentName>NoDecks</OpponentName>
+          <WasConceded>false</WasConceded>
+          <Rank>20</Rank>
+          <Stars>13</Stars>
+          <OpponentRank>20</OpponentRank>
+          <Region>EU</Region>
+          <Format>Standard</Format>
+          <DeckId>00000000-0000-0000-0000-000000000000</DeckId>
+          <DeckName>none</DeckName>
+        </Game>
+        <Game>
+          <GameId>496b04a9-e5c3-40a6-b52c-b4e849c60595</GameId>
+          <PlayerHero>Shaman</PlayerHero>
+          <OpponentHero>Hunter</OpponentHero>
+          <Coin>true</Coin>
+          <GameMode>Practice</GameMode>
+          <Result>Loss</Result>
+          <Turns>5</Turns>
+          <StartTime>2017-02-23T19:32:52.4690428+00:00</StartTime>
+          <EndTime>2017-02-23T19:34:39.8517324+00:00</EndTime>
+          <PlayerName>TestRunner</PlayerName>
+          <OpponentName>The Innkeeper</OpponentName>
+          <WasConceded>true</WasConceded>
+          <Region>EU</Region>
+          <DeckId>00000000-0000-0000-0000-000000000000</DeckId>
+          <DeckName>none</DeckName>
+        </Game>
+      </Games>
+      <Name>Shaman</Name>
+    </DeckStats>
+  </DeckStats>
+</DefaultDeckStats>

@@ -24,7 +24,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
 
 		private const int CacheRefreshLimit = 300; // seconds before cache needs to be refreshed
-		private DateTime CacheCreatedAt;
+		private DateTime CacheCreatedAt = DateTime.MinValue;
 		private List<Deck> DeckCache = null;
 		private List<Game> GameCache = null;
 
@@ -68,30 +68,35 @@ namespace HDT.Plugins.Common.Providers.Tracker
 				.SelectMany(x => x.Games));
 			gameStats.AddRange(DefaultDeckStats.Instance.DeckStats
 				.SelectMany(x => x.Games));
-			// create index maps into the list on id and time
+			// create index maps into the list on id and GameIndex
 			var indexById = gameStats.ToDictionary(x => x.GameId, x => gameStats.IndexOf(x));
-			var indexByTime = gameStats.ToDictionary(x => x.StartTime, x => gameStats.IndexOf(x));
+			var fuzzyIndex = gameStats.ToDictionary(x => new GameIndex(x), x => gameStats.IndexOf(x));
 
 			foreach (var game in games)
 			{
+				// set default indices
+				var index = -1;
+				var gameIndex = new GameIndex(game);
 				if (game.Id != null && indexById.ContainsKey(game.Id))
 				{
-					var idx = indexById[game.Id];
-					if (idx < gameStats.Count)
-					{
-						game.CopyTo(gameStats[idx]);
-					}
+					// look for id match first
+					index = indexById[game.Id];
 				}
-				else if (game.StartTime != null && game.EndTime != null
-					&& indexByTime.ContainsKey(game.StartTime))
+				else if (fuzzyIndex.ContainsKey(gameIndex))
 				{
-					var idx = indexByTime[game.StartTime];
-					if (idx < gameStats.Count)
-					{
-						var g = gameStats[idx];
-						if (game.EndTime == g.EndTime)
-							game.CopyTo(g);
-					}
+					// try a fuzzy match
+					index = fuzzyIndex[gameIndex];
+				}
+				// if the game was matched then edit it, otherwise add new game
+				if (index >= 0 && index < gameStats.Count)
+				{
+					var stats = gameStats[index];
+					// set the deck first, so it isn't overwritten
+					game.Deck = new Deck() {
+						Name = stats.DeckName,
+						Id = stats.DeckId
+					};
+					game.CopyTo(stats);
 				}
 				else
 				{
@@ -134,7 +139,12 @@ namespace HDT.Plugins.Common.Providers.Tracker
 					if (match != null)
 					{
 						var gameStats = new GameStats();
+						// copy the game info
 						g.CopyTo(gameStats);
+						// add the matched deck to GameStats object
+						gameStats.DeckId = match.DeckId;
+						gameStats.DeckName = match.Name;
+						// add game to hdt stats
 						DeckStatsList.Instance.DeckStats[match.DeckId].AddGameResult(gameStats);
 						success = true;
 					}
@@ -304,6 +314,13 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			return string.Empty;
 		}
 
+		public void InvalidateCache()
+		{
+			DeckCache = null;
+			GameCache = null;
+			CacheCreatedAt = DateTime.MinValue;
+		}
+
 		private Game CreateGame(GameStats stats)
 		{
 			var game = new Game();
@@ -351,6 +368,8 @@ namespace HDT.Plugins.Common.Providers.Tracker
 
 		private void RefreshCache()
 		{
+			// Reset the timestamp first (avoids recursive loop)
+			CacheCreatedAt = DateTime.Now;
 			// Decks
 			Reload<DeckList>();
 			DeckCache = DeckList.Instance.Decks
@@ -369,14 +388,12 @@ namespace HDT.Plugins.Common.Providers.Tracker
 				games.AddRange(deck.Games.Select(g => CreateGame(g)));
 			}
 			GameCache = games;
-			// reset the timestamp
-			CacheCreatedAt = DateTime.Now;
 		}
 
 		private bool CacheNeedsRefresh()
 		{
-			if (CacheCreatedAt == null)
-				return false;
+			if (CacheCreatedAt == DateTime.MinValue)
+				return true;
 			return DateTime.Now > CacheCreatedAt.AddSeconds(CacheRefreshLimit);
 		}
 	}

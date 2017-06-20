@@ -8,9 +8,15 @@ namespace HDT.Plugins.Common.Providers.Utils
 {
 	public static class GameExtensions
 	{
+		/// <summary>
+		/// Copy GamesStats/Deck into a Game object
+		/// Will cause existing properties to be overwritten.
+		/// </summary>
 		public static void CopyFrom(this Game game, GameStats stats, Deck deck)
 		{
-			game.Id = stats.GameId;
+			// dont't overwrite game ids with empty
+			if (stats.GameId != Guid.Empty)
+				game.Id = stats.GameId;
 			if (deck == null)
 			{
 				game.Deck = new Deck(Deck.Empty);
@@ -39,9 +45,15 @@ namespace HDT.Plugins.Common.Providers.Utils
 			game.Note = new Note(stats.Note);
 		}
 
+		/// <summary>
+		/// Copy Game into a GameStats object.
+		/// Will cause existing properties to be overwritten.
+		/// </summary>
 		public static void CopyTo(this Game from, GameStats to)
 		{
-			to.GameId = from.Id;
+			// dont't overwrite game ids with empty
+			if (from.Id != Guid.Empty)
+				to.GameId = from.Id;
 			if (from.Deck == null || from.Deck.Name == null)
 			{
 				to.DeckName = Deck.Empty.Name;
@@ -69,6 +81,9 @@ namespace HDT.Plugins.Common.Providers.Utils
 			to.WasConceded = from.WasConceded;
 		}
 
+		/// <summary>
+		/// Tests for equality between a Game object and a GameStats object
+		/// </summary>
 		public static bool EqualTo(this Game game, GameStats stats)
 		{
 			return game.Id == stats.GameId &&

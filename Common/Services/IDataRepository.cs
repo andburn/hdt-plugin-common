@@ -29,5 +29,7 @@ namespace HDT.Plugins.Common.Services
 		string GetGameMode();
 
 		void UpdateGameNote(string text);
+
+		void InvalidateCache();
 	}
 }

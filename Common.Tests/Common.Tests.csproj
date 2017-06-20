@@ -76,13 +76,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Data\EnumStringConverterTest.cs" />
-    <Compile Include="Data\HeroStringConverterTest.cs" />
+    <Compile Include="EnumStringConverterTest.cs" />
+    <Compile Include="HeroStringConverterTest.cs" />
     <Compile Include="GameExtensionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\GitHubUpdateTest.cs" />
+    <Compile Include="GitHubUpdateTest.cs" />
     <Compile Include="SettingsTest.cs" />
     <Compile Include="SettingValueTest.cs" />
+    <Compile Include="TestHelper.cs" />
+    <Compile Include="TrackerDataRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
@@ -91,6 +93,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="Data\DeckStats.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\DefaultDeckStats.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\PlayerDecks.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

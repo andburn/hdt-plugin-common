@@ -116,6 +116,7 @@
     <Compile Include="Providers\Tracker\TrackerLoggingService.cs" />
     <Compile Include="Providers\Utils\EnumConverters.cs" />
     <Compile Include="Providers\Utils\GameExtensions.cs" />
+    <Compile Include="Providers\Utils\GameIndex.cs" />
     <Compile Include="Providers\Web\GitHubUpdateService.cs" />
     <Compile Include="Providers\Web\HttpClient.cs" />
     <Compile Include="Services\IConfigurationRepository.cs" />
