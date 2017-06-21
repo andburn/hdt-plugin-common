@@ -9,6 +9,8 @@ namespace HDT.Plugins.Common.Utils
     public class GameFilter
     {
         public Guid? DeckId { get; set; }
+        public PlayerClass PlayerClass { get; set; }
+        public PlayerClass OpponentClass { get; set; }
         public Region Region { get; set; }
         public GameMode Mode { get; set; }
         public GameFormat Format { get; set; }
@@ -21,15 +23,32 @@ namespace HDT.Plugins.Common.Utils
             Mode = GameMode.ALL;
             TimeFrame = TimeFrame.ALL;
             Format = GameFormat.ANY;
+            PlayerClass = PlayerClass.ALL;
+            OpponentClass = PlayerClass.ALL;
         }
 
-        public GameFilter(Guid? deck, Region region, GameMode mode, TimeFrame time, GameFormat format)
+        public GameFilter(Guid? deck, Region region, GameMode mode, TimeFrame time,
+            GameFormat format)
         {
             DeckId = deck;
             Region = region;
             Mode = mode;
             TimeFrame = time;
             Format = format;
+            PlayerClass = PlayerClass.ALL;
+            OpponentClass = PlayerClass.ALL;
+        }
+
+        public GameFilter(Guid? deck, Region region, GameMode mode, TimeFrame time, 
+            GameFormat format, PlayerClass pClass, PlayerClass oClass)
+        {
+            DeckId = deck;
+            Region = region;
+            Mode = mode;
+            TimeFrame = time;
+            Format = format;
+            PlayerClass = pClass;
+            OpponentClass = oClass;
         }
 
         public List<Game> Apply(List<Game> games)
@@ -46,6 +65,16 @@ namespace HDT.Plugins.Common.Utils
                 {
                     filtered = filtered.Where(g => g.Deck != null && DeckId.Equals(g.Deck.Id));
                 }
+            }
+            // player class filter (only useful if deck is null)
+            if (!PlayerClass.Equals(PlayerClass.ALL))
+            {
+                filtered = filtered.Where(g => g.PlayerClass == PlayerClass);
+            }
+            // opponent class filter
+            if (!OpponentClass.Equals(PlayerClass.ALL))
+            {
+                filtered = filtered.Where(g => g.OpponentClass == OpponentClass);
             }
             // format filter
             if (!Format.Equals(GameFormat.ANY))

@@ -21,6 +21,8 @@ namespace HDT.Plugins.Common.Tests
             {
                 new Game() {
                     Deck = new Deck(),
+                    PlayerClass = PlayerClass.DRUID,
+                    OpponentClass = PlayerClass.MAGE,
                     Region = Region.US,
                     Mode = GameMode.BRAWL,
                     Format = GameFormat.WILD,
@@ -29,6 +31,8 @@ namespace HDT.Plugins.Common.Tests
                 },
                 new Game() {
                     Deck = new Deck(),
+                    PlayerClass = PlayerClass.HUNTER,
+                    OpponentClass = PlayerClass.MAGE,
                     Region = Region.EU,
                     Mode = GameMode.RANKED,
                     Format = GameFormat.STANDARD,
@@ -90,6 +94,25 @@ namespace HDT.Plugins.Common.Tests
             var filtered = filter.Apply(games);
             Assert.AreEqual(1, filtered.Count);
             Assert.AreEqual(GameFormat.STANDARD, filtered[0].Format);
+        }
+
+        [TestMethod]
+        public void Apply_FilterByPlayerClass()
+        {
+            var filter = new GameFilter(null, Region.ALL, GameMode.ALL, TimeFrame.ALL, GameFormat.ANY, PlayerClass.DRUID, PlayerClass.ALL);
+            var filtered = filter.Apply(games);
+            Assert.AreEqual(1, filtered.Count);
+            Assert.AreEqual(PlayerClass.DRUID, filtered[0].PlayerClass);
+        }
+
+        [TestMethod]
+        public void Apply_FilterByOpponentClass()
+        {
+            var filter = new GameFilter(null, Region.ALL, GameMode.ALL, TimeFrame.ALL, GameFormat.ANY, PlayerClass.ALL, PlayerClass.MAGE);
+            var filtered = filter.Apply(games);
+            Assert.AreEqual(2, filtered.Count);
+            Assert.AreEqual(PlayerClass.MAGE, filtered[0].OpponentClass);
+            Assert.AreEqual(PlayerClass.MAGE, filtered[1].OpponentClass);
         }
 
         [TestMethod]
