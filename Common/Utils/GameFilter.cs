@@ -53,7 +53,7 @@ namespace HDT.Plugins.Common.Utils
 
         public List<Game> Apply(List<Game> games)
         {
-            IEnumerable<Game> filtered = games;
+            IEnumerable<Game> filtered = new List<Game>(games);
             // filter by deck first if needed
             if (DeckId != null)
             {
@@ -95,9 +95,7 @@ namespace HDT.Plugins.Common.Utils
             var range = ConvertTimeFrameToRange(TimeFrame);
             filtered = filtered.Where(g => g.StartTime >= range.Start && g.EndTime <= range.End);
 
-            // finally sort by time
-            // TODO should this be filters job?
-            return filtered.OrderByDescending(g => g.EndTime).ToList();
+            return filtered.ToList();
         }
 
         /// <summary>
