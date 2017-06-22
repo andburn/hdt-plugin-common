@@ -81,10 +81,10 @@ namespace HDT.Plugins.Common.Tests
         [TestMethod]
         public void Apply_FilterByMode()
         {
-            var filter = new GameFilter(null, Region.ALL, GameMode.RANKED, TimeFrame.ALL, GameFormat.ANY);
+            var filter = new GameFilter(null, Region.ALL, GameMode.BRAWL, TimeFrame.ALL, GameFormat.ANY);
             var filtered = filter.Apply(games);
             Assert.AreEqual(1, filtered.Count);
-            Assert.AreEqual(GameMode.RANKED, filtered[0].Mode);
+            Assert.AreEqual(GameMode.BRAWL, filtered[0].Mode);
         }
 
         [TestMethod]
@@ -254,6 +254,41 @@ namespace HDT.Plugins.Common.Tests
             var range = new TimeRange();
             Assert.AreEqual(DateTime.MinValue, range.Start);
             Assert.AreEqual(DateTime.MaxValue, range.End);
+        }
+
+        [TestMethod]
+        public void RankedRange_NoChange_WhenGameModeFilter_IsNotRanked()
+        {
+            var list = new List<Game>() {
+                new Game() { Mode = GameMode.RANKED, Rank = 10 },
+                new Game() { Mode = GameMode.RANKED, Rank = 5 }
+            };
+            var filter = new GameFilter() { Rank = new Tuple<int, int>(3, 1) };
+            Assert.AreEqual(2, filter.Apply(list).Count);
+        }
+
+        [TestMethod]
+        public void RankedRange_DefaultShouldIncludeAll()
+        {
+            var list = new List<Game>() {
+                new Game() { Mode = GameMode.RANKED, Rank = 25 },
+                new Game() { Mode = GameMode.RANKED, Rank = 0 }
+            };
+            var filter = new GameFilter() { Mode = GameMode.RANKED };
+            Assert.AreEqual(2, filter.Apply(list).Count);
+        }
+
+        [TestMethod]
+        public void RankedRange_LoShouldBeInclusive_HiShouldBeExclusive()
+        {
+            var list = new List<Game>() {
+                new Game() { Mode = GameMode.RANKED, Rank = 10 },
+                new Game() { Mode = GameMode.RANKED, Rank = 5 }
+            };
+            var filter = new GameFilter() { Mode = GameMode.RANKED, Rank = new Tuple<int, int>(10, 5) };
+            var filtered = filter.Apply(list);
+            Assert.AreEqual(1, filtered.Count);
+            Assert.AreEqual(10, filtered[0].Rank);
         }
     }
 }

@@ -8,6 +8,9 @@ namespace HDT.Plugins.Common.Utils
 {
     public class GameFilter
     {
+        public const int RANK_HI = 0;
+        public const int RANK_LO = 25;
+
         public Guid? DeckId { get; set; }
         public PlayerClass PlayerClass { get; set; }
         public PlayerClass OpponentClass { get; set; }
@@ -15,6 +18,7 @@ namespace HDT.Plugins.Common.Utils
         public GameMode Mode { get; set; }
         public GameFormat Format { get; set; }
         public TimeFrame TimeFrame { get; set; }
+        public Tuple<int, int> Rank { get; set; }
 
         public GameFilter()
         {
@@ -25,10 +29,12 @@ namespace HDT.Plugins.Common.Utils
             Format = GameFormat.ANY;
             PlayerClass = PlayerClass.ALL;
             OpponentClass = PlayerClass.ALL;
+            Rank = new Tuple<int, int>(RANK_LO, RANK_HI);
         }
 
         public GameFilter(Guid? deck, Region region, GameMode mode, TimeFrame time,
             GameFormat format)
+            : this()
         {
             DeckId = deck;
             Region = region;
@@ -41,14 +47,17 @@ namespace HDT.Plugins.Common.Utils
 
         public GameFilter(Guid? deck, Region region, GameMode mode, TimeFrame time, 
             GameFormat format, PlayerClass pClass, PlayerClass oClass)
+            : this(deck, region, mode, time, format)
         {
-            DeckId = deck;
-            Region = region;
-            Mode = mode;
-            TimeFrame = time;
-            Format = format;
             PlayerClass = pClass;
             OpponentClass = oClass;
+        }
+
+        public GameFilter(Guid? deck, Region region, GameMode mode, TimeFrame time,
+            GameFormat format, PlayerClass pClass, PlayerClass oClass, int rankLo, int rankHi)
+            : this(deck, region, mode, time, format, pClass, oClass)
+        {
+            Rank = new Tuple<int, int>(rankLo, rankHi);
         }
 
         public List<Game> Apply(List<Game> games)
@@ -89,8 +98,22 @@ namespace HDT.Plugins.Common.Utils
             // game mode filter
             if (!Mode.Equals(GameMode.ALL))
             {
-                filtered = filtered.Where(g => g.Mode == Mode);
-            }
+                // if Ranked filter is on, also check for Rank range filter
+                if (Mode.Equals(GameMode.RANKED))
+                {
+                    // filtering by rank only makes sense when filtering by rank mode,
+                    // can be enforced by caller or ui elements
+                    if (Rank.Item1 != RANK_LO || Rank.Item2 != RANK_HI)
+                    {
+                        filtered = filtered.Where(g => g.Mode == GameMode.RANKED
+                            && g.Rank <= Rank.Item1 && g.Rank > Rank.Item2);
+                    }
+                }
+                else
+                {
+                    filtered = filtered.Where(g => g.Mode == Mode);
+                }                    
+            }                      
             // time filter
             var range = ConvertTimeFrameToRange(TimeFrame);
             filtered = filtered.Where(g => g.StartTime >= range.Start && g.EndTime <= range.End);
