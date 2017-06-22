@@ -101,9 +101,8 @@ namespace HDT.Plugins.Common.Utils
                 // if Ranked filter is on, also check for Rank range filter
                 if (Mode.Equals(GameMode.RANKED))
                 {
-                    // filtering by rank only makes sense when filtering by rank mode,
-                    // can be enforced by caller or ui elements
-                    if (Rank.Item1 != RANK_LO || Rank.Item2 != RANK_HI)
+                    // ignore rank if its invalid or equal to the default range
+                    if (RankIsValid(Rank) && (Rank.Item1 != RANK_LO || Rank.Item2 != RANK_HI))
                     {
                         filtered = filtered.Where(g => g.Mode == GameMode.RANKED
                             && g.Rank <= Rank.Item1 && g.Rank > Rank.Item2);
@@ -205,6 +204,15 @@ namespace HDT.Plugins.Common.Utils
             }
 
             return new TimeRange(startTime, endTime);
+        }
+
+        // Invalid if outside of min/max range or hi is greater than lo
+        private bool RankIsValid(Tuple<int, int> rank)
+        {
+            if (rank.Item1 > RANK_LO || rank.Item2 < RANK_HI || rank.Item1 < rank.Item2)
+                return false;
+            else
+                return true;
         }
     }
 

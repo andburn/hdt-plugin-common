@@ -290,5 +290,27 @@ namespace HDT.Plugins.Common.Tests
             Assert.AreEqual(1, filtered.Count);
             Assert.AreEqual(10, filtered[0].Rank);
         }
+
+        [TestMethod]
+        public void RankedRange_IgnoreIfOutOfBounds()
+        {
+            var list = new List<Game>() {
+                new Game() { Mode = GameMode.RANKED, Rank = 10 },
+                new Game() { Mode = GameMode.RANKED, Rank = 5 }
+            };
+            var filter = new GameFilter() { Mode = GameMode.RANKED, Rank = new Tuple<int, int>(30, 8) };
+            Assert.AreEqual(2, filter.Apply(list).Count);
+        }
+
+        [TestMethod]
+        public void RankedRange_IgnoreIfHiAndLoCrossover()
+        {
+            var list = new List<Game>() {
+                new Game() { Mode = GameMode.RANKED, Rank = 10 },
+                new Game() { Mode = GameMode.RANKED, Rank = 5 }
+            };
+            var filter = new GameFilter() { Mode = GameMode.RANKED, Rank = new Tuple<int, int>(8, 12) };
+            Assert.AreEqual(2, filter.Apply(list).Count);
+        }
     }
 }
