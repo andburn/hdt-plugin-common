@@ -4,16 +4,16 @@ using System.Windows;
 
 namespace HDT.Plugins.Common.Services
 {
-	public interface IGameClientService
-	{
-		Rectangle GameRectangle(bool dpiScale);
+    public interface IGameClientService
+    {
+        Rectangle GameRectangle(bool dpiScale);
 
-		Task<Bitmap> GameScreenshot(bool altMethod);
+        Task<Bitmap> GameScreenshot(bool altMethod);
 
-		bool IsInMenu();
+        bool IsInMenu();
 
-		Window MainWindow();
+        Window MainWindow();
 
-		string[] CurrentGameInfo();
-	}
+        string[] CurrentGameInfo();
+    }
 }

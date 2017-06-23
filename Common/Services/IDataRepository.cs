@@ -1,35 +1,37 @@
-﻿using System;
+﻿using HDT.Plugins.Common.Models;
+using System;
 using System.Collections.Generic;
-using HDT.Plugins.Common.Models;
 
 namespace HDT.Plugins.Common.Services
 {
-	public interface IDataRepository
-	{
-		List<Game> GetAllGames();
+    public interface IDataRepository
+    {
+        List<Game> GetAllGames();
 
-		List<Game> GetAllGamesWithDeck(Guid id);
+        List<Game> GetAllGamesWithDeck(Guid id);
 
-		int AddGames(List<Game> games);
+        int AddGames(List<Game> games);
 
-		List<Deck> GetAllDecks();
+        List<Deck> GetAllDecks();
 
-		List<Deck> GetAllDecksWithTag(string tag);
+        List<Deck> GetAllDecksWithTag(string tag);
 
-		void DeleteAllDecksWithTag(string tag);
+        void DeleteAllDecksWithTag(string tag);
 
-		void AddDeck(Deck deck);
+        void AddDeck(Deck deck);
 
-		void AddDeck(string name, string playerClass, string cards, bool archive, params string[] tags);
+        void AddDeck(string name, string playerClass, string cards, bool archive, params string[] tags);
 
-		Deck GetOpponentDeck();
+        Deck GetOpponentDeck();
 
-		string GetGameNote();
+        string GetGameNote();
 
-		string GetGameMode();
+        string GetGameMode();
 
-		void UpdateGameNote(string text);
+        void UpdateGameNote(string text);
 
-		void InvalidateCache();
-	}
+        void InvalidateCache();
+
+        Guid GetActiveDeckId();
+    }
 }
