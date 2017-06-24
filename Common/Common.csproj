@@ -138,6 +138,7 @@
     <Compile Include="Utils\Logger.cs" />
     <Compile Include="Utils\PluginMenu.cs" />
     <Compile Include="Utils\TaskExtensions.cs" />
+    <Compile Include="Utils\CaseConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
