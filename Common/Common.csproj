@@ -99,6 +99,7 @@
     <Compile Include="Enums\GameFormat.cs" />
     <Compile Include="Enums\GameMode.cs" />
     <Compile Include="Enums\GameResult.cs" />
+    <Compile Include="Enums\LogLevel.cs" />
     <Compile Include="Enums\PlayerClass.cs" />
     <Compile Include="Enums\Position.cs" />
     <Compile Include="Enums\Region.cs" />

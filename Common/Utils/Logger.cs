@@ -1,65 +1,62 @@
-﻿using System;
+﻿using HDT.Plugins.Common.Enums;
+using System;
 using System.IO;
 
 namespace HDT.Plugins.Common.Utils
 {
 	/// <summary>
-	/// A basic logger to log any errors in the common library.
+	/// A basic file logger
 	/// </summary>
 	public class Logger
 	{
-		private const string _defaultFileName = "Common.log";
-		private const string _defaultDirName = "HearthstoneDeckTracker";
-		private readonly string _filePath;
+		private static readonly string _defaultName = "Common";
+		private static readonly string _defaultDirName = "HearthstoneDeckTracker";
+		private string _filePath;
 
-		private static Logger _instance;
-
-		public static Logger Instance
+		public Logger()
+			: this(_defaultName)
 		{
-			get
+		}
+
+		public Logger(string name)
+		{
+			try
 			{
-				if (_instance == null)
-					_instance = new Logger();
-				return _instance;
+				_filePath = Path.Combine(
+					Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+					_defaultDirName, $"{name}.log");
+			}
+			catch (Exception e)
+			{
+				ExceptionFallback(e, "Path creation failed");
 			}
 		}
 
-		public bool IsEnabled { get; set; } = true;
-		public bool UseTrackerLogging { get; set; } = true;
-
-		private Logger()
+		public void Log(LogLevel level, string message)
 		{
-			_filePath = Path.Combine(
-				Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-				_defaultDirName,
-				_defaultFileName);
+			try
+			{
+				using (var stream = new StreamWriter(_filePath))
+				{
+					stream.WriteLine(string.Format("%s [%s] %s",
+						level.ToString(), DateTime.Now.ToString("yyyyMMdd HH:mm:ss"), message));
+				}
+			}
+			catch (Exception e)
+			{
+				ExceptionFallback(e, message);
+			}
 		}
 
 		public void Log(string message)
 		{
-			if (IsEnabled)
-			{
-				if (UseTrackerLogging)
-				{
-					Hearthstone_Deck_Tracker.Utility.Logging.Log.Info(message);
-				}
-				else
-				{
-					try
-					{
-						using (var stream = new StreamWriter(_filePath))
-						{
-							stream.WriteLine(string.Format("[%s] %s",
-								DateTime.Now.ToString("yyyyMMdd HH:mm:ss"), message));
-						}
-					}
-					catch (Exception e)
-					{
-						UseTrackerLogging = true;
-						Hearthstone_Deck_Tracker.Utility.Logging.Log.Error(e);
-					}
-				}
-			}
+			Log(LogLevel.INFO, message);
+		}
+
+		private void ExceptionFallback(Exception ex, string message)
+		{
+			Hearthstone_Deck_Tracker.Utility.Logging.Log.Error(
+					$"{message} [{ex.Message}]", "Common.Logger");
 		}
 	}
 }
