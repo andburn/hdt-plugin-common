@@ -109,7 +109,7 @@ namespace HDT.Plugins.Common.Providers.Metro
 			}
 			catch (Exception e)
 			{
-				Hearthstone_Deck_Tracker.Utility.Logging.Log.Error(e);
+				Common.Log.Error(e);
 			}
 		}
 
@@ -121,7 +121,7 @@ namespace HDT.Plugins.Common.Providers.Metro
 			}
 			catch (Exception e)
 			{
-				Hearthstone_Deck_Tracker.Utility.Logging.Log.Error(e);
+				Common.Log.Error(e);
 			}
 		}
 

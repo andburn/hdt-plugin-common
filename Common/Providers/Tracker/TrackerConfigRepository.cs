@@ -1,7 +1,6 @@
-﻿using System;
-using HDT.Plugins.Common.Services;
+﻿using HDT.Plugins.Common.Services;
 using Hearthstone_Deck_Tracker;
-using Hearthstone_Deck_Tracker.Utility.Logging;
+using System;
 
 namespace HDT.Plugins.Common.Providers.Tracker
 {
@@ -36,7 +35,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			}
 			catch (Exception e)
 			{
-				Log.Error(e);
+				Common.Log.Error(e);
 			}
 		}
 	}

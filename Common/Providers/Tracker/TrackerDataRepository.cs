@@ -2,10 +2,10 @@
 using HDT.Plugins.Common.Models;
 using HDT.Plugins.Common.Providers.Utils;
 using HDT.Plugins.Common.Services;
+using HDT.Plugins.Common.Utils;
 using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Importing;
 using Hearthstone_Deck_Tracker.Stats;
-using Hearthstone_Deck_Tracker.Utility.Logging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -250,7 +250,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
         {
             if (deck == null)
             {
-                Log.Info("Cannot add null deck");
+                Common.Log.Info("Cannot add null deck");
                 return;
             }
             HDTDeck d = new HDTDeck();
@@ -304,7 +304,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
             if (string.IsNullOrWhiteSpace(tag))
                 return;
             var decks = DeckList.Instance.Decks.Where(d => d.Tags.Contains(tag)).ToList();
-            Log.Info($"Deleting {decks.Count} tagged with '{tag}'");
+            Common.Log.Info($"Deleting {decks.Count} tagged with '{tag}'");
             foreach (var d in decks)
                 DeckList.Instance.Decks.Remove(d);
             if (decks.Any())
@@ -328,7 +328,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			{
 				return Core.Game.CurrentGameStats.Rank;
 			}
-			return Common.Utils.GameFilter.RANK_LO;
+			return GameFilter.RANK_LO;
 		}
 
 		public void InvalidateCache()
@@ -379,7 +379,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
             }
             catch (Exception e)
             {
-                Log.Error(e);
+                Common.Log.Error(e);
             }
         }
 

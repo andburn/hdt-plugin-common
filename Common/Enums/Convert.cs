@@ -3,7 +3,6 @@ using System.Globalization;
 using System.Text;
 using System.Windows;
 using System.Windows.Data;
-using HDT.Plugins.Common.Utils;
 
 namespace HDT.Plugins.Common.Enums
 {
@@ -71,7 +70,7 @@ namespace HDT.Plugins.Common.Enums
 			}
 			catch (Exception e)
 			{
-				Logger.Instance.Log($"Enum Converison failed ({e.Message})");
+				Common.Log.Error($"Enum Converison failed ({e.Message})");
 			}
 			return result;
 		}

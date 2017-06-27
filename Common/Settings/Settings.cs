@@ -48,7 +48,7 @@ namespace HDT.Plugins.Common.Settings
 			}
 			catch (Exception e)
 			{
-				Logger.Instance.Log(e.Message);
+				Common.Log.Error(e.Message);
 			}
 			InitializeDefault(ini);
 		}
@@ -64,7 +64,7 @@ namespace HDT.Plugins.Common.Settings
 			}
 			catch (Exception e)
 			{
-				Logger.Instance.Log(e.Message);
+				Common.Log.Error(e.Message);
 			}
 			InitializeDefault(ini);
 		}
@@ -104,7 +104,7 @@ namespace HDT.Plugins.Common.Settings
 		{
 			if (string.IsNullOrWhiteSpace(key))
 			{
-				Logger.Instance.Log("Settings must have non-empty keys");
+				Common.Log.Debug("Settings must have non-empty keys");
 				return;
 			}
 
@@ -142,7 +142,7 @@ namespace HDT.Plugins.Common.Settings
 
 		public void RestoreDefaults()
 		{
-			Logger.Instance.Log("Restoring default settings.");
+			Common.Log.Debug("Restoring default settings.");
 			_user = new IniData();
 			if (File.Exists(_userFile))
 			{
@@ -153,7 +153,7 @@ namespace HDT.Plugins.Common.Settings
 				}
 				catch (Exception e)
 				{
-					Logger.Instance.Log(e.Message);
+					Common.Log.Error(e.Message);
 				}
 				finally
 				{
@@ -179,7 +179,7 @@ namespace HDT.Plugins.Common.Settings
 		{
 			if (File.Exists(_userFile))
 			{
-				Logger.Instance.Log($"Loading user settings from {_userFile}");
+				Common.Log.Debug($"Loading user settings from {_userFile}");
 				try
 				{
 					Lock.EnterWriteLock();
@@ -187,7 +187,7 @@ namespace HDT.Plugins.Common.Settings
 				}
 				catch (Exception e)
 				{
-					Logger.Instance.Log(e.Message);
+					Common.Log.Error(e.Message);
 				}
 				finally
 				{
@@ -237,7 +237,7 @@ namespace HDT.Plugins.Common.Settings
 			if (string.IsNullOrWhiteSpace(name))
 				fname = DefaultName;
 			_userFile = Path.Combine(fdir, fname + ".ini");
-			Logger.Instance.Log("User setting file is " + _userFile);
+			Common.Log.Debug("User setting file is " + _userFile);
 		}
 	}
 }

@@ -1,6 +1,6 @@
 ﻿using HDT.Plugins.Common.Enums;
+using HDT.Plugins.Common.Providers.Utils;
 using HDT.Plugins.Common.Services;
-using HDT.Plugins.Common.Utils;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using System;
 

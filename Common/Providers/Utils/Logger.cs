@@ -2,7 +2,7 @@
 using System;
 using System.IO;
 
-namespace HDT.Plugins.Common.Utils
+namespace HDT.Plugins.Common.Providers.Utils
 {
 	/// <summary>
 	/// A basic file logger
