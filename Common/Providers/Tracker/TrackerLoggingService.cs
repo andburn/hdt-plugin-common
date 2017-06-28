@@ -9,15 +9,18 @@ namespace HDT.Plugins.Common.Providers.Tracker
 	public class TrackerLoggingService : ILoggingService
 	{
 		private bool _dumpToFile = false;
+		private string _name;
 		private Logger _dumper;
 
-		public void EnableDumpToFile(string name)
+		public void SetDumpFileName(string name)
 		{
-			if (!_dumpToFile)
-			{
-				_dumpToFile = true;
-				_dumper = new Logger(name);
-			}
+			_name = name;
+		}
+
+		public void EnableDumpToFile()
+		{
+			_dumpToFile = true;
+			_dumper = new Logger(_name);
 		}
 
 		public void DisableDumpToFile()

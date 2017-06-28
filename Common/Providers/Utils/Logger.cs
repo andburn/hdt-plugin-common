@@ -20,11 +20,12 @@ namespace HDT.Plugins.Common.Providers.Utils
 
 		public Logger(string name)
 		{
+			var fname = string.IsNullOrWhiteSpace(name) ? _defaultName : name;
 			try
 			{
 				_filePath = Path.Combine(
 					Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-					_defaultDirName, $"{name}.log");
+					_defaultDirName, $"{fname}.log");
 			}
 			catch (Exception e)
 			{
@@ -38,7 +39,7 @@ namespace HDT.Plugins.Common.Providers.Utils
 			{
 				using (var stream = new StreamWriter(_filePath))
 				{
-					stream.WriteLine(string.Format("%s [%s] %s",
+					stream.WriteLine(string.Format("{0} [{1}] {2}",
 						level.ToString(), DateTime.Now.ToString("yyyyMMdd HH:mm:ss"), message));
 				}
 			}

@@ -18,7 +18,9 @@ namespace HDT.Plugins.Common.Services
 
 		void Debug(object obj);
 
-		void EnableDumpToFile(string filename);
+		void SetDumpFileName(string filename);
+
+		void EnableDumpToFile();
 
 		void DisableDumpToFile();
 	}
