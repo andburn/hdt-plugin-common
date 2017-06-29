@@ -37,7 +37,7 @@ namespace HDT.Plugins.Common.Providers.Utils
 		{
 			try
 			{
-				using (var stream = new StreamWriter(_filePath))
+				using (var stream = new StreamWriter(_filePath, true))
 				{
 					stream.WriteLine(string.Format("{0} [{1}] {2}",
 						level.ToString(), DateTime.Now.ToString("yyyyMMdd HH:mm:ss"), message));
