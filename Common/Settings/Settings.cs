@@ -122,7 +122,19 @@ namespace HDT.Plugins.Common.Settings
 				_user[section][key] = value;
 			}
 
-			FileParser.WriteFile(_userFile, _user);
+			try
+			{
+				Lock.EnterWriteLock();
+				FileParser.WriteFile(_userFile, _user);
+			}
+			catch (Exception e)
+			{
+				Common.Log.Error(e.Message);
+			}
+			finally
+			{
+				Lock.ExitWriteLock();
+			}
 		}
 
 		public void Set(string key, string value)
