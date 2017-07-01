@@ -128,7 +128,6 @@
     <Compile Include="Services\IHttpClient.cs" />
     <Compile Include="Utils\GameFilter.cs" />
     <Compile Include="Utils\GitVersion.cs" />
-    <Compile Include="Utils\IPluggable.cs" />
     <Compile Include="Services\ILoggingService.cs" />
     <Compile Include="Services\ISlidePanel.cs" />
     <Compile Include="Services\IUpdateService.cs" />
