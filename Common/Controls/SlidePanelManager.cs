@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
-using HDT.Plugins.Common.Enums;
+﻿using HDT.Plugins.Common.Enums;
 using HDT.Plugins.Common.Services;
 using HDT.Plugins.Common.Utils;
+using System;
+using System.Collections.Generic;
+using System.Windows;
 
 namespace HDT.Plugins.Common.Controls
 {
@@ -16,24 +16,35 @@ namespace HDT.Plugins.Common.Controls
 			_panels = new List<ISlidePanel>();
 		}
 
-		public static ISlidePanel Add()
+		public static ISlidePanel Add(ISlidePanel panel)
 		{
-			return null;
+			Common.Log.Debug($"SlidePanelManager: Adding {panel.Name}");
+			_panels.Add(panel);
+			return panel;
 		}
 
 		public static void CloseAll()
 		{
+			Common.Log.Debug($"SlidePanelManager: Closing {_panels.Count}");
 			foreach (var item in _panels)
 				item.Close();
 		}
 
 		public static void DetachAll()
 		{
+			Common.Log.Debug($"SlidePanelManager: Detaching {_panels.Count}");
 			foreach (var item in _panels)
 			{
 				item.Close();
 				item.Detach();
 			}
+		}
+
+		public static void RemoveAll()
+		{
+			Common.Log.Debug($"SlidePanelManager: Removing {_panels.Count}");
+			DetachAll();
+			_panels.Clear();
 		}
 
 		public static ISlidePanel Notification(ISlidePanel panel, string title, string message,
@@ -54,6 +65,8 @@ namespace HDT.Plugins.Common.Controls
 			panel.Content = content;
 			panel.Attach();
 			_panels.Add(panel);
+
+			Common.Log.Debug($"SlidePanelManager: Created Notificaton ({title}, {message})");
 
 			return panel;
 		}
