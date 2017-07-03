@@ -1,10 +1,10 @@
-﻿using System;
+﻿using HDT.Plugins.Common.Services;
+using HDT.Plugins.Common.Utils;
+using MahApps.Metro.Controls;
+using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using HDT.Plugins.Common.Services;
-using HDT.Plugins.Common.Utils;
-using MahApps.Metro.Controls;
 using static HDT.Plugins.Common.Providers.Utils.EnumConverter;
 using Position = HDT.Plugins.Common.Enums.Position;
 
@@ -142,6 +142,7 @@ namespace HDT.Plugins.Common.Providers.Metro
 			{
 				await Task.Delay(seconds * 1000);
 				Close();
+				Common.Log.Debug($"MetroSlidePanel: Auto closed after {seconds}s");
 			}
 		}
 

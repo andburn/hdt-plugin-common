@@ -90,6 +90,7 @@ namespace HDT.Plugins.Common.Enums
 						str.Append(" ");
 				}
 			}
+			Common.Log.Debug($"Covnert: ToTitleCase ({e} -> {str})");
 			return str.ToString();
 		}
 	}

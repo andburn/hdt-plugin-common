@@ -34,12 +34,14 @@ namespace HDT.Plugins.Common.Models
 
 		public Note()
 		{
+			Common.Log.Debug($"Note: New empty");
 		}
 
 		public Note(string text)
 			: this()
 		{
 			SetText(text);
+			Common.Log.Debug($"Note: {text}");
 		}
 
 		private void SetText(string text)
@@ -51,9 +53,11 @@ namespace HDT.Plugins.Common.Models
 				{
 					Archetype = match.Groups["tag"].Value;
 					_text = match.Groups["note"].Value;
+					Common.Log.Debug($"Note: Set text ({_text} -> {text}): {Archetype}");
 				}
 				else
 				{
+					Common.Log.Debug($"Note: Set text ({_text} -> {text})");
 					_text = text;
 				}
 			}

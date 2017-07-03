@@ -18,10 +18,13 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			try
 			{
 				var propInfo = _configType.GetField(key);
-				return propInfo.GetValue(Config.Instance);
+				var v = propInfo.GetValue(Config.Instance);
+				Common.Log.Debug($"Tracker: Config Get ({key} = {v})");
+				return v;
 			}
 			catch (NullReferenceException)
 			{
+				Common.Log.Debug($"Tracker: Config [{key}] not found");
 				return null;
 			}
 		}
@@ -32,6 +35,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			{
 				var propInfo = _configType.GetField(key);
 				propInfo.SetValue(Config.Instance, value);
+				Common.Log.Debug($"Tracker: Config Set ({key} => {value})");
 			}
 			catch (Exception e)
 			{

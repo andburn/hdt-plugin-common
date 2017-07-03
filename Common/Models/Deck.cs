@@ -48,6 +48,7 @@ namespace HDT.Plugins.Common.Models
 		}
 
 		public Deck(Guid id, string name, bool arena, string klass, bool standard)
+			: this()
 		{
 			Id = id;
 			Name = name;

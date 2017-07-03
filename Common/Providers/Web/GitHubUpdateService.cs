@@ -1,11 +1,11 @@
-﻿using System;
+﻿using HDT.Plugins.Common.Services;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using HDT.Plugins.Common.Services;
-using Newtonsoft.Json;
 
 namespace HDT.Plugins.Common.Providers.Web
 {
@@ -19,11 +19,13 @@ namespace HDT.Plugins.Common.Providers.Web
 
 			using (WebClient wc = new WebClient())
 			{
+				Common.Log.Debug($"GitHub: Checking {source}");
 				// API requires user-agent string, user name or app name preferred
 				wc.Headers.Add(HttpRequestHeader.UserAgent, name);
 				json = await wc.DownloadStringTaskAsync(source);
 			}
 			var releases = JsonConvert.DeserializeObject<List<GithubRelease>>(json);
+			Common.Log.Debug($"GitHub: Release {releases.FirstOrDefault()}");
 			return new GitHubUpdateResult(releases.FirstOrDefault(), version);
 		}
 	}
@@ -69,10 +71,12 @@ namespace HDT.Plugins.Common.Providers.Web
 					Version = v;
 					DownloadUrl = _release.Url;
 					IsPreRelease = _release.PreRelease == "True" ? true : false;
+					Common.Log.Debug($"GitHub: release {v} is new");
 				}
 				else
 				{
 					HasUpdate = false;
+					Common.Log.Debug($"GitHub: release {v} is old");
 				}
 			}
 		}
@@ -91,6 +95,11 @@ namespace HDT.Plugins.Common.Providers.Web
 		public string PreRelease { get; set; }
 
 		[JsonProperty("published_at")]
-		public string Publsihed { get; set; }
+		public string Published { get; set; }
+
+		public override string ToString()
+		{
+			return $"{Tag} ({Published})";
+		}
 	}
 }

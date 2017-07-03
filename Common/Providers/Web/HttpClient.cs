@@ -17,9 +17,15 @@ namespace HDT.Plugins.Common.Providers.Web
 
 				var response = "";
 				if (string.IsNullOrWhiteSpace(data))
+				{
+					Common.Log.Debug($"HttpClient: Json Get request ({url})");
 					response = await wc.DownloadStringTaskAsync(new Uri(url));
+				}
 				else
+				{
+					Common.Log.Debug($"HttpClient: Json Post request ({url}, {data})");
 					response = await wc.UploadStringTaskAsync(new Uri(url), data);
+				}
 
 				return response;
 			}

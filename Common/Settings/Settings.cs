@@ -1,10 +1,10 @@
-﻿using System;
-using System.IO;
-using System.Threading;
-using HDT.Plugins.Common.Utils;
+﻿using HDT.Plugins.Common.Utils;
 using IniParser;
 using IniParser.Model;
 using IniParser.Parser;
+using System;
+using System.IO;
+using System.Threading;
 
 namespace HDT.Plugins.Common.Settings
 {
@@ -104,22 +104,26 @@ namespace HDT.Plugins.Common.Settings
 		{
 			if (string.IsNullOrWhiteSpace(key))
 			{
-				Common.Log.Debug("Settings must have non-empty keys");
+				Common.Log.Debug("Settings: keys must be non-empty");
 				return;
 			}
 
 			if (string.IsNullOrWhiteSpace(section))
 			{
 				_user.Global[key] = value;
+				Common.Log.Debug($"Settings: Set Global[{key}]={value}");
 			}
 			else if (_user.HasSection(section))
 			{
 				_user[section][key] = value;
+				Common.Log.Debug($"Settings: Set {section}[{key}]={value}");
 			}
 			else
 			{
 				_user.Sections.AddSection(section);
+				Common.Log.Debug($"Settings: Adding section {section}");
 				_user[section][key] = value;
+				Common.Log.Debug($"Settings: Set {section}[{key}]={value}");
 			}
 
 			try
@@ -154,7 +158,7 @@ namespace HDT.Plugins.Common.Settings
 
 		public void RestoreDefaults()
 		{
-			Common.Log.Debug("Restoring default settings.");
+			Common.Log.Debug("Settings: Restoring defaults");
 			_user = new IniData();
 			if (File.Exists(_userFile))
 			{
@@ -172,6 +176,8 @@ namespace HDT.Plugins.Common.Settings
 					Lock.ExitWriteLock();
 				}
 			}
+			else
+				Common.Log.Debug($"Settings: User file ({_userFile}) not found");
 		}
 
 		private void Initialize()
@@ -191,6 +197,7 @@ namespace HDT.Plugins.Common.Settings
 		{
 			if (File.Exists(_userFile))
 			{
+				Common.Log.Debug($"Settings: Load user file from '{_userFile}'");
 				try
 				{
 					Lock.EnterWriteLock();
@@ -205,10 +212,14 @@ namespace HDT.Plugins.Common.Settings
 					Lock.ExitWriteLock();
 				}
 			}
+			else
+				Common.Log.Debug($"Settings: user file not found '{_userFile}'");
 		}
 
 		private SettingValue GetSetting(IniData data, string section, string key)
 		{
+			Common.Log.Debug($"Settings: Get {section}[{key}]");
+
 			if (string.IsNullOrWhiteSpace(key))
 				return SettingValue.Empty;
 
@@ -234,9 +245,15 @@ namespace HDT.Plugins.Common.Settings
 					Environment.SpecialFolder.ApplicationData);
 			var dir = Path.Combine(appData, DefaultDir);
 			if (Directory.Exists(dir))
+			{
+				Common.Log.Debug($"Settings: Default dir '{dir}'");
 				return dir;
+			}
 			else
+			{
+				Common.Log.Debug($"Settings: Default dir '{appData}'");
 				return appData;
+			}
 		}
 
 		private void SetUserFile(string name = null, string dir = null)
@@ -247,8 +264,9 @@ namespace HDT.Plugins.Common.Settings
 				fdir = GetDefaultDir();
 			if (string.IsNullOrWhiteSpace(name))
 				fname = DefaultName;
+
 			_userFile = Path.Combine(fdir, fname + ".ini");
-			Common.Log.Debug("User setting file is " + _userFile);
+			Common.Log.Debug($"Settings: user file set to '{_userFile}'");
 		}
 	}
 }

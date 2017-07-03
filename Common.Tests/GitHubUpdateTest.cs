@@ -24,7 +24,7 @@ namespace HDT.Plugins.Common.Tests
 				Url = string.Empty,
 				Tag = "v0.2.0",
 				PreRelease = "False",
-				Publsihed = string.Empty
+				Published = string.Empty
 			};
 		}
 
