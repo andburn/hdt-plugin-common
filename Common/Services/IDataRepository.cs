@@ -24,7 +24,9 @@ namespace HDT.Plugins.Common.Services
 
         Deck GetOpponentDeck();
 
-        string GetGameNote();
+		Deck GetOpponentDeckLive();
+
+		string GetGameNote();
 
         string GetGameMode();
 

@@ -34,7 +34,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			if (DeckCache == null || CacheNeedsRefresh())
 				RefreshCache();
 
-			Common.Log.Debug($"Tracker: GetAllDecks (${DeckCache.Count}) cached at {CacheCreatedAt}");
+			Common.Log.Debug($"Tracker: GetAllDecks ({DeckCache.Count}) cached at {CacheCreatedAt}");
 			return DeckCache;
 		}
 
@@ -50,7 +50,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			if (GameCache == null || CacheNeedsRefresh())
 				RefreshCache();
 
-			Common.Log.Debug($"Tracker: GetAllGames (${GameCache.Count}) cached at {CacheCreatedAt}");
+			Common.Log.Debug($"Tracker: GetAllGames ({GameCache.Count}) cached at {CacheCreatedAt}");
 			return GameCache;
 		}
 
@@ -268,6 +268,28 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			return CreateDeck(klass, cards);
 		}
 
+		public Deck GetOpponentDeckLive()
+		{
+			PlayerClass klass = PlayerClass.ALL;
+			IEnumerable<TrackedCard> cards = new List<TrackedCard>();
+			var game = API.Core.Game;
+
+			if (game != null && game.IsRunning)
+			{
+				klass = ToHeroClass(game.Opponent.Class);
+				cards = game.Opponent.OpponentCardList
+					.Where(x => !x.IsCreated)
+					.Select(x => new TrackedCard(x.Id, x.Count));
+			}
+			else
+			{
+				Common.Log.Debug($"Tracker: GetOpponentDeckLive game not running");
+			}
+			Common.Log.Debug($"Tracker: GetOpponentDeckLive {klass} ({cards.Count()})");
+
+			return CreateDeck(klass, cards);			
+		}
+
 		public string GetGameNote()
 		{
 			var game = API.Core.Game;
@@ -313,7 +335,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 
 		public void AddDeck(string name, string playerClass, string cards, bool archive, params string[] tags)
 		{
-			Common.Log.Debug($"Tracker: Adding Deck ({name}, {playerClass}, {cards.Count()}, {archive}, {tags})");
+			Common.Log.Debug($"Tracker: Adding Deck ({name}, {playerClass}, {cards}, {archive}, {tags})");
 			var deck = StringImporter.Import(cards);
 			if (deck != null)
 			{
@@ -392,7 +414,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 				Common.Log.Debug($"Tracker: Rank found {game.CurrentGameStats.Rank}");
 				return game.CurrentGameStats.Rank;
 			}
-			Common.Log.Debug($"Tracker: Using default rank ${GameFilter.RANK_LO}");
+			Common.Log.Debug($"Tracker: Using default rank {GameFilter.RANK_LO}");
 			return GameFilter.RANK_LO;
 		}
 
@@ -412,7 +434,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 				Common.Log.Debug($"Tracker: No ActiveDeck");
 				return Guid.Empty;
 			}
-			Common.Log.Debug($"Tracker: ActiveDeck ${active.DeckId}");
+			Common.Log.Debug($"Tracker: ActiveDeck {active.DeckId}");
 			return active.DeckId;
 		}
 
@@ -475,7 +497,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 
 		private void RefreshCache()
 		{
-			Common.Log.Debug($"Tracker: Refreshing Cache ${CacheCreatedAt}");
+			Common.Log.Debug($"Tracker: Refreshing Cache {CacheCreatedAt}");
 			// Reset the timestamp first (avoids recursive loop)
 			CacheCreatedAt = DateTime.Now;
 			// Decks
@@ -485,7 +507,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 				.Select(d => new Deck(d.DeckId, d.Name, d.IsArenaDeck, d.Class, d.StandardViable))
 				.OrderBy(d => d.Name)
 				.ToList();
-			Common.Log.Debug($"Tracker: Loaded ${DeckCache.Count} decks");
+			Common.Log.Debug($"Tracker: Loaded {DeckCache.Count} decks");
 			// Games
 			var games = new List<Game>();
 			Reload<DeckStatsList>();
@@ -497,7 +519,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 				games.AddRange(deck.Games.Select(g => CreateGame(g)));
 			}
 			GameCache = games;
-			Common.Log.Debug($"Tracker: Loaded ${GameCache.Count} games");
+			Common.Log.Debug($"Tracker: Loaded {GameCache.Count} games");
 		}
 
 		private bool CacheNeedsRefresh()
