@@ -1,7 +1,10 @@
-﻿using HDT.Plugins.Common.Services;
+﻿using HDT.Plugins.Common.Models;
+using HDT.Plugins.Common.Services;
 using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Utility;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using API = Hearthstone_Deck_Tracker.API;
 
@@ -54,6 +57,49 @@ namespace HDT.Plugins.Common.Providers.Tracker
 		public System.Windows.Window MainWindow()
 		{
 			return API.Core.MainWindow;
+		}
+
+		public void OpenDeckEditor(IEnumerable<Card> cards, params string[] tags)
+		{
+			if (cards == null || cards.Count() <= 0)
+			{
+				Common.Log.Debug("Tracker: OpenDeckEditor cards are empty");
+				return;
+			}
+
+			var deck = new Hearthstone_Deck_Tracker.Hearthstone.Deck();
+			string klass = null;
+
+			foreach (var c in cards)
+			{
+				var card = Hearthstone_Deck_Tracker.Hearthstone.Database.GetCardFromId(c.Id);
+				card.Count = c.Count;
+				deck.Cards.Add(card);
+				// get class from any class cards
+				var cardKlass = card.PlayerClass;
+				if (klass == null && cardKlass != null
+						&& card.PlayerClass.ToLowerInvariant() != "neutral")
+				{
+					klass = card.PlayerClass;
+					Common.Log.Debug($"Tracker: Class card {klass} found");
+				}
+			}
+
+			if (!string.IsNullOrWhiteSpace(klass))
+			{
+				deck.Class = klass;
+			}
+			else
+			{
+				Common.Log.Info($"NewDeck: Class not found");
+				return;
+			}
+
+			if (tags.Length > 0)
+				deck.Tags.AddRange(tags);
+
+			API.Core.MainWindow.ShowDeckEditorFlyout(deck, true);
+			API.Core.MainWindow.Show();
 		}
 	}
 }
