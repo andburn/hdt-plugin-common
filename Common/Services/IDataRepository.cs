@@ -1,4 +1,5 @@
-﻿using HDT.Plugins.Common.Models;
+﻿using HDT.Plugins.Common.Enums;
+using HDT.Plugins.Common.Models;
 using System;
 using System.Collections.Generic;
 
@@ -29,6 +30,8 @@ namespace HDT.Plugins.Common.Services
 		string GetGameNote();
 
         string GetGameMode();
+
+		GameFormat GetGameFormat();
 
 		int GetPlayerRank();
 

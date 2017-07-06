@@ -438,6 +438,17 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			return active.DeckId;
 		}
 
+		public GameFormat GetGameFormat()
+		{
+			var game = API.Core.Game;
+			if (game != null)
+			{
+				Common.Log.Debug($"Tracker: Format {game.CurrentFormat}");
+				return EnumConverter.Convert(game.CurrentFormat);
+			}
+			return GameFormat.ANY;
+		}
+
 		private Game CreateGame(GameStats stats)
 		{
 			Common.Log.Debug("Tracker: Creating Game from "
