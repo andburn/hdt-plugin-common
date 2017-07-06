@@ -308,6 +308,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			{
 				API.Core.Game.CurrentGameStats.Note = text;
 				Common.Log.Debug($"Tracker: Note set '{text}'");
+				DeckStatsList.Save();
 			}
 			else
 			{
