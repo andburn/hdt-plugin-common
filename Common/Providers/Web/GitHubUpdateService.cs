@@ -25,8 +25,10 @@ namespace HDT.Plugins.Common.Providers.Web
 				json = await wc.DownloadStringTaskAsync(source);
 			}
 			var releases = JsonConvert.DeserializeObject<List<GithubRelease>>(json);
-			Common.Log.Debug($"GitHub: Release {releases.FirstOrDefault()}");
-			return new GitHubUpdateResult(releases.FirstOrDefault(), version);
+			// sort the releases by date (its a string but ok in the format)
+			var latest = releases.OrderByDescending(x => x.Published).FirstOrDefault();
+			Common.Log.Debug($"GitHub: Latest Release {latest}");
+			return new GitHubUpdateResult(latest, version);
 		}
 	}
 
@@ -71,12 +73,12 @@ namespace HDT.Plugins.Common.Providers.Web
 					Version = v;
 					DownloadUrl = _release.Url;
 					IsPreRelease = _release.PreRelease == "True" ? true : false;
-					Common.Log.Debug($"GitHub: release {v} is new");
+					Common.Log.Debug($"GitHub: Release {v} is new");
 				}
 				else
 				{
 					HasUpdate = false;
-					Common.Log.Debug($"GitHub: release {v} is old");
+					Common.Log.Debug($"GitHub: Up to date with release {v}");
 				}
 			}
 		}
