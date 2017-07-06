@@ -357,7 +357,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 					if (reloadTags)
 					{
 						DeckList.Save();
-						Core.MainWindow.ReloadTags();
+						API.Core.MainWindow.ReloadTags();
 					}
 				}
 				// hacky way to update ui:

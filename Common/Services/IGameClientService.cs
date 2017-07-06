@@ -19,5 +19,8 @@ namespace HDT.Plugins.Common.Services
         string[] CurrentGameInfo();
 
 		void OpenDeckEditor(IEnumerable<Card> cards, params string[] tags);
-    }
+
+		void ActivateMainWindow();
+
+	}
 }

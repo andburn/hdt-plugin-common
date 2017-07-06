@@ -99,7 +99,15 @@ namespace HDT.Plugins.Common.Providers.Tracker
 				deck.Tags.AddRange(tags);
 
 			API.Core.MainWindow.ShowDeckEditorFlyout(deck, true);
-			API.Core.MainWindow.Show();
+		}
+
+		public void ActivateMainWindow()
+		{
+			var window = API.Core.MainWindow;
+			window.Show();
+			if (window.WindowState == System.Windows.WindowState.Minimized)
+				window.WindowState = System.Windows.WindowState.Normal;
+			window.Activate();
 		}
 	}
 }
