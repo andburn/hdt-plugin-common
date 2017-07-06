@@ -197,7 +197,6 @@ namespace HDT.Plugins.Common.Settings
 		{
 			if (File.Exists(_userFile))
 			{
-				Common.Log.Debug($"Settings: Load user file from '{_userFile}'");
 				try
 				{
 					Lock.EnterWriteLock();
