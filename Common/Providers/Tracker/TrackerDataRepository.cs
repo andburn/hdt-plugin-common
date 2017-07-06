@@ -24,7 +24,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 		private static readonly BindingFlags bindFlags =
 			BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
 
-		private const int CacheRefreshLimit = 300; // seconds before cache needs to be refreshed
+		private const int CacheRefreshLimit = 180; // seconds before cache needs to be refreshed
 		private DateTime CacheCreatedAt = DateTime.MinValue;
 		private List<Deck> DeckCache = null;
 		private List<Game> GameCache = null;
@@ -452,12 +452,11 @@ namespace HDT.Plugins.Common.Providers.Tracker
 		private Game CreateGame(GameStats stats)
 		{
 			Common.Log.Debug("Tracker: Creating Game from "
-				+ $"({stats.GameId}, {stats.DeckId}, {stats.DeckName}, {stats.StartTime})");
+				+ $"({stats.GameId}, {stats.DeckName}, {stats.StartTime})");
 			var game = new Game();
 			var deck = GetDeck(stats.DeckId);
 			game.CopyFrom(stats, deck);
-			Common.Log.Debug("Tracker: Created Game as "
-				+ $"({game.Id}, {game.Deck.Id}, {game.StartTime})");
+			Common.Log.Debug("Tracker: Created Game as ({game.Id}, {game.StartTime})");
 			return game;
 		}
 
