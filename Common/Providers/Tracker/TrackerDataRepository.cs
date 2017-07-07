@@ -24,10 +24,10 @@ namespace HDT.Plugins.Common.Providers.Tracker
 		private static readonly BindingFlags bindFlags =
 			BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
 
-		private const int CacheRefreshLimit = 180; // seconds before cache needs to be refreshed
-		private DateTime CacheCreatedAt = DateTime.MinValue;
-		private List<Deck> DeckCache = null;
-		private List<Game> GameCache = null;
+		private const int CacheRefreshLimit = 900; // refresh cache after 15 minutes
+		private static DateTime CacheCreatedAt = DateTime.MinValue;
+		private static List<Deck> DeckCache = null;
+		private static List<Game> GameCache = null;
 
 		public List<Deck> GetAllDecks()
 		{
@@ -419,7 +419,9 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			return GameFilter.RANK_LO;
 		}
 
-		public void InvalidateCache()
+		public void InvalidateCache() => InvalidateDataCache();
+
+		public static void InvalidateDataCache()
 		{
 			DeckCache = null;
 			GameCache = null;
