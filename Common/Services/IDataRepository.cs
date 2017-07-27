@@ -28,6 +28,8 @@ namespace HDT.Plugins.Common.Services
 
         string GetGameMode();
 
+		int GetPlayerRank();
+
         void UpdateGameNote(string text);
 
         void InvalidateCache();

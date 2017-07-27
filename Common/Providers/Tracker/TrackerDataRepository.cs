@@ -320,7 +320,18 @@ namespace HDT.Plugins.Common.Providers.Tracker
             return string.Empty;
         }
 
-        public void InvalidateCache()
+		public int GetPlayerRank()
+		{
+			if (Core.Game.IsRunning 
+				&& Core.Game.CurrentGameStats != null
+				&& Core.Game.CurrentGameStats.HasRank)
+			{
+				return Core.Game.CurrentGameStats.Rank;
+			}
+			return Common.Utils.GameFilter.RANK_LO;
+		}
+
+		public void InvalidateCache()
         {
             DeckCache = null;
             GameCache = null;
