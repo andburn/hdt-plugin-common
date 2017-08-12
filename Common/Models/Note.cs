@@ -34,14 +34,14 @@ namespace HDT.Plugins.Common.Models
 
 		public Note()
 		{
-			Common.Log.Debug($"Note: New empty");
+			Common.Log.Debug($"Note: New()");
 		}
 
 		public Note(string text)
 			: this()
 		{
 			SetText(text);
-			Common.Log.Debug($"Note: {text}");
+			Common.Log.Debug($"Note: New('{text}')");
 		}
 
 		private void SetText(string text)

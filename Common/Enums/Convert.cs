@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Windows;
@@ -47,6 +48,8 @@ namespace HDT.Plugins.Common.Enums
 
 	public class EnumStringConverter : IValueConverter
 	{
+		private static readonly Dictionary<Enum, string> _lookup = new Dictionary<Enum, string>();
+
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			if (value == null)
@@ -77,6 +80,9 @@ namespace HDT.Plugins.Common.Enums
 
 		public static string ToTitleCase(Enum e)
 		{
+			if (_lookup.ContainsKey(e))
+				return _lookup[e];
+
 			var str = new StringBuilder();
 			var words = e.ToString().ToLower().Split('_');
 			for (int i = 0; i < words.Length; i++)
@@ -90,8 +96,9 @@ namespace HDT.Plugins.Common.Enums
 						str.Append(" ");
 				}
 			}
-			Common.Log.Debug($"Covnert: ToTitleCase ({e} -> {str})");
-			return str.ToString();
+			Common.Log.Debug($"Convert: ToTitleCase ({e} -> {str})");
+			_lookup[e] = str.ToString();
+			return _lookup[e];
 		}
 	}
 }
