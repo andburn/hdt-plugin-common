@@ -32,9 +32,15 @@
             DataContext="{Binding ElementName=root}"
             Command="{Binding Command}"
             CommandParameter="{Binding Param}">
-        <DockPanel HorizontalAlignment="Center">
-            <TextBlock DockPanel.Dock="Bottom" FontSize="10" Text="{Binding Text}" TextAlignment="Center" Margin="0,3,0,2"/>
-            <TextBlock FontFamily="pack://application:,,,/Common;component/Resources/#IcoMoon-Free" FontSize="26" Text="{Binding Icon}" TextAlignment="Center" />
-        </DockPanel>
+        <Grid>
+            <!-- Rectangle underneath makes whole area clickable -->
+            <Rectangle Width="42" Height="42" Fill="Black" Opacity="0"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Grid.Column="0" Grid.Row="0" />
+            <DockPanel HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0">
+                <TextBlock DockPanel.Dock="Bottom" FontSize="10" Text="{Binding Text}" TextAlignment="Center" Margin="0,3,0,2"/>
+                <TextBlock FontFamily="pack://application:,,,/StatsConverter.Common;component/Resources/#IcoMoon-Free" FontSize="26" Text="{Binding Icon}" TextAlignment="Center" />
+            </DockPanel>
+        </Grid>
     </Button>
 </UserControl>
