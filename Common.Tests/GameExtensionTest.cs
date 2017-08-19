@@ -104,5 +104,20 @@ namespace HDT.Plugins.Common.Tests
 			game.CopyFrom(stats, null);
 			Assert.IsTrue(game.EqualTo(stats));
 		}
+
+		[TestMethod]
+		public void CopyTo_HeroCopiedCorrectly()
+		{
+			var stats = new GameStats();
+			var game = new Game() {
+				PlayerClass = PlayerClass.MAGE,
+				OpponentClass = PlayerClass.DRUID
+			};
+			game.CopyTo(stats);
+			Assert.AreEqual("Mage", stats.PlayerHero);
+			Assert.AreEqual("Druid", stats.OpponentHero);
+		}
+
+
 	}
 }

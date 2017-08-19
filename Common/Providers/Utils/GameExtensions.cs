@@ -3,6 +3,7 @@ using HDT.Plugins.Common.Models;
 using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Stats;
 using static HDT.Plugins.Common.Providers.Utils.EnumConverter;
+using HDT.Plugins.Common.Enums;
 
 namespace HDT.Plugins.Common.Providers.Utils
 {
@@ -69,9 +70,9 @@ namespace HDT.Plugins.Common.Providers.Utils
 			to.GameMode = Convert(from.Mode);
 			to.Format = Convert(from.Format);
 			to.Note = from.Note?.Text;
-			to.OpponentHero = from.OpponentClass.ToString();
+			to.OpponentHero = EnumStringConverter.ToTitleCase(from.OpponentClass);
 			to.OpponentName = from.OpponentName;
-			to.PlayerHero = from.PlayerClass.ToString();
+			to.PlayerHero = EnumStringConverter.ToTitleCase(from.PlayerClass);
 			to.PlayerName = from.PlayerName;
 			to.Coin = from.PlayerGotCoin;
 			to.Rank = from.Rank;
