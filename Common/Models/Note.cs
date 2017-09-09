@@ -62,5 +62,12 @@ namespace HDT.Plugins.Common.Models
 				}
 			}
 		}
+
+		public override string ToString()
+		{
+			if (HasArchetype)
+				return $"[{Archetype}] {Text}";
+			return Text;
+		}
 	}
 }

@@ -75,7 +75,7 @@ namespace HDT.Plugins.Common.Providers.Utils
 
 			to.GameMode = Convert(from.Mode);
 			to.Format = Convert(from.Format);
-			to.Note = from.Note?.Text;
+			to.Note = from.Note.ToString();
 			to.OpponentHero = EnumStringConverter.ToTitleCase(from.OpponentClass);
 			to.OpponentName = from.OpponentName;
 			to.PlayerHero = EnumStringConverter.ToTitleCase(from.PlayerClass);

@@ -172,5 +172,14 @@ namespace HDT.Plugins.Common.Tests
 			Assert.AreEqual(new DateTime(2010, 5, 19, 10, 20, 05),
 				stats.EndTime);
 		}
+
+		[TestMethod]
+		public void CopyTo_NoteAndArchetypeAreCopied()
+		{
+			var stats = new GameStats();
+			var game = new Game() { Note = new Note("[Arch] Some text") };
+			game.CopyTo(stats);
+			Assert.AreEqual("[Arch] Some text", stats.Note);
+		}
 	}
 }
