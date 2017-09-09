@@ -173,12 +173,22 @@ namespace HDT.Plugins.Common.Providers.Tracker
 						// add the matched deck to GameStats object
 						gameStats.DeckId = match.DeckId;
 						gameStats.DeckName = match.Name;
+						// if no deck version matches use latest
+						if (gameStats.PlayerDeckVersion == null
+							|| !match.VersionsIncludingSelf.Contains(gameStats.PlayerDeckVersion))
+						{
+							gameStats.PlayerDeckVersion = match.GetMaxVerion();
+						}
 						// add game to hdt stats
 						DeckStatsList.Instance.DeckStats[match.DeckId].AddGameResult(gameStats);
 						success = true;
 						Common.Log.Debug($"Tracker: Game added to {match.Name} stats");
 					}
-					// multiple matches are unresolvable, fallback to default stats
+					else
+					{
+						// multiple matches are unresolvable, fallback to default stats
+						Common.Log.Debug($"Multiple decks matching {name}, using default stats");
+					}
 				}
 				if (!success)
 				{
