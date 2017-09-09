@@ -23,6 +23,7 @@ namespace HDT.Plugins.Common.Tests
 				GameId = new Guid("2dcabbf1-b4b2-4083-9ade-3b2c722fe269"),
 				DeckName = Deck.Name,
 				DeckId = Deck.Id,
+				PlayerDeckVersion = new Hearthstone_Deck_Tracker.SerializableVersion(1, 1),
 				StartTime = new DateTime(2016, 2, 10, 22, 0, 0),
 				EndTime = new DateTime(2016, 2, 10, 22, 10, 0),
 				GameMode = Hearthstone_Deck_Tracker.Enums.GameMode.Brawl,
@@ -180,6 +181,17 @@ namespace HDT.Plugins.Common.Tests
 			var game = new Game() { Note = new Note("[Arch] Some text") };
 			game.CopyTo(stats);
 			Assert.AreEqual("[Arch] Some text", stats.Note);
+		}
+
+		[TestMethod]
+		public void CopyTo_DeckVersionIsCopiedCorrectly()
+		{
+			var stats = new GameStats();
+			var game = new Game() { DeckVersion = new Version(1, 1) };
+			game.CopyTo(stats);
+			Assert.AreEqual(
+				new Hearthstone_Deck_Tracker.SerializableVersion(1, 1),
+				stats.PlayerDeckVersion);
 		}
 	}
 }

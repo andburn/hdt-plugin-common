@@ -1,5 +1,5 @@
-﻿using System;
-using HDT.Plugins.Common.Enums;
+﻿using HDT.Plugins.Common.Enums;
+using System;
 
 namespace HDT.Plugins.Common.Models
 {

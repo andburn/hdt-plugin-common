@@ -287,7 +287,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			}
 			Common.Log.Debug($"Tracker: GetOpponentDeckLive {klass} ({cards.Count()})");
 
-			return CreateDeck(klass, cards);			
+			return CreateDeck(klass, cards);
 		}
 
 		public string GetGameNote()

@@ -26,8 +26,12 @@ namespace HDT.Plugins.Common.Providers.Utils
 			{
 				game.Deck = deck;
 			}
-			var v = stats.PlayerDeckVersion ?? new SerializableVersion();
-			game.DeckVersion = new Version(v.Major, v.Minor, v.Build, v.Revision);
+			if (stats.PlayerDeckVersion != null)
+			{
+				game.DeckVersion = new Version(
+					stats.PlayerDeckVersion.Major, stats.PlayerDeckVersion.Minor);
+			}
+
 			game.Region = Convert(stats.Region);
 			game.Mode = Convert(stats.GameMode);
 			game.Format = Convert(stats.Format);
@@ -65,6 +69,11 @@ namespace HDT.Plugins.Common.Providers.Utils
 				to.DeckName = from.Deck.Name;
 				to.DeckId = from.Deck.Id;
 			}
+			if (from.DeckVersion != null)
+			{
+				to.PlayerDeckVersion = new SerializableVersion(
+					from.DeckVersion.Major, from.DeckVersion.Minor);
+			}
 
 			to.StartTime = from.StartTime;
 			// set end time based on duration
@@ -75,7 +84,7 @@ namespace HDT.Plugins.Common.Providers.Utils
 
 			to.GameMode = Convert(from.Mode);
 			to.Format = Convert(from.Format);
-			to.Note = from.Note.ToString();
+			to.Note = from.Note?.ToString();
 			to.OpponentHero = EnumStringConverter.ToTitleCase(from.OpponentClass);
 			to.OpponentName = from.OpponentName;
 			to.PlayerHero = EnumStringConverter.ToTitleCase(from.PlayerClass);
@@ -111,7 +120,18 @@ namespace HDT.Plugins.Common.Providers.Utils
 				game.Minutes == stats.SortableDuration &&
 				game.PlayerGotCoin == stats.Coin &&
 				game.WasConceded == stats.WasConceded &&
-				game.Note?.Text == stats.Note;
+				game.Note?.Text == stats.Note &&
+				DeckVersionsAreEqual(game.DeckVersion, stats.PlayerDeckVersion);
+		}
+
+		private static bool DeckVersionsAreEqual(Version v, SerializableVersion sv)
+		{
+			if (v == null && sv == null)
+				return true;
+			else if (v == null || sv == null)
+				return false;
+
+			return v.Major == sv.Major && v.Minor == sv.Minor;
 		}
 	}
 }
