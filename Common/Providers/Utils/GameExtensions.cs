@@ -1,9 +1,9 @@
-﻿using System;
+﻿using HDT.Plugins.Common.Enums;
 using HDT.Plugins.Common.Models;
 using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Stats;
+using System;
 using static HDT.Plugins.Common.Providers.Utils.EnumConverter;
-using HDT.Plugins.Common.Enums;
 
 namespace HDT.Plugins.Common.Providers.Utils
 {
@@ -25,7 +25,7 @@ namespace HDT.Plugins.Common.Providers.Utils
 			else
 			{
 				game.Deck = deck;
-			}			
+			}
 			var v = stats.PlayerDeckVersion ?? new SerializableVersion();
 			game.DeckVersion = new Version(v.Major, v.Minor, v.Build, v.Revision);
 			game.Region = Convert(stats.Region);
@@ -64,9 +64,15 @@ namespace HDT.Plugins.Common.Providers.Utils
 			{
 				to.DeckName = from.Deck.Name;
 				to.DeckId = from.Deck.Id;
-			}			
+			}
+
 			to.StartTime = from.StartTime;
-			to.EndTime = from.EndTime;
+			// set end time based on duration
+			if (from.Minutes >= 0 && from.StartTime > DateTime.MinValue)
+				to.EndTime = from.StartTime.AddMinutes(from.Minutes);
+			else
+				to.EndTime = from.EndTime;
+
 			to.GameMode = Convert(from.Mode);
 			to.Format = Convert(from.Format);
 			to.Note = from.Note?.Text;
