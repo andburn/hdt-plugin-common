@@ -186,8 +186,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 					}
 					else
 					{
-						// multiple matches are unresolvable, fallback to default stats
-						Common.Log.Debug($"Multiple decks matching {name}, using default stats");
+						Common.Log.Debug($"Single deck matching '{name}' not  found, using default stats");
 					}
 				}
 				if (!success)
