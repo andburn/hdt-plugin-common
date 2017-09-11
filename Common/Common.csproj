@@ -71,6 +71,8 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -126,6 +128,7 @@
     <Compile Include="Services\IEventsService.cs" />
     <Compile Include="Services\IGameClientService.cs" />
     <Compile Include="Services\IHttpClient.cs" />
+    <Compile Include="Utils\Backup.cs" />
     <Compile Include="Utils\GameFilter.cs" />
     <Compile Include="Utils\GitVersion.cs" />
     <Compile Include="Services\ILoggingService.cs" />
