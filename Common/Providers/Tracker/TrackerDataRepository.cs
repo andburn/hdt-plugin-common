@@ -88,19 +88,8 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			// create index maps into the list on id and GameIndex
 			var indexById = gameStats.ToDictionary(x => x.GameId, x => gameStats.IndexOf(x));
 			// create a fuzzy index based on start time and opponent
-			var fuzzyIndex = new Dictionary<GameIndex, int>();
-			foreach (var g in gameStats)
-			{
-				var gi = new GameIndex(g);
-				// very small chance of collision here, but log it anyway
-				if (fuzzyIndex.ContainsKey(gi))
-				{
-					Common.Log.Error($"fuzzyIndex collision: {gi}");
-					throw new Exception("Error creating gamestats fuzzy index");
-				}
-				fuzzyIndex[gi] = indexById[g.GameId];
-			}
-
+			var fuzzyIndex = gameStats.ToDictionary(x => new GameIndex(x), x => indexById[x.GameId]);
+			
 			foreach (var game in games)
 			{
 				// set default indices
@@ -191,6 +180,9 @@ namespace HDT.Plugins.Common.Providers.Tracker
 						{
 							gameStats.PlayerDeckVersion = match.GetMaxVerion();
 						}
+						// if game id is empty create new one
+						if (gameStats.GameId == Guid.Empty)
+							gameStats.GameId = Guid.NewGuid();
 						// add game to hdt stats
 						DeckStatsList.Instance.DeckStats[match.DeckId].AddGameResult(gameStats);
 						success = true;
@@ -209,6 +201,9 @@ namespace HDT.Plugins.Common.Providers.Tracker
 						var stats = DefaultDeckStats.Instance.GetDeckStats(klass);
 						var gameStats = new GameStats();
 						g.CopyTo(gameStats);
+						// if game id is empty create new one
+						if (gameStats.GameId == Guid.Empty)
+							gameStats.GameId = Guid.NewGuid();
 						stats.AddGameResult(gameStats);
 						success = true;
 						Common.Log.Debug($"Tracker: Game added to default {klass} stats");
