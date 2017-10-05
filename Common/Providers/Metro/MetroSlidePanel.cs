@@ -35,7 +35,7 @@ namespace HDT.Plugins.Common.Providers.Metro
 
 		public string Header
 		{
-			get { return _flyout.Header; }
+			get { return _flyout.Header.ToString(); }
 			set { _flyout.Header = value; }
 		}
 
