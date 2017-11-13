@@ -40,8 +40,10 @@ namespace HDT.Plugins.Common.Providers.Tracker
 
 		public Deck GetDeck(Guid id)
 		{
-			var deck = GetAllDecks().SingleOrDefault(d => d.Id == id);
-			Common.Log.Debug($"Tracker: GetDeck ({id}) = {deck?.Name}");
+			Common.Log.Debug($"Tracker: GetDeck ({id})");
+			// empty Guid will match all default class decks, get first to avoid crash with single
+			var deck = GetAllDecks().FirstOrDefault(d => d.Id == id);
+			Common.Log.Debug($"Tracker: GetDeck > {deck?.Name}");
 			return deck;
 		}
 
