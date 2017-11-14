@@ -91,7 +91,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			var indexById = gameStats.ToDictionary(x => x.GameId, x => gameStats.IndexOf(x));
 			// create a fuzzy index based on start time and opponent
 			var fuzzyIndex = gameStats.ToDictionary(x => new GameIndex(x), x => indexById[x.GameId]);
-			
+
 			foreach (var game in games)
 			{
 				// set default indices
@@ -162,13 +162,14 @@ namespace HDT.Plugins.Common.Providers.Tracker
 					// add it if it exists (latest version)
 					// if not create empty deck, and add to that
 					var decks = DeckList.Instance.Decks;
-					var match = decks.Where(d =>
+					var deckMatches = decks.Where(d =>
 						d.Name.ToLowerInvariant() == name
 						&& d.Class.ToLower() == klass
-						&& !d.Archived).SingleOrDefault();
+						&& !d.Archived);
 					// if only a single match use that deck
-					if (match != null)
+					if (deckMatches.Count() == 1)
 					{
+						var match = deckMatches.First();
 						Common.Log.Debug($"Tracker: Matching deck found '{match.Name}' {match.DeckId}");
 						var gameStats = new GameStats();
 						// copy the game info
@@ -475,7 +476,19 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			Common.Log.Debug("Tracker: Creating Game from "
 				+ $"({stats.GameId}, {stats.DeckName}, {stats.StartTime})");
 			var game = new Game();
-			var deck = GetDeck(stats.DeckId);
+			Deck deck = null;
+			if (stats.GameId == Guid.Empty)
+			{
+				// need to use the default class deck
+				deck = GetAllDecks()
+					.Where(x => x.Id == Guid.Empty
+						&& x.Class == ToHeroClass(stats.PlayerHero))
+					.FirstOrDefault();
+			}
+			else
+			{
+				deck = GetDeck(stats.DeckId);
+			}
 			game.CopyFrom(stats, deck);
 			Common.Log.Debug("Tracker: Created Game as ({game.Id}, {game.StartTime})");
 			return game;
