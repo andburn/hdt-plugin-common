@@ -428,11 +428,19 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			var game = API.Core.Game;
 			if (game != null
 				&& game.IsRunning
-				&& game.CurrentGameStats != null
-				&& game.CurrentGameStats.HasRank)
+				&& game.CurrentGameStats != null)
 			{
-				Common.Log.Debug($"Tracker: Rank found {game.CurrentGameStats.Rank}");
-				return game.CurrentGameStats.Rank;
+				if (game.CurrentGameStats.HasLegendRank)
+				{
+					Common.Log.Debug($"Tracker: Legend Rank found {game.CurrentGameStats.LegendRank}");
+					// use zero to indicate legend rank
+					return GameFilter.RANK_HI;
+				}
+				else if (game.CurrentGameStats.HasRank)
+				{
+					Common.Log.Debug($"Tracker: Rank found {game.CurrentGameStats.Rank}");
+					return game.CurrentGameStats.Rank;
+				}
 			}
 			Common.Log.Debug($"Tracker: Using default rank {GameFilter.RANK_LO}");
 			return GameFilter.RANK_LO;
