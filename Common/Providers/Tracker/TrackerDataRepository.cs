@@ -78,7 +78,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			var count = 0;
 			var newGames = new List<Game>();
 
-			Common.Log.Debug($"Tracker: Reloading deck stats");
+			Common.Log.Debug("Tracker: Reloading deck stats");
 			Reload<DeckStatsList>();
 			Reload<DefaultDeckStats>();
 
@@ -144,7 +144,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 		{
 			Common.Log.Debug($"Tracker: Adding {games.Count} new games");
 
-			Common.Log.Debug($"Tracker: Refreshing deck status");
+			Common.Log.Debug("Tracker: Refreshing deck status");
 			Reload<DeckStatsList>();
 			Reload<DefaultDeckStats>();
 			Reload<DeckList>();
@@ -280,7 +280,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			}
 			else
 			{
-				Common.Log.Debug($"Tracker: GetOpponentDeck game not running");
+				Common.Log.Debug("Tracker: GetOpponentDeck game not running");
 			}
 			Common.Log.Debug($"Tracker: GetOpponentDeck {klass} ({cards.Count()})");
 
@@ -302,7 +302,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 			}
 			else
 			{
-				Common.Log.Debug($"Tracker: GetOpponentDeckLive game not running");
+				Common.Log.Debug("Tracker: GetOpponentDeckLive game not running");
 			}
 			Common.Log.Debug($"Tracker: GetOpponentDeckLive {klass} ({cards.Count()})");
 
@@ -317,7 +317,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 				Common.Log.Debug($"Tracker: Note get '{game.CurrentGameStats.Note}'");
 				return API.Core.Game.CurrentGameStats.Note;
 			}
-			Common.Log.Debug($"Tracker: Note set, game not running");
+			Common.Log.Debug("Tracker: Note set, game not running");
 			return null;
 		}
 
@@ -498,7 +498,7 @@ namespace HDT.Plugins.Common.Providers.Tracker
 				deck = GetDeck(stats.DeckId);
 			}
 			game.CopyFrom(stats, deck);
-			Common.Log.Debug("Tracker: Created Game as ({game.Id}, {game.StartTime})");
+			Common.Log.Debug($"Tracker: Created Game as ({game.Id}, {game.StartTime})");
 			return game;
 		}
 

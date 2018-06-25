@@ -83,10 +83,16 @@ namespace HDT.Plugins.Common.Providers.Metro
 			}
 			set
 			{
-				if (value)
-					_flyout.Theme = FlyoutTheme.Accent;
-				else
-					_flyout.UpdateDefaultStyle();
+                if (value)
+                {
+                    Common.Log.Debug("MetroSlidePanel: Set accent theme");
+                    _flyout.Theme = FlyoutTheme.Accent;
+                }
+                else
+                {
+                    Common.Log.Debug("MetroSlidePanel: Resetting to defualt style");
+                    _flyout.UpdateDefaultStyle();
+                }
 			}
 		}
 
@@ -128,19 +134,22 @@ namespace HDT.Plugins.Common.Providers.Metro
 		public void Open()
 		{
 			_flyout.IsOpen = true;
-		}
+            Common.Log.Debug("MetroSlidePanel: Set to Open");
+        }
 
 		public void Close()
 		{
 			_flyout.IsOpen = false;
-		}
+            Common.Log.Debug($"MetroSlidePanel: Set to Close");
+        }
 
 		private async Task AutoCloseAsync(int seconds = 0)
 		{
 			Open();
 			if (seconds > 0)
 			{
-				await Task.Delay(seconds * 1000);
+                Common.Log.Debug($"MetroSlidePanel: Auto closing in {seconds}s");
+                await Task.Delay(seconds * 1000);
 				Close();
 				Common.Log.Debug($"MetroSlidePanel: Auto closed after {seconds}s");
 			}
