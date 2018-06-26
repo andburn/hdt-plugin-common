@@ -1,11 +1,11 @@
-﻿using HDT.Plugins.Common.Enums;
+﻿using HDT.Plugins.Common.Controls;
+using HDT.Plugins.Common.Enums;
 using HDT.Plugins.Common.Services;
-using HDT.Plugins.Common.Utils;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 
-namespace HDT.Plugins.Common.Controls
+namespace HDT.Plugins.Common.Utils
 {
 	public class SlidePanelManager
 	{

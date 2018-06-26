@@ -87,6 +87,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.cs" />
+    <Compile Include="Controls\ClickableToast.xaml.cs">
+      <DependentUpon>ClickableToast.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Extensions\Focusable.cs" />
     <Compile Include="Controls\MoonTextButton.xaml.cs">
       <DependentUpon>MoonTextButton.xaml</DependentUpon>
@@ -94,7 +97,11 @@
     <Compile Include="Controls\NotificationDialog.xaml.cs">
       <DependentUpon>NotificationDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SlidePanelManager.cs" />
+    <Compile Include="Controls\SimpleToast.xaml.cs">
+      <DependentUpon>SimpleToast.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\NotificationManager.cs" />
+    <Compile Include="Utils\SlidePanelManager.cs" />
     <Compile Include="Controls\Extensions\WatermarkAdorner.cs" />
     <Compile Include="Controls\Extensions\WatermarkService.cs" />
     <Compile Include="Enums\Convert.cs" />
@@ -117,6 +124,7 @@
     <Compile Include="Providers\Tracker\TrackerDataRepository.cs" />
     <Compile Include="Providers\Tracker\TrackerEventsService.cs" />
     <Compile Include="Providers\Tracker\TrackerLoggingService.cs" />
+    <Compile Include="Providers\Tracker\TrackerToastService.cs" />
     <Compile Include="Providers\Utils\EnumConverters.cs" />
     <Compile Include="Providers\Utils\GameExtensions.cs" />
     <Compile Include="Providers\Utils\GameIndex.cs" />
@@ -127,6 +135,7 @@
     <Compile Include="Services\IEventsService.cs" />
     <Compile Include="Services\IGameClientService.cs" />
     <Compile Include="Services\IHttpClient.cs" />
+    <Compile Include="Services\IToastService.cs" />
     <Compile Include="Utils\Backup.cs" />
     <Compile Include="Utils\GameFilter.cs" />
     <Compile Include="Utils\GitVersion.cs" />
@@ -151,11 +160,19 @@
     <Resource Include="Resources\hdt-banner.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\ClickableToast.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\MoonTextButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\NotificationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SimpleToast.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
