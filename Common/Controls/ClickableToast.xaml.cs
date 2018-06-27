@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using HDT.Plugins.Common.Utils;
+using System;
+using System.Diagnostics;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace HDT.Plugins.Common.Controls
 {
     public partial class ClickableToast : UserControl
     {
+        public string Icon { get; set; }
+        public string Title { get; set; }
+        public string Message { get; set; }
+
+        private Uri _link;
+
         public ClickableToast()
         {
             InitializeComponent();
@@ -25,7 +21,19 @@ namespace HDT.Plugins.Common.Controls
         public ClickableToast(string title, string message, string icon, string url)
             : base()
         {
+            Icon = icon;
+            Title = title;
+            Message = message;
+            _link = new Uri(url);
 
+            InitializeComponent();
+        }
+        
+        private void Toast_OnClicked(object sender, EventArgs e)
+        {
+            NotificationManager.CloseAll();
+            if (_link != null)
+                Process.Start(_link.ToString());
         }
     }
 }
