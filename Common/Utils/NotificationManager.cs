@@ -13,25 +13,19 @@ namespace HDT.Plugins.Common.Utils
 
         public static void ShowToast(string title, string message, string icon = null, string url = null)
         {
+            Common.Log.Debug($"NotificationManager: Toast request '{title}' '{message}'");
+
             if (icon == null)
                 icon = IcoMoon.Notification;
 
-            UserControl control = null;
-            if (url == null)
-                control = new SimpleToast(title, message, icon);
-            else
-                control = new ClickableToast(title, message, icon, url);
-
-            _notifications.Add(control);
+            UserControl control = new SimpleToast(title, message, icon, url);
             GetService()?.Show(control);
         }
 
-        public static void CloseAll()
+        public static void Close(UserControl control)
         {
-            foreach (var control in _notifications)
-            {
-                GetService()?.Hide(control);
-            }
+            Common.Log.Debug("NotificationManager: Closing notification");
+            GetService()?.Hide(control);
         }
 
         public static void SetService(IToastService service) => _service = service;

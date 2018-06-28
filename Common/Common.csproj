@@ -87,9 +87,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.cs" />
-    <Compile Include="Controls\ClickableToast.xaml.cs">
-      <DependentUpon>ClickableToast.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Extensions\Focusable.cs" />
     <Compile Include="Controls\MoonTextButton.xaml.cs">
       <DependentUpon>MoonTextButton.xaml</DependentUpon>
@@ -160,10 +157,6 @@
     <Resource Include="Resources\hdt-banner.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\ClickableToast.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\MoonTextButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
