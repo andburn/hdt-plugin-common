@@ -3,33 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:tc="clr-namespace:Hearthstone_Deck_Tracker.Utility.Toasts.ToastControls;assembly=HearthstoneDeckTracker"
+             MouseUp="Toast_OnClicked" Height="50" Width="250"
              mc:Ignorable="d">
-    <tc:BaseToast Clicked="Toast_OnClicked" Height="50">
-        <Grid Margin="10,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <TextBlock FontFamily="pack://application:,,,/Common;component/Resources/#IcoMoon-Free"
+    <UserControl.Background>
+        <ImageBrush ImageSource="pack://application:,,,/Common;component/Resources/hdt-banner.png"
+                TileMode="Tile"
+                Stretch="UniformToFill" />
+    </UserControl.Background>
+    <Grid Margin="10,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock FontFamily="pack://application:,,,/Common;component/Resources/#IcoMoon-Free"
                 Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" 
                 Width="32" Margin="6,0,6,0"
                 Text="{Binding Icon}" Foreground="White" FontSize="24" 
                 HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" />
-            <TextBlock Grid.Column="1" Grid.Row="0"
+        <TextBlock Grid.Column="1" Grid.Row="0"
                    Margin="6,0,0,0"
                    Foreground="White" FontSize="15" FontWeight="Bold"
                    VerticalAlignment="Bottom" HorizontalAlignment="Left"
                    Text="{Binding Title}" />
-            <TextBlock Grid.Column="1" Grid.Row="1"
+        <TextBlock Grid.Column="1" Grid.Row="1"
                    Margin="6,0,0,0"
                    Foreground="White" FontSize="12"
                    VerticalAlignment="Top" HorizontalAlignment="Left"
                    Text="{Binding Message}" />
-        </Grid>
-    </tc:BaseToast>
+    </Grid>
 </UserControl>
